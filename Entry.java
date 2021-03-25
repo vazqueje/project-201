@@ -74,4 +74,8 @@ public ArrayList<String> getCommentList() {
 public void setCommentList(ArrayList<String> commentList) {
 	this.commentList = commentList;
 }
+
+public String toString() {
+	return name + "\n" + description + "\n" + genre + "\n" + developer + "\n" + publishDate + "\n" + esrbRating;
+}
 }
