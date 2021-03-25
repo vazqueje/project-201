@@ -1,10 +1,9 @@
-package a201;
-
 
 public class Comment{
 	private final int pid;
 	private String title;
 	private String desc;
+	private String game;
 
 	/*
 	 * Basic Constructor
@@ -21,6 +20,21 @@ public class Comment{
 		this.pid  = pid;
 		this.title = title;
 		this.desc = desc;
+		this.game = game;
+	}
+	/*
+	 * Getter method for the game associated with comment
+	 * @return String : String that contains the game name.
+	 */
+	public String getGame() {
+		return game;
+	}
+	/*
+	 * Method that set the game associated with comment
+	 * @param String : game title that can be edited.
+	 */
+	public void setGame(String game) {
+		this.game = game;
 	}
 	/*
 	 * Getter method for the current comment title
