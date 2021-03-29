@@ -24,7 +24,7 @@ public class MainPage implements ActionListener{
 	JPanel mainPanel = new JPanel();
 	JPanel topPanel = new JPanel();
 	JPanel bottomPanel = new JPanel();
-	
+	JButton requestPageButton = new JButton("Request New Game");
 	
 	public MainPage() {
 	
@@ -52,6 +52,8 @@ public class MainPage implements ActionListener{
 		topPanel.add(searchButton);
 		
 		
+		requestPageButton.addActionListener(this);
+		topPanel.add(requestPageButton);
 		
 		
 		frame.setVisible(true);
@@ -59,6 +61,11 @@ public class MainPage implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == requestPageButton) {
+			frame.dispose();
+			new reguestFormPage();
+		}
+		else {
 		String searchString = searchBar.getText();
 		Search newSearch = new Search(searchString);
 		ArrayList<Entry> entries = newSearch.fetchSearch(searchString);
@@ -74,6 +81,7 @@ public class MainPage implements ActionListener{
 		}
 		}
 		frame.setVisible(true);
+		}
 	}
 	public JPanel createEntryPanel(Entry entry) {
 		JPanel retPanel = new JPanel();
