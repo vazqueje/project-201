@@ -33,7 +33,7 @@ public class Search {
 			 
 			 //if there is no next row, tell the user there were no matches
 			 if (rs.next() == false) {
-			        System.out.println("Your query did not match any results.");
+			        return null;
 			      } else {
 			 //else, add rows in result set to an ArrayList of type Entry
 			        do {

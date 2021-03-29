@@ -7,20 +7,20 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class loginPage implements ActionListener {
-	
+	//NEWUSER 
 	JPasswordField password = new JPasswordField();
 	JTextField username = new JTextField();
+	JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
 	
 	public loginPage() {
-		
-		JFrame frame = new JFrame();
-		JPanel panel = new JPanel();
-		
+
 		frame.add(panel);
 		frame.setSize(350, 250);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,13 +57,19 @@ public class loginPage implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String user = username.getText();
 		String passW = password.getText();
-		
+		User testUser;
 		UserVerify newUser = new UserVerify(user, passW);
 		
 		try {
-			User testUser = newUser.getUser();
-			if (testUser == null) System.out.println("Not found");
-			else { System.out.println(testUser.getUsername() + ", " + testUser.getPassword()); }
+			 testUser = newUser.getUser();
+			if (testUser == null) {
+				JOptionPane.showMessageDialog(null, "User Login Information Not Found", "Error", JOptionPane.WARNING_MESSAGE);
+			}
+			else { 
+				
+				frame.dispose();
+				new MainPage();
+			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
