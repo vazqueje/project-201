@@ -8,22 +8,22 @@
 import java.util.*;
 public class FavoritesPage {
 	
-	private ArrayList<String> favorites;
-	private ArrayList<String> wishList;
+	private ArrayList<Entry> favorites;
+	private ArrayList<Entry> wishList;
 	
 	/*
 	 * Basic Constructor
 	 */
 	FavoritesPage() {
-		favorites = new ArrayList<String>();
-		wishList = new ArrayList<String>();
+		favorites = new ArrayList<Entry>();
+		wishList = new ArrayList<Entry>();
 	}
 	
 	/*
 	 * Getter method for the favorite game list
 	 * @return ArrayList<String> : List contains the games on the user's favorites list.
 	 */
-	protected ArrayList<String> getGameList() {
+	protected ArrayList<Entry> getGameList() {
 		return favorites;
 	}
 	
@@ -31,7 +31,7 @@ public class FavoritesPage {
 	 * Getter method for the wish list
 	 * @return ArrayList<String> : List that contains the games on the user's wish list
 	 */
-	protected ArrayList<String> getWishList() {
+	protected ArrayList<Entry> getWishList() {
 		return wishList;
 	}
 	
@@ -40,15 +40,17 @@ public class FavoritesPage {
 	 * @param ArrayList<String> : A list of Strings
 	 * @return String : formatted string with the contents of the list passed into the method
 	 */
-	protected String toString(ArrayList<String> list) {
+	protected String toString(ArrayList<Entry> list) {
 		String returnS = "[";
 		if(list.size() == 0) {
 			return "EMPTY LIST";
 		} else {
-			for(String s : list) {
-				returnS += s + ", "; 
+			for(Entry e : list) {
+				rurnS += "{";
+				returnS += e.toString() + ", "
+				returnS = returnS.substring(0, returnS.length() - 2);
+				returnS += "} ";
 			}
-			returnS = returnS.substring(0, returnS.length() - 2);
 			returnS += "]";
 			return returnS;
 		}
@@ -58,7 +60,7 @@ public class FavoritesPage {
 	 * Method that adds a game to the user's game list
 	 * @param String : game that the user wishes to add
 	 */
-	protected void addGameList(String game) {
+	protected void addGameList(Entry game) {
 		this.getGameList().add(game);
 	}
 	
@@ -66,7 +68,7 @@ public class FavoritesPage {
 	 * Method that adds a game to the user's wish list
 	 * @param String :  game that the user wishes to add
 	 */
-	protected void addWishList(String game) {
+	protected void addWishList(Entry game) {
 		this.getWishList().add(game);
 	}
 	
@@ -75,7 +77,7 @@ public class FavoritesPage {
 	 * @param Game that the user wishes to remove
 	 * @return boolean : boolean value that will be true if successful, false if not
 	 */
-	protected boolean removeGameList(String game) {
+	protected boolean removeGameList(Entry game) {
 		if (!this.getGameList().contains(game)) {
 			return false;
 		}else {
@@ -89,7 +91,7 @@ public class FavoritesPage {
 	 * @param String : Game that the user wishes to remove
 	 * @return boolean : boolean value that will be true if successful, false if not
 	 */
-	protected boolean removeWishList(String game) {
+	protected boolean removeWishList(Entry game) {
 		if(!this.getWishList().contains(game)) {
 			return false;
 		}else {
