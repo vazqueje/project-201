@@ -46,8 +46,8 @@ public class FavoritesPage {
 			return "EMPTY LIST";
 		} else {
 			for(Entry e : list) {
-				rurnS += "{";
-				returnS += e.toString() + ", "
+				returnS += "{";
+				returnS += e.toString() + ", ";
 				returnS = returnS.substring(0, returnS.length() - 2);
 				returnS += "} ";
 			}
