@@ -72,7 +72,7 @@ public class FavoriteListSQL {
 	}
 	
 	//returns an FavoritesPage of all the favorites from the user_favorites
-	public ArrayList<Entry> displayFavorites() {
+	public FavoritesPage displayFavorites() {
 		String userFormatted = user.getUsername()+"_favorite";
 
 		try {
@@ -89,7 +89,7 @@ public class FavoriteListSQL {
 			          results.add(new Entry(rs.getString("name"), rs.getString("description"), rs.getString("genre"), rs.getString("developer"), rs.getDate("publishDate"), rs.getString("esrbRating"), null));
 			        } while (rs.next());
 			      }
-			 return results;
+			 return new FavoritesPage(results,new ArrayList<Entry>());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			return null;
