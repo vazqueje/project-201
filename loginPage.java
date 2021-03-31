@@ -13,11 +13,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class loginPage implements ActionListener {
-	//NEWUSER 
+	User mainUser;
 	JPasswordField password = new JPasswordField();
 	JTextField username = new JTextField();
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
+	JButton guestUser = new JButton("Log In as Guest");
 	
 	public loginPage() {
 
@@ -44,19 +45,29 @@ public class loginPage implements ActionListener {
 		loginButton.setBounds(100, 70, 100, 20);
 		loginButton.addActionListener(this);
 		panel.add(loginButton);
-
+		
+		guestUser.setBounds(100, 120, 150, 20);
+		guestUser.addActionListener(this);
+		panel.add(guestUser);
+		
 		frame.setVisible(true);
 	
 	}
 	
 	public static void main(String[] args) {
-		new MainPage();
+		new loginPage();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String user = username.getText();
 		String passW = password.getText();
+		if (e.getSource() == guestUser) {
+			mainUser = new User("Guest","Guest","Guest",new java.sql.Date(111,0,23),-1);
+			frame.dispose();
+			new MainPage(mainUser);
+		}
+		else {
 		User testUser;
 		UserVerify newUser = new UserVerify(user, passW);
 		
@@ -66,12 +77,13 @@ public class loginPage implements ActionListener {
 				JOptionPane.showMessageDialog(null, "User Login Information Not Found", "Error", JOptionPane.WARNING_MESSAGE);
 			}
 			else { 
-				
+				mainUser = testUser;
 				frame.dispose();
-				new MainPage();
+				new MainPage(mainUser);
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+	}
 	}
 }

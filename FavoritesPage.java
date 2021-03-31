@@ -19,6 +19,11 @@ public class FavoritesPage {
 		wishList = new ArrayList<Entry>();
 	}
 	
+	FavoritesPage(ArrayList<Entry> favorites, ArrayList<Entry> wishlist) {
+        this.favorites = favorites;
+        this.wishList = wishList;
+    }
+	
 	/*
 	 * Getter method for the favorite game list
 	 * @return ArrayList<String> : List contains the games on the user's favorites list.

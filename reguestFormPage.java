@@ -20,14 +20,15 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class reguestFormPage implements ActionListener{
-	
+	User mainUser;
 	JFrame frame = new JFrame();
 	JPanel mainPanel = new JPanel();
 	JTextField title = new JTextField(20);
 	JTextField reason = new JTextField(20);
 	JButton exitPage = new JButton("Main Menu");
 	
-	public reguestFormPage() {
+	public reguestFormPage(User user) {
+		mainUser = user;
 		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("TEST CATALOG RequestPage");
@@ -55,7 +56,7 @@ public class reguestFormPage implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == exitPage) {
 			frame.dispose();
-			new MainPage();
+			new MainPage(mainUser);
 		}
 		else {
 		String name = title.getText();

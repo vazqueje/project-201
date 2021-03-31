@@ -19,15 +19,18 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class MainPage implements ActionListener{
+	User mainUser;
 	JTextField searchBar = new JTextField(20);
 	JFrame frame = new JFrame();
 	JPanel mainPanel = new JPanel();
 	JPanel topPanel = new JPanel();
 	JPanel bottomPanel = new JPanel();
 	JButton requestPageButton = new JButton("Request New Game");
+	JButton favoritesPage = new JButton("Favorites Page");
+	JButton adminPage = new JButton("Admin Page");
 	
-	public MainPage() {
-	
+	public MainPage(User user) {
+		mainUser = user;
 		frame.add(topPanel);
 		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,10 +54,17 @@ public class MainPage implements ActionListener{
 		searchButton.addActionListener(this);
 		topPanel.add(searchButton);
 		
-		
+		if (mainUser.getPrivileges() != -1) {
 		requestPageButton.addActionListener(this);
 		topPanel.add(requestPageButton);
 		
+		favoritesPage.addActionListener(this);
+		topPanel.add(favoritesPage);
+		}
+		if (mainUser.getPrivileges() == 2) {
+			adminPage.addActionListener(this);
+			topPanel.add(adminPage);
+		}
 		
 		frame.setVisible(true);
 	}
@@ -63,10 +73,19 @@ public class MainPage implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == requestPageButton) {
 			frame.dispose();
-			new reguestFormPage();
+			new reguestFormPage(mainUser);
+		}
+		else if(e.getSource() == favoritesPage) {
+			frame.dispose();
+			new FavoritesPageGUI(mainUser);
+		}
+		else if (e.getSource() == adminPage) {
+			frame.dispose();
+			//CALL ADMIN PAGE CONSTRUCTOR
 		}
 		else {
 		String searchString = searchBar.getText();
+		if (searchString.isEmpty()) return;
 		Search newSearch = new Search(searchString);
 		ArrayList<Entry> entries = newSearch.fetchSearch(searchString);
 		if (entries == null) {
@@ -77,7 +96,6 @@ public class MainPage implements ActionListener{
 		for ( int i = 0; i < entries.size(); i++) {
 			JPanel panel = createEntryPanel(entries.get(i));
 			bottomPanel.add(panel);
-			System.out.println(entries.get(i).toString());
 		}
 		}
 		frame.setVisible(true);
