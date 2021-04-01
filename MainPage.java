@@ -81,7 +81,7 @@ public class MainPage implements ActionListener{
 		}
 		else if (e.getSource() == adminPage) {
 			frame.dispose();
-			//CALL ADMIN PAGE CONSTRUCTOR
+			new AdminPage(mainUser);
 		}
 		else {
 		String searchString = searchBar.getText();
