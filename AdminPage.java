@@ -66,6 +66,15 @@ public class AdminPage extends JFrame {
 			JPanel backPanel = new JPanel();
 			backPanel.setBorder(new TitledBorder("Back to Main Page"));
 			backPanel.add(back);
+			back.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+					new mainPage(user);
+				}
+				
+			});
 			//button panel
 			JPanel buttonPanel = new JPanel();
 			buttonPanel.setBorder(new TitledBorder("Approve or Deny the Pending Request"));
