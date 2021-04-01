@@ -37,7 +37,8 @@ public class AdminPage extends JFrame {
 	JButton denyButton;
 	JTextArea requestTA;
 	String currentRequest;
-	public AdminPage(User user) { //User user
+	JButton back;
+	public AdminPage() { //User user
 			super("Admin page");
 			setTitle("Admin Page");
 	        setSize(600, 500);
@@ -51,7 +52,7 @@ public class AdminPage extends JFrame {
 			container.setLayout(new BorderLayout());
 			approveButton = new JButton("Approve");
 			denyButton = new JButton("Deny");
-			
+			back = new JButton("Back");
 			//current request panel
 			requestTA = new JTextArea(10, 50);
 			requestTA.setEditable(false);
@@ -61,7 +62,10 @@ public class AdminPage extends JFrame {
 			displayRequestPanel.setBorder(new TitledBorder("Pending Request"));
 			
 			displayRequestPanel.add(scrollPane);
-			
+			//back
+			JPanel backPanel = new JPanel();
+			backPanel.setBorder(new TitledBorder("Back to Main Page"));
+			backPanel.add(back);
 			//button panel
 			JPanel buttonPanel = new JPanel();
 			buttonPanel.setBorder(new TitledBorder("Approve or Deny the Pending Request"));
@@ -73,8 +77,10 @@ public class AdminPage extends JFrame {
 			
 			
 			//add to container
+			container.add(backPanel, BorderLayout.NORTH);
 			container.add(buttonPanel, BorderLayout.CENTER);
 			container.add(displayRequestPanel, BorderLayout.SOUTH);
+			
 			
 			
 
@@ -141,6 +147,8 @@ public class AdminPage extends JFrame {
 		e.printStackTrace();
 	}
 }
+	
+
 	
 
 	
