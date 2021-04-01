@@ -37,8 +37,13 @@ public class AdminPage extends JFrame {
 	JButton denyButton;
 	JTextArea requestTA;
 	String currentRequest;
-	public AdminPage() { //User user
+	public AdminPage(User user) { //User user
 			super("Admin page");
+			setTitle("Admin Page");
+	        setSize(600, 500);
+	        setLocationRelativeTo(null);
+	        setVisible(true);
+	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.user = user;
 			
 			//Jframe items
@@ -141,14 +146,6 @@ public class AdminPage extends JFrame {
 	
 	
 
-	public static void main(String[] args) {
-		AdminPage frame = new AdminPage();
-        frame.setTitle("Admin Page");
-        frame.setSize(600, 500);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	}
+	
 
 }
