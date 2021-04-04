@@ -1,23 +1,22 @@
-
 import java.util.ArrayList;
 
 public class CommentSection {
 	/*Starts from 0*/
-	private int maxpid;
+	private int maxcommentid;
 	private ArrayList<Comment> all;
 	/*
 	 * Basic Constructor
 	 */
 	CommentSection() {
-		maxpid = 0;
+		maxcommentid = 0;
 		all = new ArrayList<Comment>();
 	}
 	/*
 	 * Getter method for the current comment section's total comments.
 	 * @return int : Current section's comment maxpid.
 	 */
-	protected int getmaxpid() {
-		return this.maxpid;
+	protected int getmaxcommentid() {
+		return this.maxcommentid;
 	}
 	/*
 	 * Method that adds comment to current comment section. 
@@ -25,9 +24,9 @@ public class CommentSection {
 	 * @param String : comment main body.
 	 */
 	protected void addcomment(String title, String desc) {
-		Comment c = new Comment(maxpid+1, title, desc);
+		Comment c = new Comment(maxcommentid+1, title, desc);
 		all.add(c);
-		maxpid +=1;
+		maxcommentid +=1;
 	}
 	/*
 	 * Method that adds comment to current comment section. 
@@ -35,14 +34,14 @@ public class CommentSection {
 	 */
 	protected void addcomment(Comment e) {
 		all.add(e);
-		maxpid +=1;
+		maxcommentid +=1;
 	}
 	/*
 	 * Method that removes comment from current comment section. 
 	 * @param int : Comment's pid.
 	 */
-	protected void deletecomment(int pid) {
-		all.set(pid, null);
+	protected void deletecomment(int commentid) {
+		all.set(commentid, null);
 	}
 	/*
 	 * Method that edits comment in current comment section. 
@@ -50,9 +49,9 @@ public class CommentSection {
 	 * @param String : Comment's title.
 	 * @param String : Comment's main body.
 	 */
-	protected void editcomment(int pid, String title, String desc) {
-		all.get(pid).setTitle(title);
-		all.get(pid).setDescription(desc);;
+	protected void editcomment(int commentid, String title, String desc) {
+		all.get(commentid).setTitle(title);
+		all.get(commentid).setDescription(desc);;
 	}
 	/*
 	 * Method that returns all of current comment section's comments in standard String format
