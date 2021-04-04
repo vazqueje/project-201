@@ -15,7 +15,7 @@ public class Comment{
 	/*
 	 * Constructor with given comment title and main body (description)
 	 */
-	Comment(int commentid, String title, String desc){
+	Comment(int commentid, String title, String desc, String game){
 		this.commentid  = commentid;
 		this.title = title;
 		this.desc = desc;

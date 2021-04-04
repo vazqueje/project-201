@@ -23,8 +23,8 @@ public class CommentSection {
 	 * @param String : comment title.
 	 * @param String : comment main body.
 	 */
-	protected void addcomment(String title, String desc) {
-		Comment c = new Comment(maxcommentid+1, title, desc);
+	protected void addcomment(String title, String desc, String game) {
+		Comment c = new Comment(maxcommentid+1, title, desc, game);
 		all.add(c);
 		maxcommentid +=1;
 	}
