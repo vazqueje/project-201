@@ -38,7 +38,7 @@ public class AdminPage extends JFrame {
 	JTextArea requestTA;
 	String currentRequest;
 	JButton back;
-	public AdminPage() { //User user
+	public AdminPage(User user) { //User user
 			super("Admin page");
 			setTitle("Admin Page");
 	        setSize(600, 500);
@@ -71,7 +71,7 @@ public class AdminPage extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					dispose();
-					new mainPage(user);
+					new MainPage(user);
 				}
 				
 			});

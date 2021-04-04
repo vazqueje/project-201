@@ -65,7 +65,7 @@ public class reguestFormPage implements ActionListener{
 			JOptionPane.showMessageDialog(null, "Title is unfilled", "Please Submit a Game Title", JOptionPane.WARNING_MESSAGE);
 			return;
 		};
-		RequestFormFiller requestForm = new RequestFormFiller(name, description, mainUser.getUsername());
+		RequestFormFiller requestForm = new RequestFormFiller(name, description, "TestUser");
 		try {
 			if(requestForm.fillForm()) {
 				JOptionPane.showMessageDialog(null, "Request Added", "Game request Successful", JOptionPane.WARNING_MESSAGE);
