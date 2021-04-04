@@ -37,6 +37,7 @@ public class Comment{
 	}
 	/*
 	 * Getter method for the current comment title
+	 * Get Comment Number
 	 * @return String : String that contains current comment's title.
 	 */
 	protected int getcommentid() {
