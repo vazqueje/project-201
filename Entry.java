@@ -7,9 +7,9 @@ private String genre;
 private String developer;
 private Date publishDate;
 private String esrbRating;
-private ArrayList<String> commentList;
+private CommentSection commentList;
 
-public Entry(String name, String description, String genre, String developer, Date publishDate, String esrbRating, ArrayList<String> commentList) {
+public Entry(String name, String description, String genre, String developer, Date publishDate, String esrbRating, CommentSection commentList) {
 	this.name = name;
 	this.description = description;
 	this.genre = genre;
@@ -67,11 +67,11 @@ public void setEsrbRating(String esrbRating) {
 	this.esrbRating = esrbRating;
 }
 
-public ArrayList<String> getCommentList() {
+public CommentSection getCommentList() {
 	return commentList;
 }
 
-public void setCommentList(ArrayList<String> commentList) {
+public void setCommentList(CommentSection commentList) {
 	this.commentList = commentList;
 }
 
