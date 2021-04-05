@@ -1,5 +1,6 @@
+
 public class Comment{
-	private final int commentid;
+	private final int pid;
 	private String title;
 	private String desc;
 	private String game;
@@ -7,16 +8,16 @@ public class Comment{
 	/*
 	 * Basic Constructor
 	 */
-	Comment(int commentid) {
+	Comment(int pid) {
 		title = null;
 		desc = null;
-		this.commentid = commentid;
+		this.pid = pid;
 	}
 	/*
 	 * Constructor with given comment title and main body (description)
 	 */
-	Comment(int commentid, String title, String desc, String game){
-		this.commentid  = commentid;
+	Comment(int pid, String title, String desc, String game){
+		this.pid  = pid;
 		this.title = title;
 		this.desc = desc;
 		this.game = game;
@@ -37,11 +38,10 @@ public class Comment{
 	}
 	/*
 	 * Getter method for the current comment title
-	 * Get Comment Number
 	 * @return String : String that contains current comment's title.
 	 */
 	protected int getcommentid() {
-		return this.commentid;
+		return this.pid;
 	}
 	/*
 	 * Getter method for the current comment title

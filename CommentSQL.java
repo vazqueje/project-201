@@ -41,9 +41,9 @@ public class CommentSQL {
 		
 	}
 	
-	public CommentSection removeComment(Comment c) throws SQLException {
+	public CommentSection removeComment(int id) throws SQLException {
 		PreparedStatement query = conn.prepareStatement("Delete from comment where id=?", Statement.RETURN_GENERATED_KEYS);
-		query.setInt(1, c.getcommentid());
+		query.setInt(1, id);
 		query.execute();
 		return getCommentSection();
 	}

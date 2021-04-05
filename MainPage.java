@@ -28,6 +28,12 @@ public class MainPage implements ActionListener{
 	JButton requestPageButton = new JButton("Request New Game");
 	JButton favoritesPage = new JButton("Favorites Page");
 	JButton adminPage = new JButton("Admin Page");
+	JButton searchButton = new JButton("Search");
+	JButton commentSectionSearch = new JButton("Comment Section Page");
+	JTextField commentBar = new JTextField(20);
+	
+	ArrayList<JButton> list = new ArrayList<JButton>();
+	JButton button;
 	
 	public MainPage(User user) {
 		mainUser = user;
@@ -45,11 +51,9 @@ public class MainPage implements ActionListener{
 		JLabel searchLabel = new JLabel("Search: ");
 		searchLabel.setSize(100, 20);
 
-		
 		topPanel.add(searchLabel);
 		topPanel.add(searchBar);
 		
-		JButton searchButton = new JButton("Search");
 		searchButton.setSize(100, 20);
 		searchButton.addActionListener(this);
 		topPanel.add(searchButton);
@@ -83,7 +87,7 @@ public class MainPage implements ActionListener{
 			frame.dispose();
 			new AdminPage(mainUser);
 		}
-		else {
+		else if (e.getSource() == searchButton){
 		String searchString = searchBar.getText();
 		if (searchString.isEmpty()) return;
 		Search newSearch = new Search(searchString);
@@ -93,12 +97,24 @@ public class MainPage implements ActionListener{
 		}
 		else {
 		bottomPanel.removeAll();
+		if (list != null) list.clear();
 		for ( int i = 0; i < entries.size(); i++) {
 			JPanel panel = createEntryPanel(entries.get(i));
 			bottomPanel.add(panel);
 		}
 		}
 		frame.setVisible(true);
+		}
+		else {
+			for (int i = 0; i < list.size(); i++) {
+				if (e.getSource() == list.get(i)) {
+					String commentPage = list.get(i).getText();
+					Search newSearch = new Search(commentPage);
+					ArrayList<Entry> entries = newSearch.fetchSearch(commentPage);
+					frame.dispose();
+					new commentPage(mainUser, entries.get(0));
+				}
+			}
 		}
 	}
 	public JPanel createEntryPanel(Entry entry) {
@@ -120,6 +136,11 @@ public class MainPage implements ActionListener{
 
 		JLabel descriptionLabel = new JLabel("Description: " + entry.getDescription());
 		retPanel.add(descriptionLabel);
+		
+		button = new JButton(entry.getName());
+		button.addActionListener(this);
+		retPanel.add(button);
+		list.add(button);
 		
 		JLabel space = new JLabel("----------");
 		retPanel.add(space);
