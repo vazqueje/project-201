@@ -38,7 +38,7 @@ public class AdminPage extends JFrame {
 	JTextArea requestTA;
 	String currentRequest;
 	JButton back;
-	public AdminPage(User user) { //User user
+	public AdminPage(User user) { 
 			super("Admin page");
 			setTitle("Admin Page");
 	        setSize(600, 500);
@@ -143,7 +143,10 @@ public class AdminPage extends JFrame {
 					  				try {
 										Statement delete = con.createStatement();
 										delete.executeQuery("DELETE FROM request WHERE id=\""+currentID+"\";");
-									} catch (SQLException e1) {
+										currentRequest = "Name: "+(rs.getString("name")+"\nDesc:"+ rs.getString("description")+"\nUsername: "+rs.getString("username"));
+								        int currentID = rs.getInt("id");
+								        requestTA.setText(currentRequest);
+					  				} catch (SQLException e1) {
 										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
