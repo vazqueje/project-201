@@ -8,7 +8,6 @@ public class GameRequest {
 	private String gameName;
 	private String description;
 	private String userName;
-	private int id;
 	
 	/*
 	 * Basic Constructor
@@ -88,13 +87,6 @@ public class GameRequest {
 	 */
 	protected void setUserName(String userName) {
 		this.userName = userName;
-	}
-	/*
-	 * Getter for ID
-	 * @return int : returns the id.
-	 */
-	public int getId() {
-		return id;
 	}
 
 	/*
