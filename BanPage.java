@@ -66,13 +66,7 @@ public class BanPage extends JFrame implements ActionListener{
 		}
 	}
 
-	public static void main(String[]args) {
-		BanPage bp = new BanPage();
-		bp.setSize(600, 500);
-        bp.setLocationRelativeTo(null);
-        bp.setVisible(true);
-        bp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+	
 
 
 }
