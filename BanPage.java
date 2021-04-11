@@ -9,14 +9,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class BanPage extends JFrame implements ActionListener{
+	User user;
 	JLabel userLabel;
 	JPanel banPanel;
 	JTextField userField;
 	JButton banButton;
+	JButton back;
 	JLabel banStatus;
 	
-	public BanPage() {
+	
+	public BanPage(User user) {
 		super("Ban page");
+		this.user = user;
 		setSize(600, 500);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -29,10 +33,12 @@ public class BanPage extends JFrame implements ActionListener{
 		banStatus = new JLabel("");
 		banStatus.setForeground(Color.red);
 		
+		back = new JButton("Back to main");
 		banPanel.add(userLabel);
 		banPanel.add(userField);
 		banPanel.add(banButton);
 		banPanel.add(banStatus);
+		banPanel.add(back);
 		
 		add(banPanel);
 		
@@ -53,8 +59,20 @@ public class BanPage extends JFrame implements ActionListener{
 				
 			}
 		}
+		
+		if(e.getSource()==back) {
+			this.dispose();
+			new MainPage(user);
+		}
 	}
 
+	public static void main(String[]args) {
+		BanPage bp = new BanPage();
+		bp.setSize(600, 500);
+        bp.setLocationRelativeTo(null);
+        bp.setVisible(true);
+        bp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
 
 
 }
