@@ -31,6 +31,7 @@ public class MainPage implements ActionListener{
 	JButton searchButton = new JButton("Search");
 	JButton commentSectionSearch = new JButton("Comment Section Page");
 	JTextField commentBar = new JTextField(20);
+	JButton banPageButton = new JButton("Ban Page");
 	
 	ArrayList<JButton> list = new ArrayList<JButton>();
 	JButton button;
@@ -75,6 +76,8 @@ public class MainPage implements ActionListener{
 		if (mainUser.getPrivileges() == 2) {
 			adminPage.addActionListener(this);
 			topPanel.add(adminPage);
+			banPageButton.addActionListener(this);
+			topPanel.add(banPageButton);
 		}
 		
 		frame.setVisible(true);
@@ -82,7 +85,11 @@ public class MainPage implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == requestPageButton) {
+		if (e.getSource() == banPageButton) {
+			frame.dispose();
+			new BanPage(mainUser);
+		}
+		else if (e.getSource() == requestPageButton) {
 			frame.dispose();
 			new reguestFormPage(mainUser);
 		}
