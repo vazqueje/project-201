@@ -34,6 +34,7 @@ public class BanPage extends JFrame implements ActionListener{
 		banStatus.setForeground(Color.red);
 		
 		back = new JButton("Back to main");
+		back.addActionListener(this);
 		banPanel.add(userLabel);
 		banPanel.add(userField);
 		banPanel.add(banButton);
@@ -46,7 +47,6 @@ public class BanPage extends JFrame implements ActionListener{
 	
 	
 	public void actionPerformed(ActionEvent e) {
-		;
 		if(e.getSource() == banButton) {
 			String bannedUser = userField.getText();
 			BanSQL banDB = new BanSQL(bannedUser);
@@ -60,7 +60,7 @@ public class BanPage extends JFrame implements ActionListener{
 			}
 		}
 		
-		if(e.getSource()==back) {
+		else if (e.getSource()==back) {
 			this.dispose();
 			new MainPage(user);
 		}
