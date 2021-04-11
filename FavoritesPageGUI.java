@@ -26,7 +26,10 @@ public class FavoritesPageGUI implements ActionListener {
 	JPanel topPanel = new JPanel();
 	JPanel bottomPanel = new JPanel();
 	JButton returnButton = new JButton("Return to Main Page");
-	
+
+	ArrayList<JButton> list = new ArrayList<JButton>();
+	JButton button;
+
 	public FavoritesPageGUI(User user) {
 		mainUser=user;
 		frame.add(mainPanel);
@@ -77,6 +80,11 @@ public class FavoritesPageGUI implements ActionListener {
 		JLabel descriptionLabel = new JLabel("Description: " + entry.getDescription());
 		retPanel.add(descriptionLabel);
 		
+		button = new JButton(entry.getName());
+		button.addActionListener(this);
+		retPanel.add(button);
+		list.add(button);
+		
 		JLabel space = new JLabel("----------");
 		retPanel.add(space);
 		
@@ -84,8 +92,23 @@ public class FavoritesPageGUI implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == returnButton) {
 		frame.dispose();
 		new MainPage(mainUser);
+		}
+		else {
+			for (int i = 0; i < list.size(); i++) {
+				if (e.getSource() == list.get(i)) {
+					String game = list.get(i).getText();
+					Search newSearch = new Search(game);
+					ArrayList<Entry> entries = newSearch.fetchSearch(game);
+					FavoriteListSQL list = new FavoriteListSQL(entries.get(0), mainUser);
+					list.removeFavorite();
+					frame.dispose();
+					new FavoritesPageGUI(mainUser);
+				}
+			}
+		}
 	}
-
+	
 }
