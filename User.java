@@ -56,4 +56,8 @@ public class User {
 		this.dob = dob;
 	}
 	
+	public int getAge() {
+		return (java.time.LocalDate.now().getYear() - this.getDob().getYear());
+	}
+	
 }

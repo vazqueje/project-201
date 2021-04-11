@@ -31,12 +31,20 @@ public class MainPage implements ActionListener{
 	JButton searchButton = new JButton("Search");
 	JButton commentSectionSearch = new JButton("Comment Section Page");
 	JTextField commentBar = new JTextField(20);
+	JButton banPageButton = new JButton("Ban Page");
 	
 	ArrayList<JButton> list = new ArrayList<JButton>();
 	JButton button;
+	int esrb = 0;
 	
 	public MainPage(User user) {
 		mainUser = user;
+		int age = mainUser.getAge();
+		if (age >= 18) esrb = 4;
+		else if (age >=17) esrb = 3;
+		else if (age >= 13) esrb = 2;
+		else if (age >= 10) esrb = 1;
+		if (mainUser.getUsername().equals("Guest")) esrb = 0;
 		frame.add(topPanel);
 		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,6 +76,8 @@ public class MainPage implements ActionListener{
 		if (mainUser.getPrivileges() == 2) {
 			adminPage.addActionListener(this);
 			topPanel.add(adminPage);
+			banPageButton.addActionListener(this);
+			topPanel.add(banPageButton);
 		}
 		
 		frame.setVisible(true);
@@ -75,7 +85,11 @@ public class MainPage implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == requestPageButton) {
+		if (e.getSource() == banPageButton) {
+			frame.dispose();
+			new BanPage(mainUser);
+		}
+		else if (e.getSource() == requestPageButton) {
 			frame.dispose();
 			new reguestFormPage(mainUser);
 		}
@@ -99,8 +113,10 @@ public class MainPage implements ActionListener{
 		bottomPanel.removeAll();
 		if (list != null) list.clear();
 		for ( int i = 0; i < entries.size(); i++) {
+			if (esrb >= ESRBtoInt(entries.get(i).getEsrbRating())) {
 			JPanel panel = createEntryPanel(entries.get(i));
 			bottomPanel.add(panel);
+			}
 		}
 		}
 		frame.setVisible(true);
@@ -117,6 +133,8 @@ public class MainPage implements ActionListener{
 			}
 		}
 	}
+	
+	
 	public JPanel createEntryPanel(Entry entry) {
 		JPanel retPanel = new JPanel();
 		retPanel.setSize(100, 50);
@@ -147,4 +165,15 @@ public class MainPage implements ActionListener{
 		
 		return retPanel;
 	}
+	
+	public int ESRBtoInt(String rating) {
+		int ret = 0;
+		if (rating.equalsIgnoreCase("RP")) ret = 4;
+		else if (rating.equalsIgnoreCase("A")) ret = 4;
+		else if (rating.equalsIgnoreCase("M")) ret = 3;
+		else if (rating.equalsIgnoreCase("T")) ret = 2;
+		else if (rating.equalsIgnoreCase("E10")) ret = 1;
+		return ret;
+	}
+	
 }

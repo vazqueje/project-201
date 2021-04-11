@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -27,6 +28,7 @@ public class commentPage implements ActionListener{
 	JTextField commentTitle = new JTextField(30);
 	JTextField commentDescription = new JTextField(25);
 	JButton addComment = new JButton("Add Comment");
+	JButton addFavorite = new JButton("Add to Favorites Page");
 	
 	public commentPage(User user, Entry entry) {
 		mainUser = user;
@@ -55,6 +57,9 @@ public class commentPage implements ActionListener{
 		}
 		returnButton.addActionListener(this);
 		topPanel.add(returnButton);
+		
+		addFavorite.addActionListener(this);
+		topPanel.add(addFavorite);
 		
 		commentSQL = new CommentSQL(entry);
 		CommentSection comments = commentSQL.getCommentSection();
@@ -100,6 +105,17 @@ public class commentPage implements ActionListener{
 		if (e.getSource() == returnButton) {
 			frame.dispose();
 			new MainPage(mainUser);
+		}
+		else if (e.getSource() == addFavorite) {
+			FavoriteListSQL list = new FavoriteListSQL(entry, mainUser);
+			Boolean bool;
+			try {
+				bool = list.addFavorite();
+				if (!bool) JOptionPane.showMessageDialog(null, "Game already in Favorites", "Error", JOptionPane.WARNING_MESSAGE);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		else if (e.getSource() == addComment) {
 			if (commentTitle.getText().length()==0 || commentDescription.getText().length()==0) {
