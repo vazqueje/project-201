@@ -32,6 +32,7 @@ public class MainPage implements ActionListener{
 	JButton commentSectionSearch = new JButton("Comment Section Page");
 	JTextField commentBar = new JTextField(20);
 	JButton banPageButton = new JButton("Ban Page");
+	JButton accountPage = new JButton("Profile Page");
 	
 	ArrayList<JButton> list = new ArrayList<JButton>();
 	JButton button;
@@ -72,6 +73,9 @@ public class MainPage implements ActionListener{
 		
 		favoritesPage.addActionListener(this);
 		topPanel.add(favoritesPage);
+		
+		accountPage.addActionListener(this);
+		topPanel.add(accountPage);
 		}
 		if (mainUser.getPrivileges() == 2) {
 			adminPage.addActionListener(this);
@@ -88,6 +92,10 @@ public class MainPage implements ActionListener{
 		if (e.getSource() == banPageButton) {
 			frame.dispose();
 			new BanPage(mainUser);
+		}
+		if (e.getSource() == accountPage) {
+			frame.dispose();
+			new AccountPage(mainUser);
 		}
 		else if (e.getSource() == requestPageButton) {
 			frame.dispose();
