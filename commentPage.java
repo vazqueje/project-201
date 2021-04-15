@@ -57,9 +57,11 @@ public class commentPage implements ActionListener{
 		}
 		returnButton.addActionListener(this);
 		topPanel.add(returnButton);
+		if (mainUser.getPrivileges() != -1) {
+			addFavorite.addActionListener(this);
+			topPanel.add(addFavorite);
+		}
 		
-		addFavorite.addActionListener(this);
-		topPanel.add(addFavorite);
 		
 		commentSQL = new CommentSQL(entry);
 		CommentSection comments = commentSQL.getCommentSection();
