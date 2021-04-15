@@ -20,6 +20,7 @@ class testForgotPassword {
 			Date date = new Date(0);
 			User u = new User( "username",  "password",  "email", date, 0);
 			ForgotPassword f1 = new ForgotPassword(u);
+			assertTrue(f1 != null);
 		} catch (Exception e) {
 			fail("Not yet implemented");
 		}
@@ -33,6 +34,7 @@ class testForgotPassword {
 			ForgotPassword f1 = new ForgotPassword(u);
 			User u1;
 			u1 = f1.getUser();
+			assertTrue(f1 != null);
 			assertTrue (u1.equals(u));
 		} catch (Exception e) {
 			fail("Not yet implemented");
@@ -46,6 +48,7 @@ class testForgotPassword {
 			User u = new User( "username",  "password",  "email", date, 0);
 			ForgotPassword f1 = new ForgotPassword(u);
 			String email = f1.getUser().getEmail();
+			assertTrue(f1 != null);
 			assertEquals(email, "email");
 		} catch (Exception e) {
 			fail("Not yet implemented");
@@ -60,6 +63,7 @@ class testForgotPassword {
 			User u = new User( "username",  "password",  "email", date, 0);
 			ForgotPassword f1 = new ForgotPassword(u, inputEmail);
 			String email = f1.getUser().getEmail();
+			assertTrue(f1 != null);
 			assertTrue(f1.checkCompare("email"));
 			inputEmail = "123@gmail.com";
 			assertTrue(f1.checkCompare(inputEmail));
