@@ -22,7 +22,7 @@ public class FavoritesPage {
 	FavoritesPage(ArrayList<Entry> favorites, ArrayList<Entry> wishlist) {
         this.favorites = favorites;
         this.wishList = wishList;
-    }
+    } 
 	
 	/*
 	 * Getter method for the favorite game list

@@ -1,6 +1,7 @@
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -43,6 +44,15 @@ public class FavoritesPageGUI implements ActionListener {
 		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.PAGE_AXIS));
 		returnButton.addActionListener(this);
 		topPanel.add(returnButton);
+		if (user.getmode()) { 
+			mainPanel.setBackground(Color.gray);
+			topPanel.setBackground(Color.gray);
+			bottomPanel.setBackground(Color.gray);
+	 	} else {
+	 		mainPanel.setBackground(Color.white);
+			topPanel.setBackground(Color.white);
+			bottomPanel.setBackground(Color.white);
+	 	}
 		
 		FavoriteListSQL f2 = new FavoriteListSQL(mainUser);
 		FavoritesPage favPage = f2.displayFavorites();
@@ -50,7 +60,7 @@ public class FavoritesPageGUI implements ActionListener {
 		ArrayList<Entry> entries = favPage.getGameList();
 		if (entries != null) {
 			for (int i = 0; i < entries.size(); i++) {
-				JPanel panel = createEntryPanel(entries.get(i));
+				JPanel panel = createEntryPanel(entries.get(i),user);
 				bottomPanel.add(panel);
 			}
 		}
@@ -60,7 +70,8 @@ public class FavoritesPageGUI implements ActionListener {
 		frame.setVisible(true);
 	}
 	
-	public JPanel createEntryPanel(Entry entry) {
+	public JPanel createEntryPanel(Entry entry, User user) {
+
 		JPanel retPanel = new JPanel();
 		retPanel.setSize(100, 50);
 		retPanel.setLayout(new BoxLayout(retPanel, BoxLayout.PAGE_AXIS));
@@ -79,7 +90,13 @@ public class FavoritesPageGUI implements ActionListener {
 
 		JLabel descriptionLabel = new JLabel("Description: " + entry.getDescription());
 		retPanel.add(descriptionLabel);
-		
+		if (user.getmode()) { 
+			retPanel.setBackground(Color.gray);
+			
+	 	} else {
+	 		
+	 		retPanel.setBackground(Color.white);
+	 	}
 		button = new JButton(entry.getName());
 		button.addActionListener(this);
 		retPanel.add(button);
@@ -87,11 +104,12 @@ public class FavoritesPageGUI implements ActionListener {
 		
 		JLabel space = new JLabel("----------");
 		retPanel.add(space);
-		
+		 
 		return retPanel;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
 		if (e.getSource() == returnButton) {
 		frame.dispose();
 		new MainPage(mainUser);

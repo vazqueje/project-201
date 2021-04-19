@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -27,6 +28,8 @@ public class reguestFormPage implements ActionListener{
 	JTextField reason = new JTextField(20);
 	JButton exitPage = new JButton("Main Menu");
 	
+	JPanel topPanel = new JPanel();
+	JPanel bottomPanel = new JPanel();
 	public reguestFormPage(User user) {
 		mainUser = user;
 		frame.setSize(500, 500);
@@ -48,6 +51,16 @@ public class reguestFormPage implements ActionListener{
 		mainPanel.add(reason);
 		mainPanel.add(request);
 		mainPanel.add(exitPage);
+		if (user.getmode()) { 
+			mainPanel.setBackground(Color.gray);
+			topPanel.setBackground(Color.gray);
+			bottomPanel.setBackground(Color.gray);
+	 	} else {
+	 		mainPanel.setBackground(Color.white);
+			topPanel.setBackground(Color.white);
+			bottomPanel.setBackground(Color.white);
+	 	} 
+		
 		
 		frame.setVisible(true);
 	}
@@ -58,7 +71,7 @@ public class reguestFormPage implements ActionListener{
 			frame.dispose();
 			new MainPage(mainUser);
 		}
-		else {
+		else { 
 		String name = title.getText();
 		String description = reason.getText();
 		if (name == null || name.isEmpty()) {

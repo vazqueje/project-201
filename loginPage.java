@@ -63,14 +63,14 @@ public class loginPage implements ActionListener {
 		String user = username.getText();
 		String passW = password.getText();
 		if (e.getSource() == guestUser) {
-			mainUser = new User("Guest","Guest","Guest",new java.sql.Date(111,0,23),-1);
+			mainUser = new User("Guest","Guest","Guest",new java.sql.Date(111,0,23),-1, false);
 			frame.dispose();
 			new MainPage(mainUser);
 		}
 		else {
 		User testUser;
 		UserVerify newUser = new UserVerify(user, passW);
-		
+		 
 		try {
 			 testUser = newUser.getUser();
 			if (testUser == null) {

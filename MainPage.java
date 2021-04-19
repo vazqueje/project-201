@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -33,6 +34,7 @@ public class MainPage implements ActionListener{
 	JTextField commentBar = new JTextField(20);
 	JButton banPageButton = new JButton("Ban Page");
 	JButton accountPage = new JButton("Profile Page");
+	JButton darkmode = new JButton("DARKMODE");
 	
 	ArrayList<JButton> list = new ArrayList<JButton>();
 	JButton button;
@@ -56,7 +58,15 @@ public class MainPage implements ActionListener{
 		mainPanel.add(bottomPanel);
 		topPanel.setLayout(new FlowLayout());
 		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.PAGE_AXIS));
-		
+		if (user.getmode()) { 
+			mainPanel.setBackground(Color.gray);
+			topPanel.setBackground(Color.gray);
+			bottomPanel.setBackground(Color.gray);
+	 	} else {
+	 		mainPanel.setBackground(Color.white);
+			topPanel.setBackground(Color.white);
+			bottomPanel.setBackground(Color.white);
+	 	}
 		JLabel searchLabel = new JLabel("Search: ");
 		searchLabel.setSize(100, 20);
 
@@ -66,7 +76,9 @@ public class MainPage implements ActionListener{
 		searchButton.setSize(100, 20);
 		searchButton.addActionListener(this);
 		topPanel.add(searchButton);
-		
+
+		darkmode.addActionListener(this); 
+		topPanel.add(darkmode);
 		if (mainUser.getPrivileges() != -1) {
 		requestPageButton.addActionListener(this);
 		topPanel.add(requestPageButton);
@@ -76,6 +88,7 @@ public class MainPage implements ActionListener{
 		
 		accountPage.addActionListener(this);
 		topPanel.add(accountPage);
+		
 		}
 		if (mainUser.getPrivileges() == 2) {
 			adminPage.addActionListener(this);
@@ -89,6 +102,18 @@ public class MainPage implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == darkmode) {
+			this.mainUser.setmode(!this.mainUser.getmode());	    	 
+    	 	if (this.mainUser.getmode()) { 
+    	 		mainPanel.setBackground(Color.gray);
+    			topPanel.setBackground(Color.gray);
+    			bottomPanel.setBackground(Color.gray);
+    	 	} else {
+    	 		mainPanel.setBackground(Color.white);
+    			topPanel.setBackground(Color.white);
+    			bottomPanel.setBackground(Color.white);
+    	 	}
+		}
 		if (e.getSource() == banPageButton) {
 			frame.dispose();
 			new BanPage(mainUser);
@@ -122,7 +147,7 @@ public class MainPage implements ActionListener{
 		if (list != null) list.clear();
 		for ( int i = 0; i < entries.size(); i++) {
 			if (esrb >= ESRBtoInt(entries.get(i).getEsrbRating())) {
-			JPanel panel = createEntryPanel(entries.get(i));
+			JPanel panel = createEntryPanel(entries.get(i), mainUser);
 			bottomPanel.add(panel);
 			}
 		}
@@ -143,11 +168,17 @@ public class MainPage implements ActionListener{
 	}
 	
 	
-	public JPanel createEntryPanel(Entry entry) {
+	public JPanel createEntryPanel(Entry entry, User user) {
 		JPanel retPanel = new JPanel();
 		retPanel.setSize(100, 50);
 		retPanel.setLayout(new BoxLayout(retPanel, BoxLayout.PAGE_AXIS));
-		
+		if (user.getmode()) { 
+			retPanel.setBackground(Color.gray);
+
+	 	} else {
+	 		retPanel.setBackground(Color.white);
+
+	 	}
 		JLabel nameLabel = new JLabel("Title: " + entry.getName());
 		retPanel.add(nameLabel);
 		

@@ -6,14 +6,14 @@ public class User {
 	private String email;
 	private Date dob;
 	private int privileges;
-
-	public User(String username, String password, String email, Date dob, int privileges) {
+	private boolean darkmode;
+	public User(String username, String password, String email, Date dob, int privileges, boolean mode) {
 		this.username = username;
 		this.password =password;
 		this.email =email;
 		this.dob= dob;
 		this.privileges = privileges;
-
+		this.darkmode = mode;
 	}
 
 	public int getPrivileges() {
@@ -58,6 +58,12 @@ public class User {
 	
 	public int getAge() {
 		return (java.time.LocalDate.now().getYear() - this.getDob().getYear());
+	}
+	public boolean getmode() {
+		return this.darkmode;
+	}
+	public void setmode(boolean mode) {
+		this.darkmode = mode;
 	}
 	
 }

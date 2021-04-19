@@ -49,7 +49,7 @@ public class UserVerify {
 //		}
 		generatedKeys.first();
 		
-		return new User(generatedKeys.getString(1),generatedKeys.getString(2),generatedKeys.getString(3),generatedKeys.getDate(4),generatedKeys.getInt(5));
+		return new User(generatedKeys.getString(1),generatedKeys.getString(2),generatedKeys.getString(3),generatedKeys.getDate(4),generatedKeys.getInt(5), false);
 		
 	}
 	

@@ -11,6 +11,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -60,12 +61,26 @@ public class AdminPage extends JFrame {
 			JScrollPane scrollPane = new JScrollPane(requestTA);
 			JPanel displayRequestPanel = new JPanel();
 			displayRequestPanel.setBorder(new TitledBorder("Pending Request"));
+			if (user.getmode()) { 
+				displayRequestPanel.setBackground(Color.gray);
+				
+		 	} else {
+		 		displayRequestPanel.setBackground(Color.white);
+				
+		 	}
 			
 			displayRequestPanel.add(scrollPane);
 			//back
 			JPanel backPanel = new JPanel();
 			backPanel.setBorder(new TitledBorder("Back to Main Page"));
 			backPanel.add(back);
+			if (user.getmode()) { 
+				backPanel.setBackground(Color.gray);
+				
+		 	} else {
+		 		backPanel.setBackground(Color.white);
+				
+		 	}
 			back.addActionListener(new ActionListener() {
 
 				@Override
@@ -83,7 +98,13 @@ public class AdminPage extends JFrame {
 			
 			
 			buttonPanel.add(denyButton);
-			
+			if (user.getmode()) { 
+				buttonPanel.setBackground(Color.gray);
+				
+		 	} else {
+		 		buttonPanel.setBackground(Color.white);
+				
+		 	}
 			
 			//add to container
 			container.add(backPanel, BorderLayout.NORTH);

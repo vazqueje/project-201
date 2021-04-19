@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -42,13 +43,22 @@ public class AccountPage implements ActionListener{
 		bottomPanel.add(Username);
 		bottomPanel.add(Password);
 		bottomPanel.add(dob);
-		
+		if (user.getmode()) { 
+			mainPanel.setBackground(Color.gray);
+			topPanel.setBackground(Color.gray);
+			bottomPanel.setBackground(Color.gray);
+	 	} else {
+	 		mainPanel.setBackground(Color.white);
+			topPanel.setBackground(Color.white);
+			bottomPanel.setBackground(Color.white);
+	 	}
 		frame.setVisible(true);
 	}
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		// TODO Auto-generated method stub
 		if (e.getSource() == backButton) {
 			frame.dispose();
