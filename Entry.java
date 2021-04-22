@@ -1,5 +1,8 @@
+import java.awt.image.BufferedImage;
 import java.sql.*;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 public class Entry {
 private String name;
 private String description;
@@ -8,8 +11,8 @@ private String developer;
 private Date publishDate;
 private String esrbRating;
 private CommentSection commentList;
-
-public Entry(String name, String description, String genre, String developer, Date publishDate, String esrbRating, CommentSection commentList) {
+BufferedImage cover;
+public Entry(String name, String description, String genre, String developer, Date publishDate, String esrbRating, CommentSection commentList, BufferedImage cover) {
 	this.name = name;
 	this.description = description;
 	this.genre = genre;
@@ -17,6 +20,7 @@ public Entry(String name, String description, String genre, String developer, Da
 	this.publishDate = publishDate;
 	this.esrbRating = esrbRating;
 	this.commentList = commentList;
+	this.cover = cover;
 }
 
 public String getName() {
@@ -73,6 +77,11 @@ public CommentSection getCommentList() {
 
 public void setCommentList(CommentSection commentList) {
 	this.commentList = commentList;
+}
+
+
+public BufferedImage getCover(){
+    return this.cover;
 }
 
 public String toString() {

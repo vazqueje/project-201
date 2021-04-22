@@ -31,7 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.*;
-public class loginPage extends JFrame{
+public class LoginStyled2 extends JFrame{
 	User mainUser;
 	private JPanel contentPane;
 	private JTextField username;
@@ -47,7 +47,7 @@ public class loginPage extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					loginPage frame = new loginPage();
+					LoginStyled2 frame = new LoginStyled2();
 					frame.setUndecorated(true);
 					frame.setVisible(true);
 					//frame.setIconImage(Toolkit.getDefaultToolkit().getImage("/images/iconlogo.png"));
@@ -65,7 +65,7 @@ public class loginPage extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public loginPage() {
+	public LoginStyled2() {
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 729, 490);
@@ -142,12 +142,12 @@ public class loginPage extends JFrame{
 
 				int x = arg0.getXOnScreen();
 				int y = arg0.getYOnScreen();
-				loginPage.this.setLocation(x - xx, y - xy);  
+				LoginStyled2.this.setLocation(x - xx, y - xy);  
 			}
 		});
 		label.setBounds(-74, -101, 420, 591);
 		label.setVerticalAlignment(SwingConstants.TOP);
-		label.setIcon(new ImageIcon(loginPage.class.getResource("/images/maingreen2.png")));
+		label.setIcon(new ImageIcon(LoginStyled2.class.getResource("/images/maingreen2.png")));
 		panel.add(label);
 
 		button = new Button("Login");
@@ -172,7 +172,7 @@ public class loginPage extends JFrame{
 					else { 
 						mainUser = testUser;
 						dispose();
-						new test(mainUser);
+						new MainPage(mainUser);
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -226,7 +226,7 @@ public class loginPage extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				mainUser = new User("Guest","Guest","Guest",new java.sql.Date(111,0,23),-1);
 				dispose();
-				new test(mainUser);
+				new MainPage(mainUser);
 			}
 			
 		});

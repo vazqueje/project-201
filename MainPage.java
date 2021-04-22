@@ -1,187 +1,253 @@
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.awt.EventQueue;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Button;
+import java.awt.SystemColor;
+import javax.swing.JTextField;
+import javax.swing.JSeparator;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.sql.*;
+public class MainPage extends JFrame {
+	private JPanel contentPane;
+	int xx,xy;
+	private JTextField searchfield;
+	private int searchCount;
+	private TableDisplay searchcatalog;
 
-public class MainPage implements ActionListener{
-	User mainUser;
-	JTextField searchBar = new JTextField(20);
-	JFrame frame = new JFrame();
-	JPanel mainPanel = new JPanel();
-	JPanel topPanel = new JPanel();
-	JPanel bottomPanel = new JPanel();
-	JButton requestPageButton = new JButton("Request New Game");
-	JButton favoritesPage = new JButton("Favorites Page");
-	JButton adminPage = new JButton("Admin Page");
-	JButton searchButton = new JButton("Search");
-	JButton commentSectionSearch = new JButton("Comment Section Page");
-	JTextField commentBar = new JTextField(20);
-	JButton banPageButton = new JButton("Ban Page");
-	JButton accountPage = new JButton("Profile Page");
 	
-	ArrayList<JButton> list = new ArrayList<JButton>();
-	JButton button;
-	int esrb = 0;
-	
+
+	/**
+	 * Creates a new main page frame where the user can view all games in the library 
+	 * @param user the type of user viewing the page
+	 */
 	public MainPage(User user) {
-		mainUser = user;
-		int age = mainUser.getAge();
-		if (age >= 18) esrb = 4;
-		else if (age >=17) esrb = 3;
-		else if (age >= 13) esrb = 2;
-		else if (age >= 10) esrb = 1;
-		if (mainUser.getUsername().equals("Guest")) esrb = 0;
-		frame.add(topPanel);
-		frame.setSize(500, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("TEST CATALOG MainPage");
-		frame.add(mainPanel);
-		mainPanel.setLayout(new GridLayout(2,1));
-		mainPanel.add(topPanel);
-		mainPanel.add(bottomPanel);
-		topPanel.setLayout(new FlowLayout());
-		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.PAGE_AXIS));
+		setUndecorated(true);
+		setVisible(true);
+		setBackground(Color.WHITE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1578, 1046);
+		setLocationRelativeTo(null);
 		
-		JLabel searchLabel = new JLabel("Search: ");
-		searchLabel.setSize(100, 20);
+		//set main panel
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		//set up custom font: QuadUltra.ttf
+		try {
+		     //Returned font is of pt size 1
+		     Font font = Font.createFont(Font.TRUETYPE_FONT, new File("QuadUltra.ttf"));
+		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		     genv.registerFont(font);
+		     font = font.deriveFont(48f);
+		     //titleLabel3.setFont(font);
 
-		topPanel.add(searchLabel);
-		topPanel.add(searchBar);
-		
-		searchButton.setSize(100, 20);
-		searchButton.addActionListener(this);
-		topPanel.add(searchButton);
-		
-		if (mainUser.getPrivileges() != -1) {
-		requestPageButton.addActionListener(this);
-		topPanel.add(requestPageButton);
-		
-		favoritesPage.addActionListener(this);
-		topPanel.add(favoritesPage);
-		
-		accountPage.addActionListener(this);
-		topPanel.add(accountPage);
-		}
-		if (mainUser.getPrivileges() == 2) {
-			adminPage.addActionListener(this);
-			topPanel.add(adminPage);
-			banPageButton.addActionListener(this);
-			topPanel.add(banPageButton);
+		} catch (IOException|FontFormatException e) {
+		     // Handle exception
 		}
 		
-		frame.setVisible(true);
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == banPageButton) {
-			frame.dispose();
-			new BanPage(mainUser);
-		}
-		if (e.getSource() == accountPage) {
-			frame.dispose();
-			new AccountPage(mainUser);
-		}
-		else if (e.getSource() == requestPageButton) {
-			frame.dispose();
-			new reguestFormPage(mainUser);
-		}
-		else if(e.getSource() == favoritesPage) {
-			frame.dispose();
-			new FavoritesPageGUI(mainUser);
-		}
-		else if (e.getSource() == adminPage) {
-			frame.dispose();
-			new AdminPage(mainUser);
-		}
-		else if (e.getSource() == searchButton){
-		String searchString = searchBar.getText();
-		if (searchString.isEmpty()) return;
-		Search newSearch = new Search(searchString);
-		ArrayList<Entry> entries = newSearch.fetchSearch(searchString);
-		if (entries == null) {
-			JOptionPane.showMessageDialog(null, "Please Try Again", "Search Not Found", JOptionPane.WARNING_MESSAGE);
-		}
-		else {
-		bottomPanel.removeAll();
-		if (list != null) list.clear();
-		for ( int i = 0; i < entries.size(); i++) {
-			if (esrb >= ESRBtoInt(entries.get(i).getEsrbRating())) {
-			JPanel panel = createEntryPanel(entries.get(i));
-			bottomPanel.add(panel);
+		//Set up navigation bar
+		JPanel navpanel = new JPanel();
+		navpanel.setBackground(new Color(25,24,26));
+		navpanel.setBounds(0, 0, 1578, 63);
+		navpanel.setLayout(null);
+		contentPane.add(navpanel);
+		
+		//add close window button
+		JLabel lbl_close = new JLabel("X");
+		lbl_close.setBounds(1529, 16, 37, 27);
+		navpanel.add(lbl_close);
+		lbl_close.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				System.exit(0);
 			}
+		});
+		lbl_close.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_close.setForeground(new Color(58, 162, 140));
+		lbl_close.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		//Create empty border for stylized buttons
+		Border emptyBorder = BorderFactory.createEmptyBorder();
+		
+		//Add profile button to navbar
+		JButton profile = new JButton("Profile");
+		profile.setFocusPainted(false);
+		profile.setForeground(Color.WHITE);
+		profile.setBorder(emptyBorder);
+		profile.setBounds(262, 0, 164, 63);
+		profile.setBackground(new Color(25,24,26));
+		
+		//Add favorites button to navbar
+		JButton favorites = new JButton("Favorites");
+		favorites.setBounds(70, 0, 164, 63);
+		favorites.setForeground(Color.WHITE);
+		favorites.setFocusPainted(false);
+		favorites.setBorder(emptyBorder);
+		favorites.setBackground(new Color(25,24,26));
+		
+		//add search box with 
+		searchfield = new JTextField();
+		searchfield.setBorder(new LineBorder(new Color(255, 255, 255), 10));
+		JButton searchbutton = new JButton("SEARCH");
+		searchbutton.setForeground(Color.WHITE);	
+		searchbutton.setFocusPainted(false);
+		searchbutton.setBackground(new Color(25, 24, 26));
+		searchbutton.setBounds(1086, 171, 169, 54);
+		searchbutton.setBorder(emptyBorder);
+		JLabel presearch = new JLabel("Search for a game");
+		//register main font
+		try {
+		     //Returned font is of pt size 1
+		     Font font2 = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
+		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		     genv.registerFont(font2);
+		     font2 = font2.deriveFont(20f);
+		     Font font3 = font2.deriveFont(30f);
+
+		     profile.setFont(font2);
+		     favorites.setFont(font2);
+		     searchfield.setFont(font3);
+		     searchbutton.setFont(font3);
+		     presearch.setFont(font3);
+
+		} catch (IOException|FontFormatException e) {
+		     // Handle exception
 		}
-		}
-		frame.setVisible(true);
-		}
-		else {
-			for (int i = 0; i < list.size(); i++) {
-				if (e.getSource() == list.get(i)) {
-					String commentPage = list.get(i).getText();
-					Search newSearch = new Search(commentPage);
-					ArrayList<Entry> entries = newSearch.fetchSearch(commentPage);
-					frame.dispose();
-					new commentPage(mainUser, entries.get(0));
+		contentPane.add(searchbutton);
+		navpanel.add(profile);
+		navpanel.add(favorites);
+		searchfield.setBackground(Color.WHITE);
+		searchfield.setBounds(330, 171, 758, 54);
+		//Remove tooltip text when user types in search box
+		searchfield.addMouseListener(new MouseAdapter() {
+	        public void mouseClicked(MouseEvent e) {
+	            if (presearch.getText().equals("Text")) // User has not entered text yet
+	            	presearch.setText("");
+	        }
+	    });
+		
+		presearch.setForeground(Color.LIGHT_GRAY);
+		presearch.setBounds(347, 181, 359, 35);
+		
+		contentPane.add(presearch);
+		
+		contentPane.add(searchfield);
+		
+		//add library logo to top left 
+		JLabel smallIcon = new JLabel("");
+		smallIcon.setBounds(12, 10, 56, 43);
+		smallIcon.setIcon(new ImageIcon(LoginStyled.class.getResource("/images/iconlogo.png")));
+
+		navpanel.add(smallIcon);
+		
+		//background image
+				JLabel cover = new JLabel("");
+				cover.setBounds(0, 59, 1578, 356);
+				contentPane.add(cover);
+				cover.setIcon(new ImageIcon(LoginStyled.class.getResource("/images/cyberpunk.jpg")));
+		
+		//create panel to display catalog entries
+		JPanel tablepanel = new JPanel();
+		
+		
+		
+		
+		tablepanel.setBackground(Color.WHITE);
+		tablepanel.setLayout(null);
+		tablepanel.setBounds(0, 325, 1566, 730);
+		contentPane.add(tablepanel);
+		
+
+	        java.awt.EventQueue.invokeLater(new Runnable() {
+	            public void run() {
+	                new TableDisplay().setVisible(true);
+	            }
+	        });
+	    EntryRenderer er = new EntryRenderer();
+		TableDisplay catalog = new TableDisplay();
+		catalog.setBorder(new LineBorder(new Color(255, 255, 255), 10));
+		catalog.setBounds(12,85,1557,666);
+		tablepanel.add(catalog);
+		
+		
+		searchbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String searchString = searchfield.getText();
+				if (searchString.isEmpty()) return;
+				Search newSearch = new Search(searchString);
+				
+				ArrayList<Entry> entries = newSearch.fetchSearch(searchString);
+				//System.out.println(entries.get(0).toString());
+				if (entries == null) {
+					JOptionPane.showMessageDialog(null, "Please Try Again", "Search Not Found", JOptionPane.WARNING_MESSAGE);
+				} else {
+					System.out.println("searched");
+					if(searchCount > 0) {
+						System.out.println("search count greater than 0");
+						searchcatalog.setVisible(false);
+						tablepanel.remove(searchcatalog);
+						searchcatalog =  new TableDisplay(entries);
+						searchcatalog.setBorder(new LineBorder(new Color(255, 255, 255), 10));
+						//searchcatalog.setBounds(12,13,1358,704);
+						searchcatalog.setBounds(12,85,1557,666);
+						searchcatalog.repaint();
+						searchcatalog.setVisible(true);
+						
+						tablepanel.add(searchcatalog);
+						
+						
+					}else {
+						catalog.setVisible(false);
+						tablepanel.remove(catalog);
+						searchcatalog = new TableDisplay(entries);
+						searchcatalog.setBorder(new LineBorder(new Color(255, 255, 255), 10));
+						searchcatalog.setBounds(12,85,1557,666);
+						searchcatalog.setVisible(true);
+						tablepanel.add(searchcatalog);
+					}
+					//panel_1.remove(catalog);
+					
+					
 				}
+				searchCount++;
+				
 			}
-		}
+			
+		});
+		
+		
+		
+		
 	}
-	
-	
-	public JPanel createEntryPanel(Entry entry) {
-		JPanel retPanel = new JPanel();
-		retPanel.setSize(100, 50);
-		retPanel.setLayout(new BoxLayout(retPanel, BoxLayout.PAGE_AXIS));
-		
-		JLabel nameLabel = new JLabel("Title: " + entry.getName());
-		retPanel.add(nameLabel);
-		
-		JLabel genreLabel = new JLabel("Genre: " + entry.getGenre());
-		retPanel.add(genreLabel);
-		
-		JLabel developerLabel = new JLabel("Developer: " + entry.getDeveloper());
-		retPanel.add(developerLabel);
-		
-		JLabel publishDate = new JLabel("Publish Date: " + entry.getPublishDate().toString());
-		retPanel.add(publishDate);
-
-		JLabel descriptionLabel = new JLabel("Description: " + entry.getDescription());
-		retPanel.add(descriptionLabel);
-		
-		button = new JButton(entry.getName());
-		button.addActionListener(this);
-		retPanel.add(button);
-		list.add(button);
-		
-		JLabel space = new JLabel("----------");
-		retPanel.add(space);
-		
-		return retPanel;
-	}
-	
-	public int ESRBtoInt(String rating) {
-		int ret = 0;
-		if (rating.equalsIgnoreCase("RP")) ret = 4;
-		else if (rating.equalsIgnoreCase("A")) ret = 4;
-		else if (rating.equalsIgnoreCase("M")) ret = 3;
-		else if (rating.equalsIgnoreCase("T")) ret = 2;
-		else if (rating.equalsIgnoreCase("E10")) ret = 1;
-		return ret;
-	}
-	
 }
