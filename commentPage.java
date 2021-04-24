@@ -167,13 +167,13 @@ public class commentPage implements ActionListener{
 			String description =  commentDescription.getText();
 			try {
 				commentSQL.addComment(title, description, entry.getName());
-				frame.dispose();
-				new commentPage(mainUser, entry);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			frame.setVisible(true);
+			frame.dispose();
+			new commentPage(mainUser, entry);
+			//frame.setVisible(true);
 		}
 		else {
 			for (int i = 0; i < list.size(); i++) {
