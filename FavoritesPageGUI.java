@@ -57,15 +57,17 @@ public class FavoritesPageGUI implements ActionListener {
 		FavoriteListSQL f2 = new FavoriteListSQL(mainUser);
 		FavoritesPage favPage = f2.displayFavorites();
 		
-		ArrayList<Entry> entries = favPage.getGameList();
-		if (entries != null) {
-			for (int i = 0; i < entries.size(); i++) {
-				JPanel panel = createEntryPanel(entries.get(i),user);
+		//ArrayList<Entry> entries = favPage.getGameList();
+		if (favPage != null) {
+			for (int i = 0; i < favPage.getGameListSize(); i++) {
+				JPanel panel = createEntryPanel(favPage.getGameList().get(i),user);
 				bottomPanel.add(panel);
 			}
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "No Games in Favorites", "No Favorites", JOptionPane.WARNING_MESSAGE);
+			//JOptionPane.showMessageDialog(null, "No Games in Favorites", "No Favorites", JOptionPane.WARNING_MESSAGE);
+			JLabel noFavorite = new JLabel("No Favorites on Page");
+			bottomPanel.add(noFavorite);
 		}
 		frame.setVisible(true);
 	}
