@@ -86,7 +86,7 @@ public class FavoriteListSQL {
 			      } else {
 			 //else, add rows in result set to an ArrayList of type Entry
 			        do {
-			          results.add(new Entry(rs.getString("name"), rs.getString("description"), rs.getString("genre"), rs.getString("developer"), rs.getDate("publishDate"), rs.getString("esrbRating"), null));
+			          results.add(new Entry(rs.getString("name"), rs.getString("description"), rs.getString("genre"), rs.getString("developer"), rs.getDate("publishDate"), rs.getString("esrbRating"), null,null));
 			        } while (rs.next());
 			      }
 			 return new FavoritesPage(results,new ArrayList<Entry>());

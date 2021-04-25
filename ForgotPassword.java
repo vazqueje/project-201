@@ -45,7 +45,7 @@ public class ForgotPassword {
 			}
 			generatedKeys.beforeFirst();
 			generatedKeys.first();
-			return new User(generatedKeys.getString(1),generatedKeys.getString(2),generatedKeys.getString(3),generatedKeys.getDate(4),generatedKeys.getInt(5), false);
+			return new User(generatedKeys.getString(1),generatedKeys.getString(2),generatedKeys.getString(3),generatedKeys.getDate(4),generatedKeys.getInt(5));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			return null;
