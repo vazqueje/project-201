@@ -33,12 +33,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.*;
-public class MainPage extends JFrame {
+public class MainPage extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	int xx,xy;
 	private JTextField searchfield;
 	private int searchCount;
 	private TableDisplay searchcatalog;
+	private JButton profile;
 	private User user;
 
 	
@@ -101,12 +102,16 @@ public class MainPage extends JFrame {
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 		
 		//Add profile button to navbar
-		JButton profile = new JButton("Profile");
+		if(user.getPrivileges() != -1) {
+		profile = new JButton("Profile");
 		profile.setFocusPainted(false);
 		profile.setForeground(Color.WHITE);
 		profile.setBorder(emptyBorder);
 		profile.setBounds(262, 0, 164, 63);
 		profile.setBackground(new Color(25,24,26));
+		profile.addActionListener(this);
+		}
+		
 		
 		//Add favorites button to navbar
 		JButton favorites = new JButton("Favorites");
@@ -145,8 +150,10 @@ public class MainPage extends JFrame {
 		     // Handle exception
 		}
 		contentPane.add(searchbutton);
+		if(user.getPrivileges() != -1) {
 		navpanel.add(profile);
 		navpanel.add(favorites);
+		}
 		searchfield.setBackground(Color.WHITE);
 		searchfield.setBounds(330, 171, 758, 54);
 		//Remove tooltip text when user types in search box
@@ -250,5 +257,12 @@ public class MainPage extends JFrame {
 		
 		
 		
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == profile) {
+			this.dispose();
+			new newProfilePage(user);
+		}
 	}
 }

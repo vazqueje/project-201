@@ -41,19 +41,19 @@ public class newProfilePage extends JFrame implements ActionListener{
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					User me = new User("ash","123","123",new java.sql.Date(101,0,23),3);
-					newProfilePage frame = new newProfilePage(me);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					User me = new User("ash","123","123",new java.sql.Date(101,0,23),3);
+//					newProfilePage frame = new newProfilePage(me);
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -127,16 +127,15 @@ public class newProfilePage extends JFrame implements ActionListener{
 		favorites.setBorder(emptyBorder);
 		favorites.setBackground(new Color(25,24,26));
 		
-//		//add search box with 
-//		searchfield = new JTextField();
-//		searchfield.setBorder(new LineBorder(new Color(255, 255, 255), 10));
-//		JButton searchbutton = new JButton("SEARCH");
-//		searchbutton.setForeground(Color.WHITE);	
-//		searchbutton.setFocusPainted(false);
-//		searchbutton.setBackground(new Color(25, 24, 26));
-//		searchbutton.setBounds(1086, 171, 169, 54);
-//		searchbutton.setBorder(emptyBorder);
-//		JLabel presearch = new JLabel("Search for a game");
+		returnMainPage = new JButton("Main Page");
+		returnMainPage.setBounds(230, 0, 164, 63);
+		returnMainPage.setForeground(Color.WHITE);
+		returnMainPage.setFocusPainted(false);
+		returnMainPage.setBorder(emptyBorder);
+		returnMainPage.setBackground(new Color(25,24,26));
+		returnMainPage.addActionListener(this);
+		
+
 		//register main font
 		try {
 		     //Returned font is of pt size 1
@@ -146,34 +145,16 @@ public class newProfilePage extends JFrame implements ActionListener{
 		     font2 = font2.deriveFont(20f);
 		     Font font3 = font2.deriveFont(30f);
 
-//		     profile.setFont(font2);
 		     favorites.setFont(font2);
-//		     searchfield.setFont(font3);
-//		     searchbutton.setFont(font3);
-//		     presearch.setFont(font3);
+
 
 		} catch (IOException|FontFormatException e) {
 		     // Handle exception
 		}
-//		contentPane.add(searchbutton);
-//		navpanel.add(profile);
+
 		navpanel.add(favorites);
-		searchfield.setBackground(Color.WHITE);
-		searchfield.setBounds(330, 171, 758, 54);
-//		//Remove tooltip text when user types in search box
-//		searchfield.addMouseListener(new MouseAdapter() {
-//	        public void mouseClicked(MouseEvent e) {
-//	            if (presearch.getText().equals("Text")) // User has not entered text yet
-//	            	presearch.setText("");
-//	        }
-//	    });
-//		
-//		presearch.setForeground(Color.LIGHT_GRAY);
-//		presearch.setBounds(347, 181, 359, 35);
-		
-//		contentPane.add(presearch);
-		
-//		contentPane.add(searchfield);
+		navpanel.add(returnMainPage);
+
 		
 		//add library logo to top left 
 		JLabel smallIcon = new JLabel("");
@@ -212,6 +193,9 @@ public class newProfilePage extends JFrame implements ActionListener{
 		} catch (IOException|FontFormatException e) {
 		     // Handle exception
 		}
+		profilePanel.add(username);
+		profilePanel.add(password);
+		
 		changePass = new JButton("Change Password");
 		changePass.setBounds(10, 384, 164, 63);
 		changePass.setForeground(Color.DARK_GRAY);
@@ -220,6 +204,10 @@ public class newProfilePage extends JFrame implements ActionListener{
 		changePass.setBackground(new Color(25,24,26));
 		changePass.addActionListener(this);
 		profilePanel.add(changePass);
+		
+		newPass = new JTextField("new password", 100);
+		newPass.setBounds(250, 384, 255, 63);
+		profilePanel.add(newPass);
 		
 		changeEmail = new JButton("Change Email");
 		changeEmail.setBounds(10, 500, 164, 63);
@@ -230,31 +218,18 @@ public class newProfilePage extends JFrame implements ActionListener{
 		changeEmail.addActionListener(this);
 		profilePanel.add(changeEmail);
 		
+		
 		newEmail = new JTextField("new email", 100);
-		newEmail.setBounds(250, 384, 255, 63);
+		newEmail.setBounds(250, 500, 255, 63);
 		profilePanel.add(newEmail);
 		
-		newPass = new JTextField("new password", 100);
-		newPass.setBounds(250, 500, 255, 63);
-		profilePanel.add(newPass);
 		
 		
 		
 		
 		
 		
-		profilePanel.add(username);
-		profilePanel.add(password);
-//	        java.awt.EventQueue.invokeLater(new Runnable() {
-//	            public void run() {
-//	                new TableDisplay().setVisible(true);
-//	            }
-//	        });
-//	    EntryRenderer er = new EntryRenderer();
-//		TableDisplay catalog = new TableDisplay();
-//		catalog.setBorder(new LineBorder(new Color(255, 255, 255), 10));
-//		catalog.setBounds(0,81,1557,666);
-//		tablepanel.add(catalog);
+
 				
 	}
 
@@ -286,6 +261,10 @@ public class newProfilePage extends JFrame implements ActionListener{
 					new newProfilePage(mainUser);
 				}
 			}
+		}
+		else if(e.getSource() == returnMainPage) {
+			this.dispose();
+			new MainPage(mainUser);
 		}
 	}
 
