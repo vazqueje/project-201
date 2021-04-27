@@ -22,9 +22,12 @@ public class TableDisplay extends JPanel {
     private JLabel jLabel1;
     private JScrollPane jScrollPane1;
     private JTable jTable1;
+    User user;
+
     
-    public TableDisplay() {
+    public TableDisplay(User user) {
     	this.setBackground(Color.white);
+    	this.user = user;
         initComponents();
         populateJTable();
     }
@@ -37,7 +40,12 @@ public class TableDisplay extends JPanel {
     
     public void populateJTable(){
     	System.out.println("Heres");
-        EntryRenderer er = new EntryRenderer();
+        EntryRenderer er = null;
+        if(user == null) {
+        	er = new EntryRenderer();
+        } else {
+        	er = new EntryRenderer(user);
+        }
         ArrayList<Entry> list = er.fillTable();
         
         String[] columnName = {"Cover","Name","Description","Genre","Developer","publishDate","esrbRating"};
@@ -59,6 +67,7 @@ public class TableDisplay extends JPanel {
             rows[i][4] = list.get(i).getDeveloper();
             rows[i][5] = list.get(i).getPublishDate();
             rows[i][6] = list.get(i).getEsrbRating();
+        	
         }
         
         TableModel model = new TableModel(rows, columnName);
@@ -206,6 +215,7 @@ public class TableDisplay extends JPanel {
 
         
     }
+    
     
     
     

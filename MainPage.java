@@ -39,6 +39,7 @@ public class MainPage extends JFrame {
 	private JTextField searchfield;
 	private int searchCount;
 	private TableDisplay searchcatalog;
+	private User user;
 
 	
 
@@ -47,6 +48,7 @@ public class MainPage extends JFrame {
 	 * @param user the type of user viewing the page
 	 */
 	public MainPage(User user) {
+		this.user = user;
 		setUndecorated(true);
 		setVisible(true);
 		setBackground(Color.WHITE);
@@ -187,13 +189,12 @@ public class MainPage extends JFrame {
 		contentPane.add(tablepanel);
 		
 
-	        java.awt.EventQueue.invokeLater(new Runnable() {
-	            public void run() {
-	                new TableDisplay().setVisible(true);
-	            }
-	        });
-	    EntryRenderer er = new EntryRenderer();
-		TableDisplay catalog = new TableDisplay();
+//	        java.awt.EventQueue.invokeLater(new Runnable() {
+//	            public void run() {
+//	                new TableDisplay().setVisible(true);
+//	            }
+//	        });
+		TableDisplay catalog = new TableDisplay(this.user);
 		catalog.setBorder(new LineBorder(new Color(255, 255, 255), 10));
 		catalog.setBounds(12,85,1557,666);
 		tablepanel.add(catalog);
@@ -205,7 +206,7 @@ public class MainPage extends JFrame {
 				
 				String searchString = searchfield.getText();
 				if (searchString.isEmpty()) return;
-				Search newSearch = new Search(searchString);
+				Search newSearch = new Search(searchString,user);
 				
 				ArrayList<Entry> entries = newSearch.fetchSearch(searchString);
 				//System.out.println(entries.get(0).toString());
