@@ -1,12 +1,22 @@
 import java.sql.*;
 import java.util.ArrayList;
+/**
+ * @author Raymond Lin
+ *
+ */
 public class CommentSQL {
 	private Entry entry;
 	Connection conn = SQLConnection.getConnection();
+	/**
+	 * @param e The entry object that we need to grab the comment section from
+	 */
 	public CommentSQL(Entry e) {
 		this.entry = e;
 	}
 	
+	/**
+	 * @return the comment section with all comments
+	 */
 	public CommentSection getCommentSection() {
 		PreparedStatement p1;
 		try {
@@ -31,6 +41,13 @@ public class CommentSQL {
 		
 	}
 	
+	/**
+	 * @param title the title of the comment
+	 * @param description the description of the comment
+	 * @param game the game that the comment will be associated with
+	 * @return a newly generated comment section with the new comment added
+	 * @throws SQLException
+	 */
 	public CommentSection addComment(String title, String description, String game) throws SQLException {
 		PreparedStatement query = conn.prepareStatement("INSERT INTO comment (title,description,game) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
 		query.setString(1, title);
@@ -41,6 +58,11 @@ public class CommentSQL {
 		
 	}
 	
+	/**
+	 * @param id the id of the comment so that it can be removed
+	 * @return a newly generated comment section with the new comment deleted
+	 * @throws SQLException
+	 */
 	public CommentSection removeComment(int id) throws SQLException {
 		PreparedStatement query = conn.prepareStatement("Delete from comment where id=?", Statement.RETURN_GENERATED_KEYS);
 		query.setInt(1, id);
