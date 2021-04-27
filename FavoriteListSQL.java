@@ -1,38 +1,23 @@
 import java.sql.*;
 import java.util.ArrayList;
-/**
- * @author Raymond Lin
- *
- */
 public class FavoriteListSQL {
 	Connection conn = SQLConnection.getConnection();
 	private Entry entry;
 	private User user;
 	
-	/**
-	 * constructor to use if you want to add or remove from favorites
-	 * @param entry the entry that will be added to the favorite list
-	 * @param user the user that the entry will be added to.
-	 */
+	//constructor to use if you want to add or remove from favorites
 	public FavoriteListSQL(Entry entry, User user) {
 		this.entry = entry;
 		this.user = user;
 	}
 	
-	/**
-	 * constructor to use if you want to just pull up a list of favorites
-	 * @param user the user that you want to retrieve their favorites list from.
-	 */
+	//constructor to use if you want to just pull up a list of favorites
 	public FavoriteListSQL(User user) {
 		this.entry = null;
 		this.user = user;
 	}
 	
-	/**
-	 * To add to someone's favorite table (it also creates one if they do not have one)
-	 * @return true if the add was successful and false if the add failed.
-	 * @throws SQLException
-	 */
+	//specific add method if the table doesn't exist
 	public boolean addFavorite() throws SQLException {
 		//check if the user's favorite table is in the database.
 		String userFormatted = user.getUsername() +"_favorite";
@@ -72,10 +57,7 @@ public class FavoriteListSQL {
 		}
 	}
 	
-	/**
-	 * removes from the favorite list
-	 * @return true if the entry was removed from favorites successfully and false if it failed.
-	 */
+	//removes from the favorite list
 	public boolean removeFavorite() {
 		String userFormatted = user.getUsername() +"_favorite";
 		PreparedStatement remove;
@@ -89,10 +71,7 @@ public class FavoriteListSQL {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return a FavoritesPage of all the favorites from the user_favorites
-	 */
+	//returns an FavoritesPage of all the favorites from the user_favorites
 	public FavoritesPage displayFavorites() {
 		String userFormatted = user.getUsername()+"_favorite";
 

@@ -2,16 +2,10 @@ import java.sql.*;
 public class BanSQL {
 private String username;
 Connection conn = SQLConnection.getConnection();
-/**
- * @param username the username provided to ban the user
- */
 public BanSQL(String username) {
 	this.username = username;
 }
 
-/**
- * @return true if the user is successfully banned and false if not.
- */
 public boolean ban() {
 	try {
 		//gets the username from the user_table
@@ -24,7 +18,7 @@ public boolean ban() {
 		}
 		generatedKeys.beforeFirst();
 		generatedKeys.first();
-
+		//new User(generatedKeys.getString(1),generatedKeys.getString(2),generatedKeys.getString(3),generatedKeys.getDate(4),generatedKeys.getInt(5))
 		//sets the username into banned_table
 		PreparedStatement p2 = conn.prepareStatement("INSERT INTO banned_table(username,password,email,dob,privileges) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 		p2.setString(1, generatedKeys.getString(1));
