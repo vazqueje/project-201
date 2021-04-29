@@ -16,7 +16,7 @@ public class TableDisplay extends JPanel {
 
     /**
      * default constructor: Initializes table components and populates JTable with default values i.e. the whole catalog
-     * @param user
+     * @param user : the user currently using the application
      */
     public TableDisplay(User user){
         this.setBackground(Color.white); //current theme
