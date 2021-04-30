@@ -50,17 +50,6 @@ public class ForgotPasswordPage extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		//set up custom font: QuadUltra.ttf
-		try {
-		     //Returned font is of pt size 1
-		     Font font = Font.createFont(Font.TRUETYPE_FONT, new File("QuadUltra.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font);
-		     font = font.deriveFont(48f);
-		     //titleLabel3.setFont(font);
-
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
 		
 		//Set up navigation bar
 		JPanel navpanel = new JPanel();
@@ -89,19 +78,6 @@ public class ForgotPasswordPage extends JFrame implements ActionListener {
 		
 		
 
-		//register main font
-		try {
-		     //Returned font is of pt size 1
-		     Font font2 = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font2);
-		     font2 = font2.deriveFont(20f);
-		     Font font3 = font2.deriveFont(30f);
-
-
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
 
 		
 		//add library logo to top left 
@@ -124,17 +100,7 @@ public class ForgotPasswordPage extends JFrame implements ActionListener {
 		profilePanel.setLayout(null);
 		profilePanel.setBounds(0, 291, 647, 218);
 		contentPane.add(profilePanel);
-		try {
-		     //Returned font is of pt size 1
-		     Font font2 = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font2);
-		     font2 = font2.deriveFont(20f);
-		     Font font3 = font2.deriveFont(30f);
-		     Font font4 = new Font(font3.getFontName(), Font.BOLD, 20);
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
+
 		
 		//Where the user will enter their username in order to retrieve password
 		username = new JTextField("Enter Username", 100);

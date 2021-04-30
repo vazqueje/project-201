@@ -54,18 +54,7 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		//set up custom font: QuadUltra.ttf
-		try {
-		     //Returned font is of pt size 1
-		     Font font = Font.createFont(Font.TRUETYPE_FONT, new File("QuadUltra.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font);
-		     font = font.deriveFont(48f);
-		     //titleLabel3.setFont(font);
-
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
+		
 		
 		//Set up navigation bar
 		JPanel navpanel = new JPanel();
@@ -92,44 +81,9 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 		//Create empty border for stylized buttons
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 		
-//		//Add profile button to navbar
-//		JButton profile = new JButton("Profile");
-//		profile.setFocusPainted(false);
-//		profile.setForeground(Color.WHITE);
-//		profile.setBorder(emptyBorder);
-//		profile.setBounds(262, 0, 164, 63);
-//		profile.setBackground(new Color(25,24,26));
-		
-		//Add favorites button to navbar
-//		JButton favorites = new JButton("Favorites");
-//		favorites.setBounds(70, 0, 164, 63);
-//		favorites.setForeground(Color.WHITE);
-//		favorites.setFocusPainted(false);
-//		favorites.setBorder(emptyBorder);
-//		favorites.setBackground(new Color(25,24,26));
-		
-//		returnMainPage = new JButton("Main Page");
-//		returnMainPage.setBounds(230, 0, 164, 63);
-//		returnMainPage.setForeground(Color.WHITE);
-//		returnMainPage.setFocusPainted(false);
-//		returnMainPage.setBorder(emptyBorder);
-//		returnMainPage.setBackground(new Color(25,24,26));
-//		returnMainPage.addActionListener(this);
+
 		
 
-		//register main font
-		try {
-		     //Returned font is of pt size 1
-		     Font font2 = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font2);
-		     font2 = font2.deriveFont(20f);
-		     Font font3 = font2.deriveFont(30f);
-
-
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
 
 		
 		//add library logo to top left 
@@ -152,17 +106,6 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 		profilePanel.setLayout(null);
 		profilePanel.setBounds(0, 325, 893, 484);
 		contentPane.add(profilePanel);
-		try {
-		     //Returned font is of pt size 1
-		     Font font2 = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font2);
-		     font2 = font2.deriveFont(20f);
-		     Font font3 = font2.deriveFont(30f);
-		     Font font4 = new Font(font3.getFontName(), Font.BOLD, 20);
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
 		
 		username = new JTextField("Enter Username", 100);
 		username.setBounds(170, 145, 255, 63);
@@ -224,10 +167,7 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 		if(e.getSource() == btnCreateAccount) {
 			
 			if(txtjanurary.getText().matches("([0-9]{2})/([0-9]{2})/([0-9]{4})") && !(username.getText().equals("Enter Username")) && !(password.getText().equals("Enter Password")) && !(email.getText().equals("Enter Email"))) {
-//				System.out.println(txtjanurary.getText());
-//				System.out.println(username.getText());
-//				System.out.println(password.getText());
-//				System.out.println(email.getText());
+
 				int month = Integer.parseInt(txtjanurary.getText().substring(0,2))-1;
 				int day = Integer.parseInt(txtjanurary.getText().substring(3,5));
 				int year = Integer.parseInt(txtjanurary.getText().substring(6,10))-1900;
