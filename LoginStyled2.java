@@ -32,11 +32,13 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.*;
-public class LoginStyled2 extends JFrame{
+public class LoginStyled2 extends JFrame implements MouseListener{
 	User mainUser;
 	private JPanel contentPane;
 	private JTextField username;
 	private JPasswordField password;
+	private JLabel lblCreateAccount;
+	private JLabel lblForgotPassword;
 	Button guestUser;
 	Button button;
 	int xx,xy;
@@ -240,46 +242,66 @@ public class LoginStyled2 extends JFrame{
 		lblWelcome.setBounds(395, 16, 283, 83);
 		contentPane.add(lblWelcome);
 
-		JLabel lblCreateAccount = new JLabel("<HTML><U>Create Account</U></HTML>");
+		lblCreateAccount = new JLabel("<HTML><U>Create Account</U></HTML>");
 		lblCreateAccount.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblCreateAccount.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCreateAccount.setForeground(new Color(58, 162, 140));
 		lblCreateAccount.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblCreateAccount.setBounds(395, 391, 283, 27);
 		contentPane.add(lblCreateAccount);
-		lblCreateAccount.addMouseListener(new MouseListener() {
+		lblCreateAccount.addMouseListener(this);
+		
+		lblForgotPassword = new JLabel("<HTML><U>Forgot Password?</U></HTML>");
+		lblForgotPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblForgotPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblForgotPassword.setForeground(new Color(58, 162, 140));
+		lblForgotPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblForgotPassword.setBounds(395, 410, 283, 27);
+		contentPane.add(lblForgotPassword);
+		lblForgotPassword.addMouseListener(this);
+		
+	}
 
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				new CreateAccountPage();
-				
-			}
 
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(e.getSource() == lblCreateAccount) {
+			this.dispose();
+			new CreateAccountPage();
+		}
+		if(e.getSource() == lblForgotPassword) {
+			this.dispose();
+			new ForgotPasswordPage();
+		}
+		
+	}
 
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
 
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
