@@ -39,23 +39,6 @@ public class newProfilePage extends JFrame implements ActionListener{
 	private TableDisplay searchcatalog;
 
 	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					User me = new User("ash","123","123",new java.sql.Date(101,0,23),3);
-//					newProfilePage frame = new newProfilePage(me);
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
 	 * Create the frame.
 	 */
 	public newProfilePage(User user) {
@@ -64,7 +47,7 @@ public class newProfilePage extends JFrame implements ActionListener{
 		setVisible(true);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1578, 1046);
+		setBounds(100, 100, 825, 900);
 		setLocationRelativeTo(null);
 		
 		//set main panel
@@ -73,29 +56,18 @@ public class newProfilePage extends JFrame implements ActionListener{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		//set up custom font: QuadUltra.ttf
-		try {
-		     //Returned font is of pt size 1
-		     Font font = Font.createFont(Font.TRUETYPE_FONT, new File("QuadUltra.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font);
-		     font = font.deriveFont(48f);
-		     //titleLabel3.setFont(font);
 
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
 		
 		//Set up navigation bar
 		JPanel navpanel = new JPanel();
 		navpanel.setBackground(new Color(25,24,26));
-		navpanel.setBounds(0, 0, 1578, 63);
+		navpanel.setBounds(0, 0, 835, 63);
 		navpanel.setLayout(null);
 		contentPane.add(navpanel);
 		
 		//add close window button
 		JLabel lbl_close = new JLabel("X");
-		lbl_close.setBounds(1529, 16, 37, 27);
+		lbl_close.setBounds(788, 15, 37, 27);
 		navpanel.add(lbl_close);
 		lbl_close.addMouseListener(new MouseAdapter() {
 			@Override
@@ -111,13 +83,7 @@ public class newProfilePage extends JFrame implements ActionListener{
 		//Create empty border for stylized buttons
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 		
-//		//Add profile button to navbar
-//		JButton profile = new JButton("Profile");
-//		profile.setFocusPainted(false);
-//		profile.setForeground(Color.WHITE);
-//		profile.setBorder(emptyBorder);
-//		profile.setBounds(262, 0, 164, 63);
-//		profile.setBackground(new Color(25,24,26));
+
 		
 		//Add favorites button to navbar
 		JButton favorites = new JButton("Favorites");
@@ -136,21 +102,6 @@ public class newProfilePage extends JFrame implements ActionListener{
 		returnMainPage.addActionListener(this);
 		
 
-		//register main font
-		try {
-		     //Returned font is of pt size 1
-		     Font font2 = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font2);
-		     font2 = font2.deriveFont(20f);
-		     Font font3 = font2.deriveFont(30f);
-
-		     favorites.setFont(font2);
-
-
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
 
 		navpanel.add(favorites);
 		navpanel.add(returnMainPage);
@@ -165,7 +116,7 @@ public class newProfilePage extends JFrame implements ActionListener{
 		
 		//background image
 				JLabel cover = new JLabel("");
-				cover.setBounds(0, 59, 1578, 356);
+				cover.setBounds(0, 59, 835, 356);
 				contentPane.add(cover);
 				cover.setIcon(new ImageIcon(loginPage.class.getResource("/images/cyberpunk.jpg")));
 		
@@ -174,25 +125,15 @@ public class newProfilePage extends JFrame implements ActionListener{
 		
 		profilePanel.setBackground(Color.WHITE);
 		profilePanel.setLayout(null);
-		profilePanel.setBounds(0, 325, 1566, 730);
+		profilePanel.setBounds(0, 325, 835, 572);
 		contentPane.add(profilePanel);
 		JLabel username = new JLabel("Username: " + user.getUsername());
+		username.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		username.setBounds(10, 100, 430, 107);
 		JLabel password = new JLabel ("Password: " + user.getPassword());
+		password.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		password.setBounds(10, 208, 430, 107);
-		try {
-		     //Returned font is of pt size 1
-		     Font font2 = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font2);
-		     font2 = font2.deriveFont(20f);
-		     Font font3 = font2.deriveFont(30f);
-		     Font font4 = new Font(font3.getFontName(), Font.BOLD, 20);
-		     username.setFont(font4);
-		     password.setFont(font4);     
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
+		
 		profilePanel.add(username);
 		profilePanel.add(password);
 		
@@ -224,18 +165,13 @@ public class newProfilePage extends JFrame implements ActionListener{
 		profilePanel.add(newEmail);
 		
 		
+JLabel lblNewLabel = new JLabel("Edit Information:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel.setBounds(10, 344, 187, 29);
+		profilePanel.add(lblNewLabel);
 		
-		
-		
-		
-		
-
-				
-	}
-
-	@Override
+}
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getSource() == changePass) {
 			if (newPass.getText().isEmpty()) return;
 			else {
@@ -267,5 +203,6 @@ public class newProfilePage extends JFrame implements ActionListener{
 			new MainPage(mainUser);
 		}
 	}
-
 }
+
+
