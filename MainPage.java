@@ -11,8 +11,11 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Button;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
+
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -40,9 +43,8 @@ public class MainPage extends JFrame implements ActionListener {
 	private int searchCount;
 	private TableDisplay searchcatalog;
 	private JButton profile;
-	private User user;
 
-	
+	User user;
 
 	/**
 	 * Creates a new main page frame where the user can view all games in the library 
@@ -56,6 +58,7 @@ public class MainPage extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1578, 1046);
 		setLocationRelativeTo(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iconlogo.png")));
 		
 		//set main panel
 		contentPane = new JPanel();
@@ -103,15 +106,14 @@ public class MainPage extends JFrame implements ActionListener {
 		
 		//Add profile button to navbar
 		if(user.getPrivileges() != -1) {
-		profile = new JButton("Profile");
-		profile.setFocusPainted(false);
-		profile.setForeground(Color.WHITE);
-		profile.setBorder(emptyBorder);
-		profile.setBounds(262, 0, 164, 63);
-		profile.setBackground(new Color(25,24,26));
-		profile.addActionListener(this);
-		}
-		
+			profile = new JButton("Profile");
+			profile.setFocusPainted(false);
+			profile.setForeground(Color.WHITE);
+			profile.setBorder(emptyBorder);
+			profile.setBounds(262, 0, 164, 63);
+			profile.setBackground(new Color(25,24,26));
+			profile.addActionListener(this);
+			}
 		
 		//Add favorites button to navbar
 		JButton favorites = new JButton("Favorites");
@@ -128,7 +130,7 @@ public class MainPage extends JFrame implements ActionListener {
 		searchbutton.setForeground(Color.WHITE);	
 		searchbutton.setFocusPainted(false);
 		searchbutton.setBackground(new Color(25, 24, 26));
-		searchbutton.setBounds(1086, 171, 169, 54);
+		searchbutton.setBounds(1086, 234, 169, 54);
 		searchbutton.setBorder(emptyBorder);
 		JLabel presearch = new JLabel("Search for a game");
 		//register main font
@@ -150,12 +152,13 @@ public class MainPage extends JFrame implements ActionListener {
 		     // Handle exception
 		}
 		contentPane.add(searchbutton);
-		if(user.getPrivileges() != -1) {
-		navpanel.add(profile);
-		navpanel.add(favorites);
+		if (user.getPrivileges() != -1) {
+			navpanel.add(profile);
+			navpanel.add(favorites);
 		}
+		
 		searchfield.setBackground(Color.WHITE);
-		searchfield.setBounds(330, 171, 758, 54);
+		searchfield.setBounds(334, 234, 758, 54);
 		//Remove tooltip text when user types in search box
 		searchfield.addMouseListener(new MouseAdapter() {
 	        public void mouseClicked(MouseEvent e) {
@@ -165,16 +168,36 @@ public class MainPage extends JFrame implements ActionListener {
 	    });
 		
 		presearch.setForeground(Color.LIGHT_GRAY);
-		presearch.setBounds(347, 181, 359, 35);
+		presearch.setBounds(344, 244, 359, 35);
 		
 		contentPane.add(presearch);
+		
+		JLabel lblGamingLibrary = new JLabel("Gaming Library");
+		lblGamingLibrary.setBounds(474, 91, 673, 95);
+		lblGamingLibrary.setForeground(Color.white);
+		//Derive and return a 12 pt version:
+		//Need to use float otherwise
+		//it would be interpreted as style
+		try {
+			//Returned font is of pt size 1
+			Font font4 = Font.createFont(Font.TRUETYPE_FONT, new File("QuadUltra.ttf"));
+			GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			genv.registerFont(font4);
+			font4 = font4.deriveFont(70f);
+			//titleLabel3.setFont(font);
+			lblGamingLibrary.setFont(font4);
+		} catch (IOException|FontFormatException e) {
+			// Handle exception
+		}
+	
+		contentPane.add(lblGamingLibrary);
 		
 		contentPane.add(searchfield);
 		
 		//add library logo to top left 
 		JLabel smallIcon = new JLabel("");
 		smallIcon.setBounds(12, 10, 56, 43);
-		smallIcon.setIcon(new ImageIcon(LoginStyled2.class.getResource("/images/iconlogo.png")));
+		smallIcon.setIcon(new ImageIcon(LoginStyled.class.getResource("/images/iconlogo.png")));
 
 		navpanel.add(smallIcon);
 		
@@ -182,7 +205,7 @@ public class MainPage extends JFrame implements ActionListener {
 				JLabel cover = new JLabel("");
 				cover.setBounds(0, 59, 1578, 356);
 				contentPane.add(cover);
-				cover.setIcon(new ImageIcon(LoginStyled2.class.getResource("/images/cyberpunk.jpg")));
+				cover.setIcon(new ImageIcon(LoginStyled.class.getResource("/images/cyberpunk.jpg")));
 		
 		//create panel to display catalog entries
 		JPanel tablepanel = new JPanel();
@@ -196,15 +219,17 @@ public class MainPage extends JFrame implements ActionListener {
 		contentPane.add(tablepanel);
 		
 
-//	        java.awt.EventQueue.invokeLater(new Runnable() {
-//	            public void run() {
-//	                new TableDisplay().setVisible(true);
-//	            }
-//	        });
-		TableDisplay catalog = new TableDisplay(this.user);
+	        java.awt.EventQueue.invokeLater(new Runnable() {
+	            public void run() {
+	                new TableDisplay().setVisible(true);
+	            }
+	        });
+	    EntryRenderer er = new EntryRenderer();
+		TableDisplay catalog = new TableDisplay();
 		catalog.setBorder(new LineBorder(new Color(255, 255, 255), 10));
 		catalog.setBounds(12,85,1557,666);
 		tablepanel.add(catalog);
+		
 		
 		
 		searchbutton.addActionListener(new ActionListener() {
@@ -213,7 +238,7 @@ public class MainPage extends JFrame implements ActionListener {
 				
 				String searchString = searchfield.getText();
 				if (searchString.isEmpty()) return;
-				Search newSearch = new Search(searchString,user);
+				Search newSearch = new Search(searchString);
 				
 				ArrayList<Entry> entries = newSearch.fetchSearch(searchString);
 				//System.out.println(entries.get(0).toString());
@@ -256,6 +281,22 @@ public class MainPage extends JFrame implements ActionListener {
 		
 		
 		
+		catalog.getTable().addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTable source = (JTable)evt.getSource();
+                int row = source.rowAtPoint( evt.getPoint());
+                String selected = source.getModel().getValueAt(row, 1).toString();
+                try {
+                	
+					Search newSearch = new Search(selected);
+					ArrayList<Entry> entries = newSearch.fetchSearch(selected);
+					dispose();
+					new CommentPage(user, entries.get(0));
+                }catch (Exception e) {
+                	e.printStackTrace();
+                }
+            }
+		});
 		
 	}
 	
