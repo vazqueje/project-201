@@ -87,20 +87,6 @@ public class TableDisplay extends JPanel {
                 new Dimension(WIDTH,150)
         );
 
-        //import and create font
-        try {
-            Font tableFont = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
-            GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            genv.registerFont(tableFont);
-            tableFont = tableFont.deriveFont(20f);
-            Font headerFont = tableFont.deriveFont(30f);
-
-            table.setFont(tableFont);
-            table.getTableHeader().setFont(headerFont);
-
-        } catch (IOException |FontFormatException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -146,21 +132,6 @@ public class TableDisplay extends JPanel {
         headerLabels.setPreferredSize(
                 new Dimension(WIDTH,150)
         );
-
-        //set table font
-        try {
-            Font tableFont = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
-            GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            genv.registerFont(tableFont);
-            tableFont = tableFont.deriveFont(20f);
-            Font headerFont = tableFont.deriveFont(30f);
-
-            table.setFont(tableFont);
-            table.getTableHeader().setFont(headerFont);
-        } catch (IOException|FontFormatException e) {
-            e.printStackTrace();
-        }
-        table.repaint();
     }
 
     /**
@@ -213,6 +184,10 @@ public class TableDisplay extends JPanel {
                                 .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                                 .addContainerGap())
         );
+    }
+    
+    public JTable getTable(){
+        return table;
     }
 
 }

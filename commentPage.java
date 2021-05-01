@@ -39,7 +39,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.*;
 import javax.swing.JTextArea;
-public class CommentPage extends JFrame implements ActionListener{
+public class commentPage extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	int xx,xy;
 	private int searchCount;
@@ -61,7 +61,7 @@ public class CommentPage extends JFrame implements ActionListener{
 	 * Creates a new main page frame where the user can view all games in the library 
 	 * @param user the type of user viewing the page
 	 */
-	public CommentPage(User user, Entry entry) {
+	public commentPage(User user, Entry entry) {
 		this.entry = entry;
 		mainUser = user;
 		setUndecorated(true);
@@ -80,18 +80,7 @@ public class CommentPage extends JFrame implements ActionListener{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		//set up custom font: QuadUltra.ttf
-		try {
-		     //Returned font is of pt size 1
-		     Font font = Font.createFont(Font.TRUETYPE_FONT, new File("QuadUltra.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font);
-		     font = font.deriveFont(48f);
-		     //titleLabel3.setFont(font);
-
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
+		
 		
 		
 		Image image = entry.getCover().getScaledInstance(220, 284, BufferedImage.SCALE_SMOOTH);
@@ -112,16 +101,7 @@ public class CommentPage extends JFrame implements ActionListener{
 				     gameName.setText(entry.getName());
 				     gameName.setForeground(Color.white);
 				     
-				     try {
-							//Returned font is of pt size 1
-							Font font4 = Font.createFont(Font.TRUETYPE_FONT, new File("QuadUltra.ttf"));
-							GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-							genv.registerFont(font4);
-							font4 = font4.deriveFont(70f);
-							gameName.setFont(font4);
-						} catch (IOException|FontFormatException e) {
-							// Handle exception
-						}
+				   
 				     panel.add(gameName);
 				     
 				     JLabel gameCover = new JLabel("");
@@ -171,52 +151,11 @@ public class CommentPage extends JFrame implements ActionListener{
 		home.setBackground(new Color(25,24,26));
 	
 		
-		//Add favorites button to navbar
-		favorites = new JButton("Favorites");
-		favorites.setBounds(480, 0, 164, 63);
-		favorites.setForeground(Color.WHITE);
-		favorites.setFocusPainted(false);
-		favorites.setBorder(emptyBorder);
-		favorites.setBackground(new Color(25,24,26));
-		
-		profile = new JButton("Profile");
-		profile.setForeground(Color.WHITE);
-		profile.setFont(null);
-		profile.setFocusPainted(false);
-		profile.setBackground(new Color(25, 24, 26));
-		profile.setBorder(emptyBorder);
-		profile.setBounds(280, 0, 164, 63);
-		navpanel.add(profile);
-		
-		//register main font
-		try {
-		     //Returned font is of pt size 1
-		     Font font2 = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font2);
-		     font2 = font2.deriveFont(20f);
-		     Font font3 = font2.deriveFont(30f);
-
-		     profile.setFont(font2);
-		     favorites.setFont(font2);
-		     home.setFont(font2);
-
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
-		navpanel.add(profile);
-		navpanel.add(favorites);
-		
-		   
-		//Derive and return a 12 pt version:
-		//Need to use float otherwise
-		//it would be interpreted as style
-		
 		
 		//add library logo to top left 
 		JLabel smallIcon = new JLabel("");
 		smallIcon.setBounds(12, 10, 56, 43);
-		smallIcon.setIcon(new ImageIcon(LoginStyled.class.getResource("/images/iconlogo.png")));
+		smallIcon.setIcon(new ImageIcon(loginPage.class.getResource("/images/iconlogo.png")));
 
 		navpanel.add(smallIcon);
 		
@@ -235,15 +174,10 @@ public class CommentPage extends JFrame implements ActionListener{
 		tablepanel.setBounds(0, 316, 1566, 730);
 		contentPane.add(tablepanel);
 		
-
-	        java.awt.EventQueue.invokeLater(new Runnable() {
-	            public void run() {
-	                new TableDisplay().setVisible(true);
-	            }
-	        });
 	    
 	    commentSQL = new CommentSQL(entry);
-	    if(commentSQL == null) {
+
+	    if(commentSQL.getCommentSection() == null) {
 	    	JLabel noComment = new JLabel("There are no comments. Be the first one to comment on this game!");
 	    	noComment.setFont(new Font("Tahoma", Font.PLAIN, 22));
 	    	noComment.setForeground(Color.LIGHT_GRAY);
@@ -273,7 +207,7 @@ public class CommentPage extends JFrame implements ActionListener{
 	                }
 	    			
 	    			dispose();
-	    			new CommentPage(mainUser, entry);
+	    			new commentPage(mainUser, entry);
 	            }
 			});
 			}
@@ -329,17 +263,6 @@ public class CommentPage extends JFrame implements ActionListener{
 		}
 		
 		 gameDesc = new JTextArea();
-		try {
-		     //Returned font is of pt size 1
-		     Font font2 = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font2);
-		     font2 = font2.deriveFont(20f);
-		     Font font3 = font2.deriveFont(30f);
-		     gameDesc.setFont(font3);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
 		    
 		     gameDesc.setBounds(36, 212, 1302, 91);
 		     gameDesc.setEditable(false);
@@ -398,7 +321,7 @@ public class CommentPage extends JFrame implements ActionListener{
 				e1.printStackTrace();
 			}
 			dispose();
-			new CommentPage(mainUser, entry);
+			new commentPage(mainUser, entry);
 			//frame.setVisible(true);
 		}
 		else {

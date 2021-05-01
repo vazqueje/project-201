@@ -57,21 +57,7 @@ public class CommentDisplay extends JPanel {
         	     new Dimension(WIDTH,150)
         		);
      
-        try {
-		     //Returned font is of pt size 1
-        	 
-		     Font font2 = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font2);
-		     font2 = font2.deriveFont(20f);
-		     Font font3 = font2.deriveFont(40f);
-
-		     jTable1.setFont(font2);
-		     jTable1.getTableHeader().setFont(font3);
-
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
+  
         jTable1.repaint();
         //model.fireTableDataChanged();
         System.out.println(jTable1.getRowCount());
@@ -120,7 +106,7 @@ public class CommentDisplay extends JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                 .addContainerGap())

@@ -66,18 +66,6 @@ public class MainPage extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		//set up custom font: QuadUltra.ttf
-		try {
-		     //Returned font is of pt size 1
-		     Font font = Font.createFont(Font.TRUETYPE_FONT, new File("QuadUltra.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font);
-		     font = font.deriveFont(48f);
-		     //titleLabel3.setFont(font);
-
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
 		
 		//Set up navigation bar
 		JPanel navpanel = new JPanel();
@@ -133,24 +121,7 @@ public class MainPage extends JFrame implements ActionListener {
 		searchbutton.setBounds(1086, 234, 169, 54);
 		searchbutton.setBorder(emptyBorder);
 		JLabel presearch = new JLabel("Search for a game");
-		//register main font
-		try {
-		     //Returned font is of pt size 1
-		     Font font2 = Font.createFont(Font.TRUETYPE_FONT, new File("Aileron-Thin-webfont.ttf"));
-		     GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     genv.registerFont(font2);
-		     font2 = font2.deriveFont(20f);
-		     Font font3 = font2.deriveFont(30f);
-
-		     profile.setFont(font2);
-		     favorites.setFont(font2);
-		     searchfield.setFont(font3);
-		     searchbutton.setFont(font3);
-		     presearch.setFont(font3);
-
-		} catch (IOException|FontFormatException e) {
-		     // Handle exception
-		}
+		
 		contentPane.add(searchbutton);
 		if (user.getPrivileges() != -1) {
 			navpanel.add(profile);
@@ -175,20 +146,6 @@ public class MainPage extends JFrame implements ActionListener {
 		JLabel lblGamingLibrary = new JLabel("Gaming Library");
 		lblGamingLibrary.setBounds(474, 91, 673, 95);
 		lblGamingLibrary.setForeground(Color.white);
-		//Derive and return a 12 pt version:
-		//Need to use float otherwise
-		//it would be interpreted as style
-		try {
-			//Returned font is of pt size 1
-			Font font4 = Font.createFont(Font.TRUETYPE_FONT, new File("QuadUltra.ttf"));
-			GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			genv.registerFont(font4);
-			font4 = font4.deriveFont(70f);
-			//titleLabel3.setFont(font);
-			lblGamingLibrary.setFont(font4);
-		} catch (IOException|FontFormatException e) {
-			// Handle exception
-		}
 	
 		contentPane.add(lblGamingLibrary);
 		
@@ -197,7 +154,7 @@ public class MainPage extends JFrame implements ActionListener {
 		//add library logo to top left 
 		JLabel smallIcon = new JLabel("");
 		smallIcon.setBounds(12, 10, 56, 43);
-		smallIcon.setIcon(new ImageIcon(LoginStyled.class.getResource("/images/iconlogo.png")));
+		smallIcon.setIcon(new ImageIcon(loginPage.class.getResource("/images/iconlogo.png")));
 
 		navpanel.add(smallIcon);
 		
@@ -205,7 +162,7 @@ public class MainPage extends JFrame implements ActionListener {
 				JLabel cover = new JLabel("");
 				cover.setBounds(0, 59, 1578, 356);
 				contentPane.add(cover);
-				cover.setIcon(new ImageIcon(LoginStyled.class.getResource("/images/cyberpunk.jpg")));
+				cover.setIcon(new ImageIcon(loginPage.class.getResource("/images/cyberpunk.jpg")));
 		
 		//create panel to display catalog entries
 		JPanel tablepanel = new JPanel();
@@ -219,13 +176,8 @@ public class MainPage extends JFrame implements ActionListener {
 		contentPane.add(tablepanel);
 		
 
-	        java.awt.EventQueue.invokeLater(new Runnable() {
-	            public void run() {
-	                new TableDisplay().setVisible(true);
-	            }
-	        });
 	    EntryRenderer er = new EntryRenderer();
-		TableDisplay catalog = new TableDisplay();
+		TableDisplay catalog = new TableDisplay(this.user);
 		catalog.setBorder(new LineBorder(new Color(255, 255, 255), 10));
 		catalog.setBounds(12,85,1557,666);
 		tablepanel.add(catalog);
@@ -238,7 +190,7 @@ public class MainPage extends JFrame implements ActionListener {
 				
 				String searchString = searchfield.getText();
 				if (searchString.isEmpty()) return;
-				Search newSearch = new Search(searchString);
+				Search newSearch = new Search(searchString,user);
 				
 				ArrayList<Entry> entries = newSearch.fetchSearch(searchString);
 				//System.out.println(entries.get(0).toString());
@@ -288,10 +240,10 @@ public class MainPage extends JFrame implements ActionListener {
                 String selected = source.getModel().getValueAt(row, 1).toString();
                 try {
                 	
-					Search newSearch = new Search(selected);
+					Search newSearch = new Search(selected,user);
 					ArrayList<Entry> entries = newSearch.fetchSearch(selected);
 					dispose();
-					new CommentPage(user, entries.get(0));
+					new commentPage(user, entries.get(0));
                 }catch (Exception e) {
                 	e.printStackTrace();
                 }

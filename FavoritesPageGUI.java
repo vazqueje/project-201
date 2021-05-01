@@ -100,7 +100,7 @@ public class FavoritesPageGUI implements ActionListener {
 			for (int i = 0; i < list.size(); i++) {
 				if (e.getSource() == list.get(i)) {
 					String game = list.get(i).getText();
-					Search newSearch = new Search(game);
+					Search newSearch = new Search(game, mainUser);
 					ArrayList<Entry> entries = newSearch.fetchSearch(game);
 					FavoriteListSQL list = new FavoriteListSQL(entries.get(0), mainUser);
 					list.removeFavorite();

@@ -89,7 +89,7 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 		//add library logo to top left 
 		JLabel smallIcon = new JLabel("");
 		smallIcon.setBounds(12, 10, 56, 43);
-		smallIcon.setIcon(new ImageIcon(LoginStyled2.class.getResource("/images/iconlogo.png")));
+		smallIcon.setIcon(new ImageIcon(loginPage.class.getResource("/images/iconlogo.png")));
 
 		navpanel.add(smallIcon);
 		
@@ -97,7 +97,7 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 				JLabel cover = new JLabel("");
 				cover.setBounds(0, 59, 893, 356);
 				contentPane.add(cover);
-				cover.setIcon(new ImageIcon(LoginStyled2.class.getResource("/images/cyberpunk.jpg")));
+				cover.setIcon(new ImageIcon(loginPage.class.getResource("/images/cyberpunk.jpg")));
 		
 		//create panel to display catalog entries
 		JPanel profilePanel = new JPanel();

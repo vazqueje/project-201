@@ -32,7 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.*;
-public class LoginStyled2 extends JFrame implements MouseListener{
+public class loginPage extends JFrame implements MouseListener{
 	User mainUser;
 	private JPanel contentPane;
 	private JTextField username;
@@ -50,7 +50,7 @@ public class LoginStyled2 extends JFrame implements MouseListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginStyled2 frame = new LoginStyled2();
+					loginPage frame = new loginPage();
 					frame.setUndecorated(true);
 					frame.setVisible(true);
 					//frame.setIconImage(Toolkit.getDefaultToolkit().getImage("/images/iconlogo.png"));
@@ -68,7 +68,7 @@ public class LoginStyled2 extends JFrame implements MouseListener{
 	/**
 	 * Create the frame.
 	 */
-	public LoginStyled2() {
+	public loginPage() {
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 729, 490);
@@ -145,12 +145,12 @@ public class LoginStyled2 extends JFrame implements MouseListener{
 
 				int x = arg0.getXOnScreen();
 				int y = arg0.getYOnScreen();
-				LoginStyled2.this.setLocation(x - xx, y - xy);  
+				loginPage.this.setLocation(x - xx, y - xy);  
 			}
 		});
 		label.setBounds(-74, -101, 420, 591);
 		label.setVerticalAlignment(SwingConstants.TOP);
-		label.setIcon(new ImageIcon(LoginStyled2.class.getResource("/images/maingreen2.png")));
+		label.setIcon(new ImageIcon(loginPage.class.getResource("/images/maingreen2.png")));
 		panel.add(label);
 
 		button = new Button("Login");
