@@ -254,6 +254,8 @@ public class commentPage extends JFrame implements ActionListener{
 		gameDesc.setText(entry.getDescription());
 		contentPane.add(gameDesc);
 
+		//if the user is a guest they cannot add to favorites.
+		if(user.getPrivileges() != -1) {
 		//add "Add to Favorites" button
 		addFavorite = new JButton("Add to favorites");
 		addFavorite.setForeground(Color.WHITE);
@@ -262,7 +264,8 @@ public class commentPage extends JFrame implements ActionListener{
 		addFavorite.setBackground(new Color(25, 24, 26));
 		addFavorite.setBounds(1351, 212, 196, 91);
 		addFavorite.addActionListener(this);
-		contentPane.add(addFavorite);	     
+		contentPane.add(addFavorite);
+		}
 	}
 
 	@Override
