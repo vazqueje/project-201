@@ -162,12 +162,14 @@ public class CommentPage extends JFrame implements ActionListener{
 		home.setFocusPainted(false);
 		home.setBackground(new Color(25, 24, 26));
 		home.setBounds(171, 0, 164, 63);
+		home.addActionListener(this);
 		navpanel.add(home);
 		home.setFocusPainted(false);
 		home.setForeground(Color.WHITE);
 		home.setBorder(emptyBorder);
 		home.setBounds(80, 0, 164, 63);
 		home.setBackground(new Color(25,24,26));
+	
 		
 		//Add favorites button to navbar
 		favorites = new JButton("Favorites");
@@ -252,6 +254,29 @@ public class CommentPage extends JFrame implements ActionListener{
 	 	    CommentDisplay cd = new CommentDisplay(comments);
 	    	cd.setBorder(new LineBorder(new Color(255, 255, 255), 10));
 			cd.setBounds(12,13,1542,492);
+			if(user.getPrivileges()==2) {
+			cd.getTable().addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent evt) {
+	                JTable source = (JTable)evt.getSource();
+	                int row = source.rowAtPoint( evt.getPoint());
+	                String selected = source.getModel().getValueAt(row, 1).toString();
+	                for(int i = 0; i<comments.getSize(); i++) {
+	                	if(comments.getComment(i).getTitle().equals(selected)) {
+	                		try {
+								commentSQL.removeComment(comments.getComment(i).getcommentid());
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								System.out.println("Remove failed");
+								e.printStackTrace();
+							}
+	                	}
+	                }
+	    			
+	    			dispose();
+	    			new CommentPage(mainUser, entry);
+	            }
+			});
+			}
 			tablepanel.add(cd);
 	    }
 	   
@@ -281,6 +306,7 @@ public class CommentPage extends JFrame implements ActionListener{
 			submit.setFocusPainted(false);
 			submit.setBackground(new Color(25, 24, 26));
 			submit.setBounds(775, 641, 164, 63);
+			submit.addActionListener(this);
 			tablepanel.add(submit);
 			
 			
@@ -326,6 +352,7 @@ public class CommentPage extends JFrame implements ActionListener{
 		     addFavorite.setFocusPainted(false);
 		     addFavorite.setBackground(new Color(25, 24, 26));
 		     addFavorite.setBounds(1351, 212, 196, 91);
+		     addFavorite.addActionListener(this);
 		     contentPane.add(addFavorite);
 		     		     //titleLabel3.setFont(font);
 		     		     
