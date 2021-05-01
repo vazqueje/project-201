@@ -173,14 +173,14 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 				int year = Integer.parseInt(txtjanurary.getText().substring(6,10))-1900;
 				UserVerify v1 = new UserVerify(username.getText(),password.getText(),email.getText(),new java.sql.Date(year,month,day));
 				if(!(v1.createAccount())) {
-					JOptionPane.showMessageDialog(null, "Login already exists", "Login already exists", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Login already exists or it is a banned account", "Error", JOptionPane.WARNING_MESSAGE);
 					this.dispose();
 				} else {
-				JOptionPane.showMessageDialog(null,"Account Created Successfully", "Account Created Successfully", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Account Created Successfully", "Success", JOptionPane.WARNING_MESSAGE);
 				this.dispose();
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "Invalid Information", "Invalid Information", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Invalid Information", "Error", JOptionPane.WARNING_MESSAGE);
 				this.dispose();
 			}
 		}

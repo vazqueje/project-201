@@ -88,10 +88,21 @@ public class UserVerify {
 	 */
 	public boolean createAccount() {
 		try {
+			PreparedStatement p3 = conn.prepareStatement("Select * from banned_table where username=?", Statement.RETURN_GENERATED_KEYS);
+			p3.setString(1, this.username);
+			p3.execute();
+			ResultSet rs = p3.getResultSet();
+			if(rs.first()) {
+				return false;
+			}
+		} catch (SQLException e) {
+			
+		}
+		try {
 			PreparedStatement p2 = conn.prepareStatement("Insert INTO user_table(username, password, email, dob, privileges) VALUES (?,?,?,?,0)", Statement.RETURN_GENERATED_KEYS);
 			p2.setString(1, this.username);
 			p2.setString(2, this.password);
-			p2.setString(3, this.password);
+			p2.setString(3, this.email);
 			p2.setDate(4, this.dob);
 			p2.execute();
 			return true;
