@@ -177,7 +177,7 @@ public class commentPage extends JFrame implements ActionListener{
 			CommentDisplay cd = new CommentDisplay(comments);
 			cd.setBorder(new LineBorder(new Color(255, 255, 255), 10));
 			cd.setBounds(12,13,1542,492);
-			if(user.getPrivileges()==2) {
+			if(user.getPrivileges()==2 || user.getPrivileges()==1) {
 				cd.getTable().addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent evt) {
 						JTable source = (JTable)evt.getSource();
