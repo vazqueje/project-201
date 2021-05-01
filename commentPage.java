@@ -56,7 +56,7 @@ public class commentPage extends JFrame implements ActionListener{
 	private JButton addFavorite;
 	private JTextArea commentArea;
 	private JTextField commentTitle;
-	
+
 	/**
 	 * Creates a new main page frame where the user can view all games in the library 
 	 * @param user the type of user viewing the page
@@ -71,70 +71,68 @@ public class commentPage extends JFrame implements ActionListener{
 		setBounds(100, 100, 1578, 1046);
 		setLocationRelativeTo(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iconlogo.png")));
-		
-		
-		
+
 		//set main panel
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
-		
+
+		//Game cover image icon
 		Image image = entry.getCover().getScaledInstance(220, 284, BufferedImage.SCALE_SMOOTH);
-        ImageIcon icon = new ImageIcon(image.getScaledInstance(220, 284, Image.SCALE_SMOOTH) );
+		ImageIcon icon = new ImageIcon(image.getScaledInstance(220, 284, Image.SCALE_SMOOTH) );
 		
+		//Initialize title panel
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(25, 24, 26));
+		panel.setBounds(0, 59, 1578, 140);
+		contentPane.add(panel);
+
+		JLabel gameName = new JLabel("Gaming Library");
+		gameName.setBounds(41, 13, 1525, 123);
+
+		gameName.setText(entry.getName());
+		gameName.setForeground(Color.white);
+
+
+		panel.add(gameName);
+
+		JLabel gameCover = new JLabel("");
+		gameCover.setBounds(1342, 26, 196, 247);
+		panel.add(gameCover);
+		gameCover.setIcon(icon);
 		
-				     
-				     
-				     JPanel panel = new JPanel();
-				     panel.setLayout(null);
-				     panel.setBackground(new Color(25, 24, 26));
-				     panel.setBounds(0, 59, 1578, 140);
-				     contentPane.add(panel);
-				     
-				     JLabel gameName = new JLabel("Gaming Library");
-				     gameName.setBounds(41, 13, 1525, 123);
-				     
-				     gameName.setText(entry.getName());
-				     gameName.setForeground(Color.white);
-				     
-				   
-				     panel.add(gameName);
-				     
-				     JLabel gameCover = new JLabel("");
-				     gameCover.setBounds(1342, 26, 196, 247);
-				     panel.add(gameCover);
-				     gameCover.setIcon(icon);
 		//Set up navigation bar
 		JPanel navpanel = new JPanel();
 		navpanel.setBackground(new Color(25,24,26));
 		navpanel.setBounds(0, 0, 1578, 63);
 		navpanel.setLayout(null);
 		contentPane.add(navpanel);
-		
-		
-		
+
+
+
 		//add close window button
 		JLabel lbl_close = new JLabel("X");
 		lbl_close.setBounds(1529, 16, 37, 27);
 		navpanel.add(lbl_close);
+		
+		//Event handler to close window
 		lbl_close.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+
 				System.exit(0);
 			}
 		});
 		lbl_close.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_close.setForeground(new Color(58, 162, 140));
 		lbl_close.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		
+
 		//Create empty border for stylized buttons
 		Border emptyBorder = BorderFactory.createEmptyBorder();
-		
+
 		//Add profile button to navbar
 		home = new JButton("Home");
 		home.setForeground(Color.WHITE);
@@ -149,91 +147,79 @@ public class commentPage extends JFrame implements ActionListener{
 		home.setBorder(emptyBorder);
 		home.setBounds(80, 0, 164, 63);
 		home.setBackground(new Color(25,24,26));
-	
-		
-		
+
 		//add library logo to top left 
 		JLabel smallIcon = new JLabel("");
 		smallIcon.setBounds(12, 10, 56, 43);
 		smallIcon.setIcon(new ImageIcon(loginPage.class.getResource("/images/iconlogo.png")));
-
 		navpanel.add(smallIcon);
-		
-		
-		
-		
-		
+
 		//create panel to display catalog entries
 		JPanel tablepanel = new JPanel();
-		
-		
-		
-		
 		tablepanel.setBackground(Color.WHITE);
 		tablepanel.setLayout(null);
 		tablepanel.setBounds(0, 316, 1566, 730);
 		contentPane.add(tablepanel);
 		
-	    
-	    commentSQL = new CommentSQL(entry);
-
-	    if(commentSQL.getCommentSection() == null) {
-	    	JLabel noComment = new JLabel("There are no comments. Be the first one to comment on this game!");
-	    	noComment.setFont(new Font("Tahoma", Font.PLAIN, 22));
-	    	noComment.setForeground(Color.LIGHT_GRAY);
-	    	noComment.setBounds(40, 13, 294, 27);
-	    	tablepanel.add(noComment);
-	    }else {
-	    	 CommentSection comments = commentSQL.getCommentSection();  
-	 	    CommentDisplay cd = new CommentDisplay(comments);
-	    	cd.setBorder(new LineBorder(new Color(255, 255, 255), 10));
+		//Create comment query
+		commentSQL = new CommentSQL(entry);
+		
+		//If there are no comments, add label to say there are no comments
+		if(commentSQL.getCommentSection() == null) {
+			JLabel noComment = new JLabel("There are no comments. Be the first one to comment on this game!");
+			noComment.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			noComment.setForeground(Color.LIGHT_GRAY);
+			noComment.setBounds(40, 13, 294, 27);
+			tablepanel.add(noComment);
+		//Otherwise, display table of comments
+		}else {
+			CommentSection comments = commentSQL.getCommentSection();  
+			CommentDisplay cd = new CommentDisplay(comments);
+			cd.setBorder(new LineBorder(new Color(255, 255, 255), 10));
 			cd.setBounds(12,13,1542,492);
 			if(user.getPrivileges()==2) {
-			cd.getTable().addMouseListener(new java.awt.event.MouseAdapter() {
-				public void mouseClicked(java.awt.event.MouseEvent evt) {
-	                JTable source = (JTable)evt.getSource();
-	                int row = source.rowAtPoint( evt.getPoint());
-	                String selected = source.getModel().getValueAt(row, 1).toString();
-	                for(int i = 0; i<comments.getSize(); i++) {
-	                	if(comments.getComment(i).getTitle().equals(selected)) {
-	                		try {
-								commentSQL.removeComment(comments.getComment(i).getcommentid());
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								System.out.println("Remove failed");
-								e.printStackTrace();
+				cd.getTable().addMouseListener(new java.awt.event.MouseAdapter() {
+					public void mouseClicked(java.awt.event.MouseEvent evt) {
+						JTable source = (JTable)evt.getSource();
+						int row = source.rowAtPoint( evt.getPoint());
+						String selected = source.getModel().getValueAt(row, 0).toString();
+						for(int i = 0; i<comments.getSize(); i++) {
+							if(comments.getComment(i).getTitle().equals(selected)) {
+								try {
+									commentSQL.removeComment(comments.getComment(i).getcommentid());
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 							}
-	                	}
-	                }
-	    			
-	    			dispose();
-	    			new commentPage(mainUser, entry);
-	            }
-			});
+						}
+						dispose();
+						new commentPage(mainUser, entry);
+					}
+				});
 			}
 			tablepanel.add(cd);
-	    }
-	   
-	    
-		
-		
-		JLabel lblShareYourThoughts = new JLabel("Add a comment:");
-		lblShareYourThoughts.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblShareYourThoughts.setBounds(40, 500, 294, 27);
-		tablepanel.add(lblShareYourThoughts);
-		
+		}
+
+		//label to prompt user to add coment
+		JLabel lblAdd = new JLabel("Add a comment:");
+		lblAdd.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblAdd.setBounds(40, 500, 294, 27);
+		tablepanel.add(lblAdd);
+
+		//If the user is not a guest, allow them to add comments
 		if(user.getPrivileges() != -1) {
 			commentTitle = new JTextField();
 			commentTitle.setBorder(new LineBorder(new Color(51, 51, 51), 3));
 			commentTitle.setBounds(38, 550, 695, 35);
 			commentTitle.setColumns(10);
 			tablepanel.add(commentTitle);
-			
+
 			commentArea = new JTextArea();
 			commentArea.setBorder(new LineBorder(new Color(51, 51, 51), 3));
 			commentArea.setBounds(40, 610, 693, 96);
 			tablepanel.add(commentArea);
-			
+
 			submit = new JButton("Submit");
 			submit.setForeground(Color.WHITE);
 			submit.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -242,58 +228,54 @@ public class commentPage extends JFrame implements ActionListener{
 			submit.setBounds(775, 641, 164, 63);
 			submit.addActionListener(this);
 			tablepanel.add(submit);
-			
-			
-			
+
 			JLabel lblTitle = new JLabel("Title:");
 			lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblTitle.setBounds(40, 524, 294, 27);
 			tablepanel.add(lblTitle);
-			
+
 			JLabel lblComment = new JLabel("Comment:");
 			lblComment.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblComment.setBounds(40, 582, 294, 27);
 			tablepanel.add(lblComment);
-		}else {
+		//Otherwise, inform them they need to log in
+		} else {
 			JLabel guestComment = new JLabel("You must be logged into to comment.");
 			guestComment.setFont(new Font("Tahoma", Font.PLAIN, 22));
 			guestComment.setBounds(40, 524, 294, 27);
 			guestComment.setForeground(Color.LIGHT_GRAY);
 			tablepanel.add(guestComment);
 		}
-		
-		 gameDesc = new JTextArea();
-		    
-		     gameDesc.setBounds(36, 212, 1302, 91);
-		     gameDesc.setEditable(false);
-		     gameDesc.setText(entry.getDescription());
-		     contentPane.add(gameDesc);
-		     
-		     addFavorite = new JButton("Add to favorites");
-		     addFavorite.setForeground(Color.WHITE);
-		     addFavorite.setFont(new Font("Dialog", Font.PLAIN, 21));
-		     addFavorite.setFocusPainted(false);
-		     addFavorite.setBackground(new Color(25, 24, 26));
-		     addFavorite.setBounds(1351, 212, 196, 91);
-		     addFavorite.addActionListener(this);
-		     contentPane.add(addFavorite);
-		     		     //titleLabel3.setFont(font);
-		     		     
 
-		
-		
-		
-				
+		//add text area for game description-line
+		gameDesc = new JTextArea();
+		gameDesc.setBounds(36, 212, 1302, 91);
+		gameDesc.setEditable(false);
+		gameDesc.setText(entry.getDescription());
+		contentPane.add(gameDesc);
+
+		//add "Add to Favorites" button
+		addFavorite = new JButton("Add to favorites");
+		addFavorite.setForeground(Color.WHITE);
+		addFavorite.setFont(new Font("Dialog", Font.PLAIN, 21));
+		addFavorite.setFocusPainted(false);
+		addFavorite.setBackground(new Color(25, 24, 26));
+		addFavorite.setBounds(1351, 212, 196, 91);
+		addFavorite.addActionListener(this);
+		contentPane.add(addFavorite);	     
 	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
 
+	@Override
+	/**
+	 * Inherited from ActionListener interface. Adds event handler for buttons.
+	 */
+	public void actionPerformed(ActionEvent e) {
+		//Event handler for home button
 		if (e.getSource() == home) {
 			dispose();
 			new MainPage(mainUser);
 		}
+		//Event handler for adding the game to favorites
 		else if (e.getSource() == addFavorite) {
 			//NOT WORKING //OLDCODE
 			FavoriteListSQL list = new FavoriteListSQL(entry, mainUser);
@@ -306,6 +288,7 @@ public class commentPage extends JFrame implements ActionListener{
 				e1.printStackTrace();
 			}
 		}
+		//Event handler for submitting a comment
 		else if (e.getSource() == submit) {
 			if (commentTitle.getText().length()==0 || commentArea.getText().length()==0) {
 				return;
@@ -316,32 +299,11 @@ public class commentPage extends JFrame implements ActionListener{
 			try {
 				commentSQL.addComment(title, description, entry.getName());
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				System.out.println("Failed");
 				e1.printStackTrace();
 			}
 			dispose();
 			new commentPage(mainUser, entry);
-			//frame.setVisible(true);
 		}
-		else {
-			System.out.println("TO-DO");
-			//REMOVE COMMENT - NOT WORKING
-//			for (int i = 0; i < list.size(); i++) {
-//				if (e.getSource() == list.get(i)) {
-//					String str = list.get(i).getText().substring(8);
-//					int id = Integer.parseInt(str);
-//					try {
-//						commentSQL.removeComment(id);
-//					} catch (SQLException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
-//				}
-//			}
-//			
-//			frame.dispose();
-//			new commentPage(mainUser, entry);
-		}
+
 	}
 }
