@@ -39,7 +39,9 @@ public class newProfilePage extends JFrame implements ActionListener{
 	private TableDisplay searchcatalog;
 
 	/**
-	 * Create the frame.
+	 * newProfilePage constructor takes in a user object and creates the GUI for the profile page to
+	 * display user information as well as the abilities to change certain user information. 
+	 * @param User user object to store the user's information
 	 */
 	public newProfilePage(User user) {
 		mainUser = user;
@@ -84,7 +86,7 @@ public class newProfilePage extends JFrame implements ActionListener{
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 		
 
-		
+		//Create button to return to main page
 		returnMainPage = new JButton("Main Page");
 		returnMainPage.setBounds(70, 0, 164, 63);
 		returnMainPage.setForeground(Color.WHITE);
@@ -92,7 +94,6 @@ public class newProfilePage extends JFrame implements ActionListener{
 		returnMainPage.setBorder(emptyBorder);
 		returnMainPage.setBackground(new Color(25,24,26));
 		returnMainPage.addActionListener(this);
-		
 		navpanel.add(returnMainPage);
 
 		
@@ -109,23 +110,26 @@ public class newProfilePage extends JFrame implements ActionListener{
 				contentPane.add(cover);
 				cover.setIcon(new ImageIcon(loginPage.class.getResource("/images/cyberpunk.jpg")));
 		
-		//create panel to display catalog entries
+		//create panel to display users information, buttons, and text fields
 		JPanel profilePanel = new JPanel();
-		
 		profilePanel.setBackground(Color.WHITE);
 		profilePanel.setLayout(null);
 		profilePanel.setBounds(0, 325, 835, 572);
 		contentPane.add(profilePanel);
+		
+		//Create username jlabel display
 		JLabel username = new JLabel("Username: " + user.getUsername());
 		username.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		username.setBounds(10, 100, 430, 107);
+		
+		//Create password jlabel display
 		JLabel password = new JLabel ("Password: " + user.getPassword());
 		password.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		password.setBounds(10, 208, 430, 107);
-		
 		profilePanel.add(username);
 		profilePanel.add(password);
 		
+		//Create button to change User's password
 		changePass = new JButton("Change Password");
 		changePass.setBounds(10, 384, 164, 63);
 		changePass.setForeground(Color.DARK_GRAY);
@@ -135,10 +139,12 @@ public class newProfilePage extends JFrame implements ActionListener{
 		changePass.addActionListener(this);
 		profilePanel.add(changePass);
 		
+		//Create textfield to take in the new user's password
 		newPass = new JTextField("new password", 100);
 		newPass.setBounds(250, 384, 255, 63);
 		profilePanel.add(newPass);
 		
+		//Create button to change User's email address
 		changeEmail = new JButton("Change Email");
 		changeEmail.setBounds(10, 500, 164, 63);
 		changeEmail.setForeground(Color.DARK_GRAY);
@@ -148,29 +154,37 @@ public class newProfilePage extends JFrame implements ActionListener{
 		changeEmail.addActionListener(this);
 		profilePanel.add(changeEmail);
 		
-		
+		//Create textfield to take in new user's email address
 		newEmail = new JTextField("new email", 100);
 		newEmail.setBounds(250, 500, 255, 63);
 		profilePanel.add(newEmail);
 		
-		
-JLabel lblNewLabel = new JLabel("Edit Information:");
+		//Create label for editing text fields
+		JLabel lblNewLabel = new JLabel("Edit Information:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel.setBounds(10, 344, 187, 29);
 		profilePanel.add(lblNewLabel);
 		
+		//Create label for users email address
 		JLabel lblEmail = new JLabel("Email: " +user.getEmail());
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblEmail.setBounds(405, 100, 430, 107);
 		profilePanel.add(lblEmail);
 		
+		//Create label for user's date of birth
 		JLabel lblDob = new JLabel("DoB: "+user.getDob().toString());
 		lblDob.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblDob.setBounds(405, 218, 430, 107);
 		profilePanel.add(lblDob);
 		
 }
+	/**
+	 * actionperformed method handles actions done by user. 
+	 * Method handles when user clicks on change password button, 
+	 * change email button, and return to main page button.
+	 */
 	public void actionPerformed(ActionEvent e) {
+		//If statement to handle when user presses change password button
 		if (e.getSource() == changePass) {
 			if (newPass.getText().isEmpty()) return;
 			else {
@@ -184,6 +198,7 @@ JLabel lblNewLabel = new JLabel("Edit Information:");
 			}
 			}
 		}
+		//Handles when user presses change email button
 		else if (e.getSource() == changeEmail) {
 			if(newEmail.getText().isEmpty()) return;
 			else {
@@ -197,6 +212,7 @@ JLabel lblNewLabel = new JLabel("Edit Information:");
 				}
 			}
 		}
+		//Handles when user presses return to main page button
 		else if(e.getSource() == returnMainPage) {
 			this.dispose();
 			new MainPage(mainUser);
