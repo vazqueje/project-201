@@ -85,25 +85,14 @@ public class newProfilePage extends JFrame implements ActionListener{
 		
 
 		
-		//Add favorites button to navbar
-		JButton favorites = new JButton("Favorites");
-		favorites.setBounds(70, 0, 164, 63);
-		favorites.setForeground(Color.WHITE);
-		favorites.setFocusPainted(false);
-		favorites.setBorder(emptyBorder);
-		favorites.setBackground(new Color(25,24,26));
-		
 		returnMainPage = new JButton("Main Page");
-		returnMainPage.setBounds(230, 0, 164, 63);
+		returnMainPage.setBounds(70, 0, 164, 63);
 		returnMainPage.setForeground(Color.WHITE);
 		returnMainPage.setFocusPainted(false);
 		returnMainPage.setBorder(emptyBorder);
 		returnMainPage.setBackground(new Color(25,24,26));
 		returnMainPage.addActionListener(this);
 		
-
-
-		navpanel.add(favorites);
 		navpanel.add(returnMainPage);
 
 		
