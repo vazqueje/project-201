@@ -43,6 +43,9 @@ public class MainPage extends JFrame implements ActionListener {
 	private int searchCount;
 	private TableDisplay searchcatalog;
 	private JButton profile;
+	private JButton request;
+	private JButton favorites;
+	private JButton admin;
 
 	User user;
 
@@ -93,7 +96,6 @@ public class MainPage extends JFrame implements ActionListener {
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 		
 		//Add profile button to navbar
-		if(user.getPrivileges() != -1) {
 			profile = new JButton("Profile");
 			profile.setFocusPainted(false);
 			profile.setForeground(Color.WHITE);
@@ -101,15 +103,31 @@ public class MainPage extends JFrame implements ActionListener {
 			profile.setBounds(262, 0, 164, 63);
 			profile.setBackground(new Color(25,24,26));
 			profile.addActionListener(this);
-			}
+
 		
 		//Add favorites button to navbar
-		JButton favorites = new JButton("Favorites");
+		favorites = new JButton("Favorites");
 		favorites.setBounds(70, 0, 164, 63);
 		favorites.setForeground(Color.WHITE);
 		favorites.setFocusPainted(false);
 		favorites.setBorder(emptyBorder);
 		favorites.setBackground(new Color(25,24,26));
+		
+		//Add request button to navbar
+		request = new JButton("Request Game");
+		request.setBounds(454, 0, 164, 63);
+		request.setForeground(Color.WHITE);
+		request.setFocusPainted(false);
+		request.setBorder(emptyBorder);
+		request.setBackground(new Color(25,24,26));
+		
+		//Add admin page button to navbar
+		admin = new JButton("Admin Page");
+		admin.setBounds(646, 0, 164, 63);
+		admin.setForeground(Color.WHITE);
+		admin.setFocusPainted(false);
+		admin.setBorder(emptyBorder);
+		admin.setBackground(new Color(25,24,26));
 		
 		//add search box with 
 		searchfield = new JTextField();
@@ -126,6 +144,10 @@ public class MainPage extends JFrame implements ActionListener {
 		if (user.getPrivileges() != -1) {
 			navpanel.add(profile);
 			navpanel.add(favorites);
+			navpanel.add(request);
+		}
+		if(user.getPrivileges()==2) {
+			navpanel.add(admin);
 		}
 		
 		searchfield.setBackground(Color.WHITE);
@@ -143,8 +165,9 @@ public class MainPage extends JFrame implements ActionListener {
 		
 		contentPane.add(presearch);
 		
-		JLabel lblGamingLibrary = new JLabel("Gaming Library");
-		lblGamingLibrary.setBounds(474, 91, 673, 95);
+		JLabel lblGamingLibrary = new JLabel("The Gaming Library");
+		lblGamingLibrary.setFont(new Font("Tahoma", Font.PLAIN, 48));
+		lblGamingLibrary.setBounds(533, 128, 423, 95);
 		lblGamingLibrary.setForeground(Color.white);
 	
 		contentPane.add(lblGamingLibrary);
