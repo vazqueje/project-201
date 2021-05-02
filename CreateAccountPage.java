@@ -107,15 +107,17 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 		profilePanel.setBounds(0, 325, 893, 484);
 		contentPane.add(profilePanel);
 		
+		//Where the person can enter their username
 		username = new JTextField("Enter Username", 100);
 		username.setBounds(170, 145, 255, 63);
 		profilePanel.add(username);
 		
-		
+		//Where the person can enter their password
 		password = new JTextField("Enter Password", 100);
 		password.setBounds(170, 277, 255, 63);
 		profilePanel.add(password);
 		
+		//The button to press to create their account
 		btnCreateAccount = new JButton("Create Account");
 		btnCreateAccount.addActionListener(this);
 		btnCreateAccount.setForeground(Color.DARK_GRAY);
@@ -124,10 +126,13 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 		btnCreateAccount.setBounds(504, 396, 164, 63);
 		profilePanel.add(btnCreateAccount);
 		
+		//Where the person can enter their email
 		email = new JTextField("Enter Email", 100);
 		email.setBounds(170, 396, 255, 65);
 		profilePanel.add(email);
 		
+		//Basically just labels showing which textfield to put account information into.
+		//Start
 		JLabel lblNewLabel = new JLabel("Username:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel.setBounds(10, 139, 181, 63);
@@ -151,7 +156,9 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 		JLabel lblNewLabel_1 = new JLabel("Enter mm/dd/yyyy");
 		lblNewLabel_1.setBounds(460, 316, 123, 40);
 		profilePanel.add(lblNewLabel_1);
+		//End
 		
+		//the text field where they enter in their Date of Birth
 		txtjanurary = new JTextField();
 		txtjanurary.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtjanurary.setText("mm/dd/yyyy");
@@ -162,6 +169,9 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 		
 	}
 
+	/**
+	 *Performs the action to create the account by calling the logic class UserVerify.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnCreateAccount) {

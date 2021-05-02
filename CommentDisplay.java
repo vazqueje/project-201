@@ -18,13 +18,19 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+/**
+ * @author Jessica Vazquez
+ *
+ */
 public class CommentDisplay extends JPanel {
     private JLabel jLabel1;
     private JScrollPane jScrollPane1;
     private JTable jTable1;
     
     
-    
+    /**
+     * @param cs the comment section object that contains all the comments.
+     */
     public CommentDisplay(CommentSection cs) {
     	initComponents();
     	populateComments(cs);
@@ -32,6 +38,11 @@ public class CommentDisplay extends JPanel {
     }
     
     
+    /**
+     * populateComments populates a 2d array with all the comments from the comment
+     * section object.
+     * @param cs the comment section object that contains all the comments
+     */
     public void populateComments(CommentSection cs){
         String[] columnName = {"Comments","Description"};
         Object[][] rows = new Object[cs.getmaxpid()][2];
@@ -117,6 +128,9 @@ public class CommentDisplay extends JPanel {
         
     }
     
+    /**
+     * @return the table that is generated.
+     */
     public JTable getTable(){
     	return jTable1;
     }
