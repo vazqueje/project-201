@@ -246,7 +246,7 @@ public class commentPage extends JFrame implements ActionListener{
 		} else {
 			JLabel guestComment = new JLabel("You must be logged into to comment.");
 			guestComment.setFont(new Font("Tahoma", Font.PLAIN, 22));
-			guestComment.setBounds(40, 524, 294, 27);
+			guestComment.setBounds(40, 524, 400, 27);
 			guestComment.setForeground(Color.LIGHT_GRAY);
 			tablepanel.add(guestComment);
 		}
