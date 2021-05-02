@@ -251,6 +251,11 @@ public class newAdminPage extends JFrame implements ActionListener{
 			}
 		}
 		
+		if(e.getSource() == returnMainPage) {
+			this.dispose();
+			new MainPage(this.mainUser);
+		}
+		
 	}
 	
 }

@@ -121,6 +121,7 @@ public class MainPage extends JFrame implements ActionListener {
 		request.setFocusPainted(false);
 		request.setBorder(emptyBorder);
 		request.setBackground(new Color(25,24,26));
+		request.addActionListener(this);
 		request.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
 		
 		//Add admin page button to navbar
@@ -130,6 +131,7 @@ public class MainPage extends JFrame implements ActionListener {
 		admin.setFocusPainted(false);
 		admin.setBorder(emptyBorder);
 		admin.setBackground(new Color(25,24,26));
+		admin.addActionListener(this);
 		admin.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
 		
 		//add search box with 
@@ -285,6 +287,14 @@ public class MainPage extends JFrame implements ActionListener {
 		if(e.getSource() == profile) {
 			this.dispose();
 			new newProfilePage(user);
+		}
+		if(e.getSource() == admin) {
+			this.dispose();
+			new newAdminPage(user);
+		}
+		if(e.getSource() == request) {
+			this.dispose();
+			new newRequestPage(user);
 		}
 	}
 }
