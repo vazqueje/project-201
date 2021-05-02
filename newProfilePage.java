@@ -170,6 +170,16 @@ JLabel lblNewLabel = new JLabel("Edit Information:");
 		lblNewLabel.setBounds(10, 344, 187, 29);
 		profilePanel.add(lblNewLabel);
 		
+		JLabel lblEmail = new JLabel("Email: " +user.getEmail());
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblEmail.setBounds(405, 100, 430, 107);
+		profilePanel.add(lblEmail);
+		
+		JLabel lblDob = new JLabel("DoB: "+user.getDob().toString());
+		lblDob.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblDob.setBounds(405, 218, 430, 107);
+		profilePanel.add(lblDob);
+		
 }
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == changePass) {
