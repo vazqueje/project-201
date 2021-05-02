@@ -53,7 +53,6 @@ public class loginPage extends JFrame implements MouseListener{
 					loginPage frame = new loginPage();
 					frame.setUndecorated(true);
 					frame.setVisible(true);
-					//frame.setIconImage(Toolkit.getDefaultToolkit().getImage("/images/iconlogo.png"));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -110,24 +109,6 @@ public class loginPage extends JFrame implements MouseListener{
 		panel.add(lblNewLabel);
 
 		JLabel lblWelcome = new JLabel("Welcome");
-		try {
-			//Returned font is of pt size 1
-			Font font = Font.createFont(Font.TRUETYPE_FONT, new File("QuadUltra.ttf"));
-			GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			genv.registerFont(font);
-			font = font.deriveFont(48f);
-			//Derive and return a 12 pt version:
-			//Need to use float otherwise
-			//it would be interpreted as style
-
-			lblCatalog.setFont(font);
-			lblNewLabel.setFont(font);
-			lblWelcome.setFont(font);
-			//titleLabel3.setFont(font);
-
-		} catch (IOException|FontFormatException e) {
-			// Handle exception
-		}
 
 		JLabel label = new JLabel("");
 
@@ -166,7 +147,6 @@ public class loginPage extends JFrame implements MouseListener{
 				String passW=String.valueOf(password.getPassword());
 				User testUser;
 				UserVerify newUser = new UserVerify(user, passW);
-				System.out.println(user+" "+passW);
 				try {
 					testUser = newUser.getUser();
 					if (testUser == null) {
