@@ -19,31 +19,17 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.JTextArea;
 
 public class newRequestPage extends JFrame implements ActionListener{
 	private JTextField gameEntry;
-	private JTextField gameReason;
 	private JButton gameSubmit;
+	private JTextArea textArea;
 	private JButton returnMainPage;
 	private JPanel contentPane;
 	private User mainUser;
 	int xx,xy;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					User me = new User("ash","123","123",new java.sql.Date(101,0,23),3);
-					newRequestPage frame = new newRequestPage(me);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -54,7 +40,7 @@ public class newRequestPage extends JFrame implements ActionListener{
 		setVisible(true);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 825, 900);
+		setBounds(100, 100, 825, 800);
 		setLocationRelativeTo(null);
 		
 		//set main panel
@@ -121,11 +107,11 @@ public class newRequestPage extends JFrame implements ActionListener{
 		
 		profilePanel.setBackground(Color.WHITE);
 		profilePanel.setLayout(null);
-		profilePanel.setBounds(0, 325, 835, 572);
+		profilePanel.setBounds(0, 317, 835, 490);
 		contentPane.add(profilePanel);
 		
 		gameSubmit = new JButton("Submit Request");
-		gameSubmit.setBounds(225, 335, 164, 63);
+		gameSubmit.setBounds(514, 414, 164, 63);
 		gameSubmit.setForeground(Color.DARK_GRAY);
 		gameSubmit.setFocusPainted(false);
 		gameSubmit.setBorder(emptyBorder);
@@ -134,21 +120,23 @@ public class newRequestPage extends JFrame implements ActionListener{
 		profilePanel.add(gameSubmit);
 		
 		JLabel gameTitle = new JLabel("Video Game:");
-		gameTitle.setBounds(150, 150, 192, 70);
+		gameTitle.setBounds(10, 150, 192, 70);
 		gameTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		JLabel reasonTitle = new JLabel("Reason:");
-		reasonTitle.setBounds(150, 231, 192, 70);
+		reasonTitle.setBounds(10, 231, 192, 70);
 		reasonTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		profilePanel.add(gameTitle);
 		profilePanel.add(reasonTitle);
 		
 		gameEntry = new JTextField(100);
-		gameEntry.setBounds(387, 156, 250, 70);
+		gameEntry.setBorder(new LineBorder(new Color(51, 51, 51), 3));
+		gameEntry.setBounds(225, 166, 453, 51);
 		profilePanel.add(gameEntry);
-			
-		gameReason = new JTextField(100);
-		gameReason.setBounds(387, 241, 250, 63);
-		profilePanel.add(gameReason);	
+		
+		textArea = new JTextArea();
+		textArea.setBorder(new LineBorder(new Color(51, 51, 51), 3));
+		textArea.setBounds(225, 231, 453, 172);
+		profilePanel.add(textArea);
 }
 
 	@Override
@@ -161,7 +149,7 @@ public class newRequestPage extends JFrame implements ActionListener{
 		else if (e.getSource() == gameSubmit) {
 			if (gameEntry.getText().isEmpty()) return;
 			else {
-				RequestFormFiller request = new RequestFormFiller(gameEntry.getText(), gameReason.getText(), mainUser.getUsername());
+				RequestFormFiller request = new RequestFormFiller(gameEntry.getText(), textArea.getText(), mainUser.getUsername());
 				try {
 					if(request.fillForm()) {
 						JOptionPane.showMessageDialog(null, "Request Added", "Game request Successful", JOptionPane.WARNING_MESSAGE);
@@ -174,7 +162,8 @@ public class newRequestPage extends JFrame implements ActionListener{
 					e1.printStackTrace();
 				}
 			}
+			this.dispose();
+			new newRequestPage(this.mainUser);
 		}
 	}
-
 }
