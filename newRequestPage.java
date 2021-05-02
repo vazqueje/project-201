@@ -21,7 +21,10 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JTextArea;
-
+/*
+ * newRequestPage class is used for creating a request page GUI for the user to input and submit a game
+ * they wish to be added to the game catalog. 
+ */
 public class newRequestPage extends JFrame implements ActionListener{
 	private JTextField gameEntry;
 	private JButton gameSubmit;
@@ -32,7 +35,9 @@ public class newRequestPage extends JFrame implements ActionListener{
 	int xx,xy;
 
 	/**
-	 * Create the frame.
+	 * newRequestPage Constructor creates the GUI for the game submission request page 
+	 * for users to submit games to be reviewed and added to the catalog.
+	 * @param User user object is for passing user information between pages of the catalog. 
 	 */
 	public newRequestPage(User user) {
 		mainUser = user;
@@ -77,7 +82,7 @@ public class newRequestPage extends JFrame implements ActionListener{
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 		
 
-		
+		//Create button to return to main page of catalog
 		returnMainPage = new JButton("Main Page");
 		returnMainPage.setBounds(70, 0, 164, 63);
 		returnMainPage.setForeground(Color.WHITE);
@@ -85,7 +90,6 @@ public class newRequestPage extends JFrame implements ActionListener{
 		returnMainPage.setBorder(emptyBorder);
 		returnMainPage.setBackground(new Color(25,24,26));
 		returnMainPage.addActionListener(this);
-		
 		navpanel.add(returnMainPage);
 
 		
@@ -93,23 +97,22 @@ public class newRequestPage extends JFrame implements ActionListener{
 		JLabel smallIcon = new JLabel("");
 		smallIcon.setBounds(12, 10, 56, 43);
 		smallIcon.setIcon(new ImageIcon(loginPage.class.getResource("/images/iconlogo.png")));
-
 		navpanel.add(smallIcon);
 		
-		//background image
+		//set background image
 				JLabel cover = new JLabel("");
 				cover.setBounds(0, 59, 835, 356);
 				contentPane.add(cover);
 				cover.setIcon(new ImageIcon(loginPage.class.getResource("/images/cyberpunk.jpg")));
 		
-		//create panel to display catalog entries
-		JPanel profilePanel = new JPanel();
+		//create panel to display text fields and buttons for submitting a game request
+		JPanel requestPanel = new JPanel();
+		requestPanel.setBackground(Color.WHITE);
+		requestPanel.setLayout(null);
+		requestPanel.setBounds(0, 317, 835, 490);
+		contentPane.add(requestPanel);
 		
-		profilePanel.setBackground(Color.WHITE);
-		profilePanel.setLayout(null);
-		profilePanel.setBounds(0, 317, 835, 490);
-		contentPane.add(profilePanel);
-		
+		//Create button to submit a game request on click
 		gameSubmit = new JButton("Submit Request");
 		gameSubmit.setBounds(514, 414, 164, 63);
 		gameSubmit.setForeground(Color.DARK_GRAY);
@@ -117,35 +120,46 @@ public class newRequestPage extends JFrame implements ActionListener{
 		gameSubmit.setBorder(emptyBorder);
 		gameSubmit.setBackground(new Color(25,24,26));
 		gameSubmit.addActionListener(this);
-		profilePanel.add(gameSubmit);
+		requestPanel.add(gameSubmit);
 		
+		//Create game label for text field
 		JLabel gameTitle = new JLabel("Video Game:");
 		gameTitle.setBounds(10, 150, 192, 70);
 		gameTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		
+		//Create reason label for text field
 		JLabel reasonTitle = new JLabel("Reason:");
 		reasonTitle.setBounds(10, 231, 192, 70);
 		reasonTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		profilePanel.add(gameTitle);
-		profilePanel.add(reasonTitle);
+		requestPanel.add(gameTitle);
+		requestPanel.add(reasonTitle);
 		
+		//Create text field used for taking user input on a video game title 
 		gameEntry = new JTextField(100);
 		gameEntry.setBorder(new LineBorder(new Color(51, 51, 51), 3));
 		gameEntry.setBounds(225, 166, 453, 51);
-		profilePanel.add(gameEntry);
+		requestPanel.add(gameEntry);
 		
+		//Create text field used for taking user input on the reasoning behind video game to be added
 		textArea = new JTextArea();
 		textArea.setBorder(new LineBorder(new Color(51, 51, 51), 3));
 		textArea.setBounds(225, 231, 453, 172);
-		profilePanel.add(textArea);
+		requestPanel.add(textArea);
 }
 
 	@Override
+	/*
+	 * actionperformed method is the implemented method when using actionlistener.
+	 * actionperformed method will handle user events involving the mainpage button 
+	 * as well as the submitgame button. 
+	 */
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if (e.getSource() == returnMainPage) {
+		//If statement handles event when the return to main page button is clicked
+		if (e.getSource() == returnMainPage) { 
 			this.dispose();
 			new MainPage(mainUser);
 		}
+		//Handles event when the submit game request button is clicked
 		else if (e.getSource() == gameSubmit) {
 			if (gameEntry.getText().isEmpty()) return;
 			else {
