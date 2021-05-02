@@ -25,6 +25,10 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+/**
+ * @author Raymond Lin
+ *
+ */
 public class HelpPage extends JFrame implements ActionListener{
 	private JButton returnMainPage;
 	private JPanel contentPane;
@@ -111,6 +115,7 @@ public class HelpPage extends JFrame implements ActionListener{
 		profilePanel.setLayout(null);
 		profilePanel.setBounds(0, 325, 1400, 622);
 		contentPane.add(profilePanel);
+		//displays the General Help page
 		JLabel username = new JLabel("");
 		username.setIcon(new ImageIcon(HelpPage.class.getResource("/images/GeneralHelp.JPG")));
 		username.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -118,12 +123,13 @@ public class HelpPage extends JFrame implements ActionListener{
 		
 		profilePanel.add(username);
 		
+		//displays the admin and moderator help page
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(HelpPage.class.getResource("/images/AdminModeratorHelp.JPG")));
 		lblNewLabel_1.setBounds(722, 100, 697, 401);
 		profilePanel.add(lblNewLabel_1);
 		
-		
+		//a button that allows the user to move to the next page
 		btnNewButton = new JButton("Next Page");
 		btnNewButton.setBounds(1206, 556, 184, 55);
 		btnNewButton.setForeground(Color.DARK_GRAY);
@@ -135,6 +141,9 @@ public class HelpPage extends JFrame implements ActionListener{
 		
 }
 
+	/**
+	 *Performs the actions of returning to the main page and moving to next help page
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//Returns the user to the main page

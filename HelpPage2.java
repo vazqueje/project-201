@@ -79,7 +79,7 @@ public class HelpPage2 extends JFrame implements ActionListener{
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 		
 
-		
+		//return to main page button
 		returnMainPage = new JButton("Main Page");
 		returnMainPage.setBounds(70, 0, 164, 63);
 		returnMainPage.setForeground(Color.WHITE);
@@ -118,7 +118,7 @@ public class HelpPage2 extends JFrame implements ActionListener{
 		
 		profilePanel.add(username);
 		
-		
+		//button to return to previous page
 		btnNewButton = new JButton("Previous Page");
 		btnNewButton.setBounds(1206, 556, 184, 55);
 		btnNewButton.setForeground(Color.DARK_GRAY);
@@ -128,6 +128,7 @@ public class HelpPage2 extends JFrame implements ActionListener{
 		btnNewButton.addActionListener(this);
 		profilePanel.add(btnNewButton);
 		
+		//displays help user page
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(HelpPage2.class.getResource("/images/UserHelp2.JPG")));
 		label.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -136,6 +137,9 @@ public class HelpPage2 extends JFrame implements ActionListener{
 		
 }
 
+	/**
+	 *performs the actions for return to main page and return to previous help page.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//returns the user back to the main page
