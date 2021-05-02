@@ -86,11 +86,12 @@ public class commentPage extends JFrame implements ActionListener{
 		//Initialize title panel
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBackground(new Color(25, 24, 26));
+		panel.setBackground(new Color(58, 162, 140));
 		panel.setBounds(0, 59, 1578, 140);
 		contentPane.add(panel);
 
 		JLabel gameName = new JLabel("Gaming Library");
+		gameName.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 29));
 		gameName.setBounds(41, 13, 1525, 123);
 
 		gameName.setText(entry.getName());
@@ -136,7 +137,7 @@ public class commentPage extends JFrame implements ActionListener{
 		//Add profile button to navbar
 		home = new JButton("Home");
 		home.setForeground(Color.WHITE);
-		home.setFont(null);
+		home.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
 		home.setFocusPainted(false);
 		home.setBackground(new Color(25, 24, 26));
 		home.setBounds(171, 0, 164, 63);
@@ -203,7 +204,7 @@ public class commentPage extends JFrame implements ActionListener{
 
 		//label to prompt user to add coment
 		JLabel lblAdd = new JLabel("Add a comment:");
-		lblAdd.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblAdd.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 22));
 		lblAdd.setBounds(40, 500, 294, 27);
 		tablepanel.add(lblAdd);
 
@@ -213,11 +214,13 @@ public class commentPage extends JFrame implements ActionListener{
 			commentTitle.setBorder(new LineBorder(new Color(51, 51, 51), 3));
 			commentTitle.setBounds(38, 550, 695, 35);
 			commentTitle.setColumns(10);
+			commentTitle.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
 			tablepanel.add(commentTitle);
 
 			commentArea = new JTextArea();
 			commentArea.setBorder(new LineBorder(new Color(51, 51, 51), 3));
 			commentArea.setBounds(40, 610, 693, 96);
+			commentArea.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
 			tablepanel.add(commentArea);
 
 			submit = new JButton("Submit");
@@ -227,15 +230,16 @@ public class commentPage extends JFrame implements ActionListener{
 			submit.setBackground(new Color(25, 24, 26));
 			submit.setBounds(775, 641, 164, 63);
 			submit.addActionListener(this);
+			submit.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 25));
 			tablepanel.add(submit);
 
 			JLabel lblTitle = new JLabel("Title:");
-			lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblTitle.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 15));
 			lblTitle.setBounds(40, 524, 294, 27);
 			tablepanel.add(lblTitle);
 
 			JLabel lblComment = new JLabel("Comment:");
-			lblComment.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblComment.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 15));
 			lblComment.setBounds(40, 582, 294, 27);
 			tablepanel.add(lblComment);
 		//Otherwise, inform them they need to log in
@@ -249,6 +253,7 @@ public class commentPage extends JFrame implements ActionListener{
 
 		//add text area for game description-line
 		gameDesc = new JTextArea();
+		gameDesc.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
 		gameDesc.setBounds(36, 212, 1302, 91);
 		gameDesc.setEditable(false);
 		gameDesc.setText(entry.getDescription());
@@ -259,7 +264,7 @@ public class commentPage extends JFrame implements ActionListener{
 		//add "Add to Favorites" button
 		addFavorite = new JButton("Add to favorites");
 		addFavorite.setForeground(Color.WHITE);
-		addFavorite.setFont(new Font("Dialog", Font.PLAIN, 21));
+		addFavorite.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 15));
 		addFavorite.setFocusPainted(false);
 		addFavorite.setBackground(new Color(25, 24, 26));
 		addFavorite.setBounds(1351, 212, 196, 91);

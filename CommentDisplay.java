@@ -48,11 +48,13 @@ public class CommentDisplay extends JPanel {
         jTable1.setFillsViewportHeight(true);
         jTable1.setRowMargin(50);
         jTable1.setGridColor(Color.black);
+        jTable1.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 18));
         JTableHeader header = jTable1.getTableHeader();
         header.setBackground(Color.white);
         header.setBackground(new Color(25, 24, 26));
         header.setBorder(new LineBorder(new Color(25, 24, 26), 10));
         header.setForeground(Color.white);
+        header.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 25));
         header.setPreferredSize(
         	     new Dimension(WIDTH,150)
         		);

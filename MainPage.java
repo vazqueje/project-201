@@ -103,7 +103,7 @@ public class MainPage extends JFrame implements ActionListener {
 			profile.setBounds(262, 0, 164, 63);
 			profile.setBackground(new Color(25,24,26));
 			profile.addActionListener(this);
-
+			profile.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
 		
 		//Add favorites button to navbar
 		favorites = new JButton("Favorites");
@@ -112,6 +112,7 @@ public class MainPage extends JFrame implements ActionListener {
 		favorites.setFocusPainted(false);
 		favorites.setBorder(emptyBorder);
 		favorites.setBackground(new Color(25,24,26));
+		favorites.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
 		
 		//Add request button to navbar
 		request = new JButton("Request Game");
@@ -120,14 +121,16 @@ public class MainPage extends JFrame implements ActionListener {
 		request.setFocusPainted(false);
 		request.setBorder(emptyBorder);
 		request.setBackground(new Color(25,24,26));
+		request.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
 		
 		//Add admin page button to navbar
 		admin = new JButton("Admin Page");
-		admin.setBounds(646, 0, 164, 63);
+		admin.setBounds(676, 0, 164, 63);
 		admin.setForeground(Color.WHITE);
 		admin.setFocusPainted(false);
 		admin.setBorder(emptyBorder);
 		admin.setBackground(new Color(25,24,26));
+		admin.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
 		
 		//add search box with 
 		searchfield = new JTextField();
@@ -137,8 +140,10 @@ public class MainPage extends JFrame implements ActionListener {
 		searchbutton.setFocusPainted(false);
 		searchbutton.setBackground(new Color(25, 24, 26));
 		searchbutton.setBounds(1086, 234, 169, 54);
+		searchbutton.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 25));
 		searchbutton.setBorder(emptyBorder);
 		JLabel presearch = new JLabel("Search for a game");
+		presearch.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
 		
 		contentPane.add(searchbutton);
 		if (user.getPrivileges() != -1) {
@@ -152,6 +157,7 @@ public class MainPage extends JFrame implements ActionListener {
 		
 		searchfield.setBackground(Color.WHITE);
 		searchfield.setBounds(334, 234, 758, 54);
+		searchfield.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
 		//Remove tooltip text when user types in search box
 		searchfield.addMouseListener(new MouseAdapter() {
 	        public void mouseClicked(MouseEvent e) {
@@ -161,13 +167,13 @@ public class MainPage extends JFrame implements ActionListener {
 	    });
 		
 		presearch.setForeground(Color.LIGHT_GRAY);
-		presearch.setBounds(344, 244, 359, 35);
+		presearch.setBounds(354, 244, 359, 35);
 		
 		contentPane.add(presearch);
 		
 		JLabel lblGamingLibrary = new JLabel("The Gaming Library");
-		lblGamingLibrary.setFont(new Font("Tahoma", Font.PLAIN, 48));
-		lblGamingLibrary.setBounds(533, 128, 423, 95);
+		lblGamingLibrary.setFont(new Font("Microsoft JhengHei", Font.BOLD, 56));
+		lblGamingLibrary.setBounds(488, 125, 696, 95);
 		lblGamingLibrary.setForeground(Color.white);
 	
 		contentPane.add(lblGamingLibrary);

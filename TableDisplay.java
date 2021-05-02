@@ -77,12 +77,14 @@ public class TableDisplay extends JPanel {
         table.setPreferredScrollableViewportSize(new Dimension(450,450));
         table.setFillsViewportHeight(true);
         table.setRowMargin(50);
+        table.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 18));
         table.setGridColor(new Color(25, 24, 26));
         JTableHeader headerLabels = table.getTableHeader();
         headerLabels.setBackground(Color.white);
         headerLabels.setBackground(new Color(25, 24, 26));
         headerLabels.setBorder(new LineBorder(new Color(25, 24, 26), 10));
         headerLabels.setForeground(Color.white);
+        headerLabels.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 25));
         headerLabels.setPreferredSize(
                 new Dimension(WIDTH,150)
         );
