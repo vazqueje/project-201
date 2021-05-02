@@ -170,7 +170,7 @@ public class commentPage extends JFrame implements ActionListener{
 			JLabel noComment = new JLabel("There are no comments. Be the first one to comment on this game!");
 			noComment.setFont(new Font("Tahoma", Font.PLAIN, 22));
 			noComment.setForeground(Color.LIGHT_GRAY);
-			noComment.setBounds(40, 13, 294, 27);
+			noComment.setBounds(40, 13, 1000, 27);
 			tablepanel.add(noComment);
 		//Otherwise, display table of comments
 		}else {
