@@ -224,13 +224,10 @@ public class MainPage extends JFrame implements ActionListener {
 				Search newSearch = new Search(searchString,user);
 				
 				ArrayList<Entry> entries = newSearch.fetchSearch(searchString);
-				//System.out.println(entries.get(0).toString());
 				if (entries == null) {
 					JOptionPane.showMessageDialog(null, "Please Try Again", "Search Not Found", JOptionPane.WARNING_MESSAGE);
 				} else {
-					System.out.println("searched");
 					if(searchCount > 0) {
-						System.out.println("search count greater than 0");
 						searchcatalog.setVisible(false);
 						tablepanel.remove(searchcatalog);
 						searchcatalog =  new TableDisplay(entries);

@@ -110,7 +110,6 @@ public class TableDisplay extends JPanel {
                 rows[i][0] = null;
             }
             rows[i][1] = list.get(i).getName();
-            System.out.println(rows[i][1]);
             rows[i][2] = list.get(i).getDescription();
             rows[i][3] = list.get(i).getGenre();
             rows[i][4] = list.get(i).getDeveloper();

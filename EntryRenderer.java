@@ -46,7 +46,6 @@ public class EntryRenderer {
 				 if(esrb >= ESRBtoInt(rs.getString("esrbRating"))) {
 				 img = ImageIO.read(rs.getBinaryStream(7));
 				 e = new Entry(rs.getString("name"),rs.getString("description"),rs.getString("genre"), rs.getString("developer"), rs.getDate("publishDate"), rs.getString("esrbRating"),null,img);
-				 System.out.println(e.toString());
 				 list.add(e);
 				 }
 			 }
