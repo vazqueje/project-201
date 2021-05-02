@@ -69,7 +69,7 @@ public class Comment{
 	 * @param String : comment main body that the user wishes to edit.
 	 */
 	protected void setDescription(String description) {
-		this.title = description;
+		this.desc = description;
 	}
 	/*
 	 * Method that returns current comment's information in standard String format
