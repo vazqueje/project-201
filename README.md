@@ -11,6 +11,7 @@ Image References
     e) (Donkey Kong Country) https://twitter.com/runawaykid205
     f) (Super Smash Bros) https://www.reddit.com/r/SmashBrosUltimate/comments/e7ikj9/happy_birthday_ssbu/
 3. Gaming Library Logo and GUI design: Jessica Vazquez-Estrada
+4. All Descriptions of games were provided by Wikipedia.
 
 Javadoc:
 
