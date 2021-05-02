@@ -120,7 +120,7 @@ public class HelpPage extends JFrame implements ActionListener{
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(HelpPage.class.getResource("/images/AdminModeratorHelp.JPG")));
-		lblNewLabel_1.setBounds(740, 100, 660, 296);
+		lblNewLabel_1.setBounds(722, 100, 697, 401);
 		profilePanel.add(lblNewLabel_1);
 		
 		
