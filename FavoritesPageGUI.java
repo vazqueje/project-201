@@ -93,62 +93,18 @@ public class FavoritesPageGUI extends JFrame implements ActionListener {
 		//Create empty border for stylized buttons
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 		
-		//Add favorites button to navbar
+		//Add home button to Navbar
 		home = new JButton("Home");
 		home.setBounds(70, 0, 164, 63);
 		home.setForeground(Color.WHITE);
+		home.setFocusPainted(false);
 		home.setBorder(emptyBorder);
 		home.addActionListener(this);
 		home.setBackground(new Color(25,24,26));
 		home.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+		navpanel.add(home);
 		
-		//Add profile button to navbar
-		profile = new JButton("Profile");
-		profile.setForeground(Color.WHITE);
-		profile.setBorder(emptyBorder);
-		profile.addActionListener(this);
-		profile.setBounds(262, 0, 164, 63);
-		profile.setBackground(new Color(25,24,26));
-		profile.addActionListener(this);
-		profile.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
-		
-		//Add favorites button to navbar
-		favorites = new JButton("Favorites");
-		favorites.setBounds(900, 0, 164, 63);
-		favorites.setForeground(Color.WHITE);
-		favorites.addActionListener(this);
-		favorites.setBorder(emptyBorder);
-		favorites.setBackground(new Color(25,24,26));
-		favorites.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
-		
-		//Add request button to navbar
-		request = new JButton("Request Game");
-		request.setBounds(454, 0, 164, 63);
-		request.setForeground(Color.WHITE);
-		request.setBorder(emptyBorder);
-		request.setBackground(new Color(25,24,26));
-		request.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
-		
-		//Add admin page button to navbar
-		admin = new JButton("Admin Page");
-		admin.setBounds(676, 0, 164, 63);
-		admin.setForeground(Color.WHITE);
-		admin.addActionListener(this);
-		admin.setBorder(emptyBorder);
-		admin.setBackground(new Color(25,24,26));
-		admin.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
-		
-		
-		if (user.getPrivileges() != -1) {
-			navpanel.add(profile);
-			navpanel.add(favorites);
-			navpanel.add(request);
-			navpanel.add(home);
-		}
-		if(user.getPrivileges()==2) {
-			navpanel.add(admin);
-		}
-		
+
 		
 		
 		
@@ -251,22 +207,6 @@ public class FavoritesPageGUI extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == profile) {
-			this.dispose();
-			new newProfilePage(user);
-		}
-		if(e.getSource() == admin) {
-			this.dispose();
-			new newAdminPage(user);
-		}
-		if(e.getSource() == request) {
-			this.dispose();
-			new newRequestPage(user);
-		}
-		if(e.getSource() == favorites) {
-			this.dispose();
-			new FavoritesPageGUI(user);
-		}
 		if(e.getSource() == home) {
 			this.dispose();
 			new MainPage(user);
