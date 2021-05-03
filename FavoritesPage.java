@@ -21,7 +21,7 @@ public class FavoritesPage {
 	
 	FavoritesPage(ArrayList<Entry> favorites, ArrayList<Entry> wishlist) {
         this.favorites = favorites;
-        this.wishList = wishList;
+        this.wishList = wishlist;
     }
 	
 	/*
