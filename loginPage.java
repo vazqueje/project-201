@@ -87,7 +87,7 @@ public class loginPage extends JFrame implements MouseListener{
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JLabel lblCatalog = new JLabel("Catalog");
+		JLabel lblCatalog = new JLabel("Library");
 		lblCatalog.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCatalog.setForeground(new Color(38, 162, 140));
 		lblCatalog.setFont(new Font("ROG Fonts", Font.BOLD, 36));
