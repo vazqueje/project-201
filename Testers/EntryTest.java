@@ -15,7 +15,7 @@ class EntryTest {
 	void testConstructor() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getName(), "Mario");
 		assertEquals(e.getDescription(), "Mario Brothers!");
@@ -30,11 +30,11 @@ class EntryTest {
 	void testGetName() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getName(), "Mario");
 		
-		Entry e1 = new Entry("Super Mario Brothers", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e1 = new Entry("Super Mario Brothers", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e1.getName(), "Super Mario Brothers");
 	}
@@ -43,7 +43,7 @@ class EntryTest {
 	void testSetName() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getName(), "Mario");
 		
@@ -58,11 +58,11 @@ class EntryTest {
 	void testGetDescription() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getDescription(), "Mario Brothers!");
 		
-		Entry e1 = new Entry("Mario", "Great Platformer", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e1 = new Entry("Mario", "Great Platformer", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertEquals(e1.getDescription(), "Great Platformer");
 	}
 	
@@ -70,7 +70,7 @@ class EntryTest {
 	void testSetDescription() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getDescription(), "Mario Brothers!");
 		
@@ -85,11 +85,11 @@ class EntryTest {
 	void testGetGenre() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getGenre(), "platformer");
 		
-		Entry e1 = new Entry("Mario", "Mario Brothers!", "Action", "Nintendo", d, "E", commentlist);
+		Entry e1 = new Entry("Mario", "Mario Brothers!", "Action", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e1 != null);
 		assertEquals(e1.getGenre(), "Action");
 	}
@@ -98,7 +98,7 @@ class EntryTest {
 	void testSetGenre() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getGenre(), "platformer");
 		
@@ -113,11 +113,11 @@ class EntryTest {
 	void testGetDeveloper() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getDeveloper(), "Nintendo");
 		
-		Entry e1 = new Entry("Mario", "Mario Brothers!", "platformer", "EA", d, "E", commentlist);
+		Entry e1 = new Entry("Mario", "Mario Brothers!", "platformer", "EA", d, "E", commentlist,null);
 		assertEquals(e1.getDeveloper(), "EA");
 	}
 	
@@ -125,7 +125,7 @@ class EntryTest {
 	void testSetDeveloper() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getDeveloper(), "Nintendo");
 		
@@ -140,12 +140,12 @@ class EntryTest {
 	void testGetPublishDate() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getPublishDate(), d);
 		
 		Date d1 = new Date(4, 27, 2021);
-		Entry e1 = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d1, "E", commentlist);
+		Entry e1 = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d1, "E", commentlist,null);
 		assertTrue(e1 != null);
 		assertEquals(e1.getPublishDate(), d1);
 	}
@@ -156,7 +156,7 @@ class EntryTest {
 		Date d1 = new Date(9, 25, 1999);
 		Date d2 = new Date(5, 01, 2010);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getPublishDate(), d);
 
@@ -171,11 +171,11 @@ class EntryTest {
 	void testGetEsrbRating() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getEsrbRating(), "E");
 		
-		Entry e1 = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "T", commentlist);
+		Entry e1 = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "T", commentlist,null);
 		assertTrue(e1 != null);
 		assertEquals(e1.getEsrbRating(), "T");
 	}
@@ -184,7 +184,7 @@ class EntryTest {
 	void testSetEsrbRating() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getEsrbRating(), "E");
 		
@@ -199,12 +199,12 @@ class EntryTest {
 	void testGetCommentList() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getCommentList(), commentlist);
 		
 		CommentSection cs = new CommentSection();
-		Entry e1 = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", cs);
+		Entry e1 = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", cs,null);
 		assertTrue(e1 != null);
 		assertEquals(e1.getCommentList(), cs);
 	}
@@ -213,7 +213,7 @@ class EntryTest {
 	void testSetCommentList() {
 		Date d = new Date(4, 27, 2021);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.getCommentList(), commentlist);
 		
@@ -226,7 +226,7 @@ class EntryTest {
 	void testToString() {
 		Date d = new Date(100, 5, 12);
 		CommentSection commentlist = new CommentSection();
-		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist);
+		Entry e = new Entry("Mario", "Mario Brothers!", "platformer", "Nintendo", d, "E", commentlist,null);
 		assertTrue(e != null);
 		assertEquals(e.toString(), "Mario\nMario Brothers!\nplatformer\nNintendo\n2000-06-12\nE");
 	}
