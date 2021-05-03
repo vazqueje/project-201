@@ -142,7 +142,7 @@ public class MainPage extends JFrame implements ActionListener {
 				
 				//Add favorites button to navbar
 				favorites = new JButton("Favorites");
-				favorites.setBounds(900, 0, 164, 63);
+				favorites.setBounds(676, 0, 164, 63);
 				favorites.setForeground(Color.WHITE);
 				favorites.setBorder(emptyBorder);
 				favorites.setBackground(new Color(25,24,26));
@@ -162,7 +162,7 @@ public class MainPage extends JFrame implements ActionListener {
 				
 				//Add admin page button to navbar
 				admin = new JButton("Admin Page");
-				admin.setBounds(676, 0, 164, 63);
+				admin.setBounds(900, 0, 164, 63);
 				admin.setForeground(Color.WHITE);
 				admin.setFocusPainted(false);
 				admin.setBorder(emptyBorder);
