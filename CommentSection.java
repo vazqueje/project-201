@@ -2,24 +2,26 @@
 import java.util.ArrayList;
 
 public class CommentSection {
-	/*Starts from 0*/
+	/**
+	 * Starts from 0
+	 */
 	private int maxpid;
 	private ArrayList<Comment> all;
-	/*
+	/**
 	 * Basic Constructor
 	 */
 	CommentSection() {
 		maxpid = 0;
 		all = new ArrayList<Comment>();
 	}
-	/*
+	/**
 	 * Getter method for the current comment section's total comments.
 	 * @return int : Current section's comment maxpid.
 	 */
 	protected int getmaxpid() {
 		return this.maxpid;
 	}
-	/*
+	/**
 	 * Method that adds comment to current comment section. 
 	 * @param String : comment title.
 	 * @param String : comment main body.
@@ -29,7 +31,7 @@ public class CommentSection {
 		all.add(c);
 		maxpid +=1;
 	}
-	/*
+	/**
 	 * Method that adds comment to current comment section. 
 	 * @param Comment : created comment.
 	 */
@@ -37,14 +39,14 @@ public class CommentSection {
 		all.add(e);
 		maxpid +=1;
 	}
-	/*
+	/**
 	 * Method that removes comment from current comment section. 
 	 * @param int : Comment's pid.
 	 */
 	protected void deletecomment(int pid) {
 		all.set(pid, null);
 	}
-	/*
+	/**
 	 * Method that edits comment in current comment section. 
 	 * @param int : Comment's pid.
 	 * @param String : Comment's title.
@@ -54,7 +56,7 @@ public class CommentSection {
 		all.get(pid).setTitle(title);
 		all.get(pid).setDescription(desc);;
 	}
-	/*
+	/**
 	 * Method that returns all of current comment section's comments in standard String format
 	 * @return String : formatted string with all of current Comment section's contents.
 	 */
@@ -70,10 +72,19 @@ public class CommentSection {
 			return ret;
 		}
 	}
-	
+	/**
+	 * getter method to get a comment at a specific int i
+	 * @param i index
+	 * @return comment object
+	 */
 	public Comment getComment(int i) {
 		return all.get(i);
 	}
+	
+	/**
+	 * getter method to get size of arraylist of commentsection
+	 * @return size of arraylist
+	 */
 	public int getSize() {
 		return all.size();
 	}

@@ -6,10 +6,17 @@ public final class SQLConnection {
 	private static final String CONNECTION_USER = "root";
 	private static final String CONNECTION_PASSWORD = "pV9KrKZbcM!rx6&G";
 	
+	/**
+	 * Empty Constructor for SQLConnection
+	 */
 	private SQLConnection() {
 		
 	}
 	
+	/**
+	 * Method to establish connection to database
+	 * @return returns a connection object
+	 */
 	public static Connection getConnection() {
 		if(c1 != null) {
 			return c1;

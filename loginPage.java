@@ -65,7 +65,7 @@ public class loginPage extends JFrame implements MouseListener{
 
 
 	/**
-	 * Create the frame.
+	 * Constructor to create the first page of the software, the login page
 	 */
 	public loginPage() {
 		setBackground(Color.WHITE);

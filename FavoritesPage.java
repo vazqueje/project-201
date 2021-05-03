@@ -11,7 +11,7 @@ public class FavoritesPage {
 	private ArrayList<Entry> favorites;
 	private ArrayList<Entry> wishList;
 	
-	/*
+	/**
 	 * Basic Constructor
 	 */
 	FavoritesPage() {
@@ -24,7 +24,7 @@ public class FavoritesPage {
         this.wishList = wishlist;
     }
 	
-	/*
+	/**
 	 * Getter method for the favorite game list
 	 * @return ArrayList<String> : List contains the games on the user's favorites list.
 	 */
@@ -32,7 +32,7 @@ public class FavoritesPage {
 		return favorites;
 	}
 	
-	/*
+	/**
 	 * Getter method for the wish list
 	 * @return ArrayList<String> : List that contains the games on the user's wish list
 	 */
@@ -40,7 +40,7 @@ public class FavoritesPage {
 		return wishList;
 	}
 	
-	/*
+	/**
 	 * Method that returns a formatted string containing the elements of a list
 	 * @param ArrayList<String> : A list of Strings
 	 * @return String : formatted string with the contents of the list passed into the method
@@ -61,7 +61,7 @@ public class FavoritesPage {
 		}
 	}
 	
-	/*
+	/**
 	 * Method that adds a game to the user's game list
 	 * @param String : game that the user wishes to add
 	 */
@@ -69,7 +69,7 @@ public class FavoritesPage {
 		this.getGameList().add(game);
 	}
 	
-	/*
+	/**
 	 * Method that adds a game to the user's wish list
 	 * @param String :  game that the user wishes to add
 	 */
@@ -77,7 +77,7 @@ public class FavoritesPage {
 		this.getWishList().add(game);
 	}
 	
-	/*
+	/**
 	 * Method that removes a game from the user's favorite game list
 	 * @param Game that the user wishes to remove
 	 * @return boolean : boolean value that will be true if successful, false if not
@@ -91,7 +91,7 @@ public class FavoritesPage {
 		}
 	}
 	
-	/*
+	/**
 	 * Method that removes a game from the user's wish list
 	 * @param String : Game that the user wishes to remove
 	 * @return boolean : boolean value that will be true if successful, false if not
@@ -105,21 +105,21 @@ public class FavoritesPage {
 		}
 	}
 	
-	/*
+	/**
 	 * Method that clears the favorite game list
 	 */
 	protected void clearFavorites() {
 		this.getGameList().clear();
 	}
 	
-	/*
+	/**
 	 * Method that clears the wish list
 	 */
 	protected void clearWishlist() {
 		this.getWishList().clear();
 	}
 	
-	/*
+	/**
 	 * Method that returns the size of the user's favorite game list
 	 * @return int : size of the favorite game list
 	 */
@@ -127,7 +127,7 @@ public class FavoritesPage {
 		return this.getGameList().size();
 	}
 	
-	/*
+	/**
 	 * Method that returns the size of the user's wish list
 	 * @return int :  size of the wish list
 	 */

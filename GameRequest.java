@@ -9,7 +9,7 @@ public class GameRequest {
 	private String description;
 	private String userName;
 	
-	/*
+	/**
 	 * Basic Constructor
 	 */
 	GameRequest() {
@@ -18,7 +18,7 @@ public class GameRequest {
 		setUserName("");
 	}
 	
-	/*
+	/**
 	 * Constructor that has a given game title, description, and userName of user submitting the request
 	 * @param String game : String that contains the name of the game
 	 * @param String description: String that contains the description of the game
@@ -30,7 +30,7 @@ public class GameRequest {
 		setUserName(userName);
 	}
 	
-	/*
+	/**
 	 * Method that returns an array containing userName of the user making the request, the name of the game
 	 * and the description
 	 * @param GameRequest game : takes in a game object
@@ -41,7 +41,7 @@ public class GameRequest {
 		return arr;
 	}
 	
-	/*
+	/**
 	 * Getter method for name of the game
 	 * @return String : Returns name of the game
 	 */
@@ -49,7 +49,7 @@ public class GameRequest {
 		return gameName;
 	}
 
-	/*
+	/**
 	 * Setter method for the name of the game
 	 * @param String gameName : Name of the new title of the game
 	 */
@@ -57,7 +57,7 @@ public class GameRequest {
 		this.gameName = gameName;
 	}
 	
-	/*
+	/**
 	 * Getter method for description
 	 * @return String : returns the contents of the description
 	 */
@@ -65,7 +65,7 @@ public class GameRequest {
 		return description;
 	}
 
-	/*
+	/**
 	 * Setter method for description
 	 * @param String description : String containing the new description
 	 */
@@ -73,7 +73,7 @@ public class GameRequest {
 		this.description = description;
 	}
 
-	/*
+	/**
 	 * Getter method for userName
 	 * @return String : returns the userName
 	 */
@@ -81,7 +81,7 @@ public class GameRequest {
 		return userName;
 	}
 
-	/*
+	/**
 	 * Setter for userName
 	 * @param String userName : String containing the updated userName
 	 */
@@ -89,7 +89,7 @@ public class GameRequest {
 		this.userName = userName;
 	}
 
-	/*
+	/**
 	 * Method that combines the elements of the request into a string 
 	 * @return String : String that contains the compiled request 
 	 */

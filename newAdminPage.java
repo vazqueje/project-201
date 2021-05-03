@@ -42,7 +42,7 @@ public class newAdminPage extends JFrame implements ActionListener{
 	int xx,xy;
 
 	/**
-	 * Create the frame.
+	 * Constructor for new Admin Page GUI
 	 */
 	public newAdminPage(User user) {
 		mainUser = user;
@@ -195,6 +195,9 @@ public class newAdminPage extends JFrame implements ActionListener{
 }
 
 	@Override
+	/**
+	 * actionperformed method takes into account for approval button, denial button, banUser button, and return to mainpage button
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == approveButton) {
 			try {

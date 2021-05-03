@@ -29,7 +29,10 @@ public class ForgotPassword {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+	/**
+	 * returnUser returns the newly edited user objected that is edited from the constructor
+	 * @return new user object
+	 */
 	public User returnUser() {
 		try {
 			//if someone tries to find the guest account's information it will just return null

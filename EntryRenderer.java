@@ -17,9 +17,17 @@ public class EntryRenderer {
 	User user;
 	int esrb=0;
 	
+	/**
+	 * Empty Entry Renderer constructor
+	 */
 	public EntryRenderer() {
 		
 	}
+	
+	/**
+	 * Entry Renderer constructor that takes in a user so an esrb rating can be calculated according to age
+	 * @param user
+	 */
 	public EntryRenderer(User user) {
 		this.user = user;
 		int age = user.getAge();
@@ -30,6 +38,10 @@ public class EntryRenderer {
 		if (user.getUsername().equals("Guest")) esrb = 1;
 	}
     
+	/**
+	 * Method populates an arraylist of entries and takes into account age/esrb as to what is visible for the user
+	 * @return
+	 */
     public ArrayList<Entry> fillTable() {
     	
     	ArrayList<Entry> list = new ArrayList<Entry>();
@@ -59,6 +71,12 @@ public class EntryRenderer {
 		 
      
     }
+    
+    /**
+     * Method to convert a string esrb into a esrb integer
+     * @param rating string esrb rating
+     * @return integer equivalent to the string esrrb rating
+     */
     private int ESRBtoInt(String rating) {
 		int ret = 0;
 		if (rating.equalsIgnoreCase("RP")) ret = 4;

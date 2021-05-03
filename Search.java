@@ -17,6 +17,11 @@ public class Search {
 	ArrayList<Entry> results = new ArrayList<Entry>();
 	int esrb = 0;
 	
+	/**
+	 * Search constructor takes in a search and a user object and sets the esrb rating
+	 * @param userSearch String containing a search done by user
+	 * @param user User Object storing user information
+	 */
 	public Search(String userSearch, User user) {
 		this.user = user;
 		this.userSearch = userSearch;
@@ -71,6 +76,12 @@ public class Search {
 		
 		
 	}
+	
+	/**
+	 * Method to produce an esrb integer from an inputted ESRB string rating
+	 * @param rating ESRB string of the entry
+	 * @return Integer value for the ESRB rating
+	 */
 	private int ESRBtoInt(String rating) {
 		int ret = 0;
 		if (rating.equalsIgnoreCase("RP")) ret = 4;

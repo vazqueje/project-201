@@ -38,7 +38,7 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 	private JButton btnCreateAccount;
 
 	/**
-	 * Create the frame.
+	 * CreateAccountPage constructor creates a new GUI for creating an account page.
 	 */
 	public CreateAccountPage() {
 		setUndecorated(true);
