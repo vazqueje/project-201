@@ -89,27 +89,27 @@ public class loginPage extends JFrame implements MouseListener{
 
 		JLabel lblCatalog = new JLabel("Catalog");
 		lblCatalog.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCatalog.setForeground(new Color(58, 162, 140));
-		lblCatalog.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCatalog.setBounds(68, 360, 227, 70);
+		lblCatalog.setForeground(new Color(38, 162, 140));
+		lblCatalog.setFont(new Font("ROG Fonts", Font.BOLD, 36));
+		lblCatalog.setBounds(68, 355, 227, 70);
 		panel.add(lblCatalog);
 
-		JLabel lblWeGotYou = new JLabel("Powered by GamersInc.");
-		lblWeGotYou.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWeGotYou.setForeground(new Color(58, 162, 140));
-		lblWeGotYou.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblWeGotYou.setBounds(114, 415, 141, 27);
-		panel.add(lblWeGotYou);
+		JLabel lblSubtitle = new JLabel("Powered by GamersInc.");
+		lblSubtitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSubtitle.setForeground(new Color(58, 162, 140));
+		lblSubtitle.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 13));
+		lblSubtitle.setBounds(114, 415, 141, 27);
+		panel.add(lblSubtitle);
 
-		JLabel lblNewLabel = new JLabel("Game");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setForeground(new Color(58, 162, 140));
-		lblNewLabel.setBounds(91, 300, 181, 83);
-		panel.add(lblNewLabel);
+		JLabel lblGame = new JLabel("Game");
+		lblGame.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGame.setFont(new Font("ROG Fonts", Font.BOLD, 36));
+		lblGame.setForeground(new Color(58, 162, 140));
+		lblGame.setBounds(91, 300, 181, 83);
+		panel.add(lblGame);
 
 		JLabel lblWelcome = new JLabel("Welcome");
-
+		lblWelcome.setFont(new Font("ROG Fonts", Font.BOLD, 36));
 		JLabel label = new JLabel("");
 
 		label.addMouseListener(new MouseAdapter() {

@@ -85,9 +85,9 @@ public class HelpPage extends JFrame implements ActionListener{
 
 		
 		returnMainPage = new JButton("Main Page");
+		returnMainPage.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
 		returnMainPage.setBounds(70, 0, 164, 63);
 		returnMainPage.setForeground(Color.WHITE);
-		returnMainPage.setFocusPainted(false);
 		returnMainPage.setBorder(emptyBorder);
 		returnMainPage.setBackground(new Color(25,24,26));
 		returnMainPage.addActionListener(this);
@@ -131,8 +131,9 @@ public class HelpPage extends JFrame implements ActionListener{
 		
 		//a button that allows the user to move to the next page
 		btnNewButton = new JButton("Next Page");
+		btnNewButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 15));
 		btnNewButton.setBounds(1206, 556, 184, 55);
-		btnNewButton.setForeground(Color.DARK_GRAY);
+		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setBorder(emptyBorder);
 		btnNewButton.setBackground(new Color(25,24,26));

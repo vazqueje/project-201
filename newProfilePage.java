@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -51,6 +52,7 @@ public class newProfilePage extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 825, 900);
 		setLocationRelativeTo(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iconlogo.png")));
 		
 		//set main panel
 		contentPane = new JPanel();
@@ -88,6 +90,7 @@ public class newProfilePage extends JFrame implements ActionListener{
 
 		//Create button to return to main page
 		returnMainPage = new JButton("Main Page");
+		returnMainPage.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
 		returnMainPage.setBounds(70, 0, 164, 63);
 		returnMainPage.setForeground(Color.WHITE);
 		returnMainPage.setFocusPainted(false);
@@ -119,20 +122,21 @@ public class newProfilePage extends JFrame implements ActionListener{
 		
 		//Create username jlabel display
 		JLabel username = new JLabel("Username: " + user.getUsername());
-		username.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		username.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 24));
 		username.setBounds(10, 100, 430, 107);
 		
 		//Create password jlabel display
 		JLabel password = new JLabel ("Password: " + user.getPassword());
-		password.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		password.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 24));
 		password.setBounds(10, 208, 430, 107);
 		profilePanel.add(username);
 		profilePanel.add(password);
 		
 		//Create button to change User's password
 		changePass = new JButton("Change Password");
-		changePass.setBounds(10, 384, 164, 63);
-		changePass.setForeground(Color.DARK_GRAY);
+		changePass.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 13));
+		changePass.setBounds(10, 395, 164, 42);
+		changePass.setForeground(new Color(255, 255, 255));
 		changePass.setFocusPainted(false);
 		changePass.setBorder(emptyBorder);
 		changePass.setBackground(new Color(25,24,26));
@@ -141,13 +145,15 @@ public class newProfilePage extends JFrame implements ActionListener{
 		
 		//Create textfield to take in the new user's password
 		newPass = new JTextField("new password", 100);
-		newPass.setBounds(250, 384, 255, 63);
+		newPass.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
+		newPass.setBounds(250, 395, 255, 42);
 		profilePanel.add(newPass);
 		
 		//Create button to change User's email address
 		changeEmail = new JButton("Change Email");
-		changeEmail.setBounds(10, 500, 164, 63);
-		changeEmail.setForeground(Color.DARK_GRAY);
+		changeEmail.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 13));
+		changeEmail.setBounds(10, 460, 164, 42);
+		changeEmail.setForeground(new Color(255, 255, 255));
 		changeEmail.setFocusPainted(false);
 		changeEmail.setBorder(emptyBorder);
 		changeEmail.setBackground(new Color(25,24,26));
@@ -156,25 +162,26 @@ public class newProfilePage extends JFrame implements ActionListener{
 		
 		//Create textfield to take in new user's email address
 		newEmail = new JTextField("new email", 100);
-		newEmail.setBounds(250, 500, 255, 63);
+		newEmail.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
+		newEmail.setBounds(250, 460, 255, 42);
 		profilePanel.add(newEmail);
 		
 		//Create label for editing text fields
 		JLabel lblNewLabel = new JLabel("Edit Information:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 24));
 		lblNewLabel.setBounds(10, 344, 187, 29);
 		profilePanel.add(lblNewLabel);
 		
 		//Create label for users email address
 		JLabel lblEmail = new JLabel("Email: " +user.getEmail());
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblEmail.setBounds(405, 100, 430, 107);
+		lblEmail.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 24));
+		lblEmail.setBounds(462, 100, 430, 107);
 		profilePanel.add(lblEmail);
 		
 		//Create label for user's date of birth
 		JLabel lblDob = new JLabel("DoB: "+user.getDob().toString());
-		lblDob.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblDob.setBounds(405, 218, 430, 107);
+		lblDob.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 24));
+		lblDob.setBounds(462, 220, 430, 107);
 		profilePanel.add(lblDob);
 		
 }

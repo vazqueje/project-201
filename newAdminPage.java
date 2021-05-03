@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -52,6 +53,8 @@ public class newAdminPage extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 825, 800);
 		setLocationRelativeTo(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iconlogo.png")));
+
 		
 		//set main panel
 		contentPane = new JPanel();
@@ -89,6 +92,7 @@ public class newAdminPage extends JFrame implements ActionListener{
 
 		
 		returnMainPage = new JButton("Main Page");
+		returnMainPage.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
 		returnMainPage.setBounds(70, 0, 164, 63);
 		returnMainPage.setForeground(Color.WHITE);
 		returnMainPage.setFocusPainted(false);
@@ -122,8 +126,9 @@ public class newAdminPage extends JFrame implements ActionListener{
 		
 		//approve button for requests
 		approveButton = new JButton("Approve");
+		approveButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
 		approveButton.setBounds(10, 321, 164, 63);
-		approveButton.setForeground(Color.DARK_GRAY);
+		approveButton.setForeground(new Color(255, 255, 255));
 		approveButton.setFocusPainted(false);
 		approveButton.setBorder(emptyBorder);
 		approveButton.setBackground(new Color(25,24,26));
@@ -138,7 +143,8 @@ public class newAdminPage extends JFrame implements ActionListener{
 		
 		//deny button for requests
 		denyButton = new JButton("Deny");
-		denyButton.setForeground(Color.DARK_GRAY);
+		denyButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
+		denyButton.setForeground(new Color(255, 255, 255));
 		denyButton.setFocusPainted(false);
 		denyButton.setBackground(new Color(25, 24, 26));
 		denyButton.setBounds(299, 321, 164, 63);
@@ -146,13 +152,13 @@ public class newAdminPage extends JFrame implements ActionListener{
 		profilePanel.add(denyButton);
 		
 		JLabel lblNewLabel = new JLabel("Current Request:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 16));
 		lblNewLabel.setBounds(10, 100, 164, 23);
 		profilePanel.add(lblNewLabel);
 		
 		JLabel banUserLabel = new JLabel("Ban User:");
-		banUserLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		banUserLabel.setBounds(473, 100, 164, 23);
+		banUserLabel.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 16));
+		banUserLabel.setBounds(483, 100, 164, 23);
 		profilePanel.add(banUserLabel);
 		
 		//field to type in the username of the person you want banned
@@ -163,7 +169,8 @@ public class newAdminPage extends JFrame implements ActionListener{
 		
 		//button for banning users
 		banUserButton = new JButton("Ban");
-		banUserButton.setForeground(Color.DARK_GRAY);
+		banUserButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
+		banUserButton.setForeground(new Color(255, 255, 255));
 		banUserButton.setFocusPainted(false);
 		banUserButton.setBackground(new Color(25, 24, 26));
 		banUserButton.setBounds(568, 172, 164, 63);

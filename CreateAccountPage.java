@@ -109,60 +109,65 @@ public class CreateAccountPage extends JFrame implements ActionListener {
 		
 		//Where the person can enter their username
 		username = new JTextField("Enter Username", 100);
+		username.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 15));
 		username.setBounds(170, 145, 255, 63);
 		profilePanel.add(username);
 		
 		//Where the person can enter their password
 		password = new JTextField("Enter Password", 100);
+		password.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 15));
 		password.setBounds(170, 277, 255, 63);
 		profilePanel.add(password);
 		
 		//The button to press to create their account
 		btnCreateAccount = new JButton("Create Account");
+		btnCreateAccount.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
 		btnCreateAccount.addActionListener(this);
-		btnCreateAccount.setForeground(Color.DARK_GRAY);
+		btnCreateAccount.setForeground(new Color(255, 255, 255));
 		btnCreateAccount.setFocusPainted(false);
 		btnCreateAccount.setBackground(new Color(25, 24, 26));
-		btnCreateAccount.setBounds(504, 396, 164, 63);
+		btnCreateAccount.setBounds(717, 398, 164, 63);
 		profilePanel.add(btnCreateAccount);
 		
 		//Where the person can enter their email
 		email = new JTextField("Enter Email", 100);
+		email.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 15));
 		email.setBounds(170, 396, 255, 65);
 		profilePanel.add(email);
 		
 		//Basically just labels showing which textfield to put account information into.
 		//Start
 		JLabel lblNewLabel = new JLabel("Username:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 24));
 		lblNewLabel.setBounds(10, 139, 181, 63);
 		profilePanel.add(lblNewLabel);
 		
 		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblPassword.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 24));
 		lblPassword.setBounds(10, 271, 181, 63);
 		profilePanel.add(lblPassword);
 		
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblEmail.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 24));
 		lblEmail.setBounds(10, 396, 181, 63);
 		profilePanel.add(lblEmail);
 		
 		JLabel lblDateOfBirth = new JLabel("Date Of Birth:");
-		lblDateOfBirth.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblDateOfBirth.setBounds(450, 271, 148, 63);
+		lblDateOfBirth.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 24));
+		lblDateOfBirth.setBounds(455, 139, 148, 63);
 		profilePanel.add(lblDateOfBirth);
 		
 		JLabel lblNewLabel_1 = new JLabel("Enter mm/dd/yyyy");
-		lblNewLabel_1.setBounds(460, 316, 123, 40);
+		lblNewLabel_1.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 13));
+		lblNewLabel_1.setBounds(455, 183, 123, 40);
 		profilePanel.add(lblNewLabel_1);
 		//End
 		
 		//the text field where they enter in their Date of Birth
 		txtjanurary = new JTextField();
-		txtjanurary.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		txtjanurary.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 15));
 		txtjanurary.setText("mm/dd/yyyy");
-		txtjanurary.setBounds(622, 277, 255, 63);
+		txtjanurary.setBounds(626, 145, 255, 63);
 		profilePanel.add(txtjanurary);
 		txtjanurary.setColumns(10);
 		

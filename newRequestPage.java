@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -45,6 +46,7 @@ public class newRequestPage extends JFrame implements ActionListener{
 		setVisible(true);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iconlogo.png")));
 		setBounds(100, 100, 825, 800);
 		setLocationRelativeTo(null);
 		
@@ -84,6 +86,7 @@ public class newRequestPage extends JFrame implements ActionListener{
 
 		//Create button to return to main page of catalog
 		returnMainPage = new JButton("Main Page");
+		returnMainPage.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
 		returnMainPage.setBounds(70, 0, 164, 63);
 		returnMainPage.setForeground(Color.WHITE);
 		returnMainPage.setFocusPainted(false);
@@ -114,8 +117,9 @@ public class newRequestPage extends JFrame implements ActionListener{
 		
 		//Create button to submit a game request on click
 		gameSubmit = new JButton("Submit Request");
+		gameSubmit.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 13));
 		gameSubmit.setBounds(514, 414, 164, 63);
-		gameSubmit.setForeground(Color.DARK_GRAY);
+		gameSubmit.setForeground(new Color(255, 255, 255));
 		gameSubmit.setFocusPainted(false);
 		gameSubmit.setBorder(emptyBorder);
 		gameSubmit.setBackground(new Color(25,24,26));
@@ -124,13 +128,13 @@ public class newRequestPage extends JFrame implements ActionListener{
 		
 		//Create game label for text field
 		JLabel gameTitle = new JLabel("Video Game:");
-		gameTitle.setBounds(10, 150, 192, 70);
-		gameTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		gameTitle.setBounds(21, 151, 192, 70);
+		gameTitle.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 24));
 		
 		//Create reason label for text field
 		JLabel reasonTitle = new JLabel("Reason:");
-		reasonTitle.setBounds(10, 231, 192, 70);
-		reasonTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		reasonTitle.setBounds(21, 231, 192, 70);
+		reasonTitle.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 24));
 		requestPanel.add(gameTitle);
 		requestPanel.add(reasonTitle);
 		

@@ -40,12 +40,13 @@ import java.util.ArrayList;
 import java.sql.*;
 import javax.swing.JTextArea;
 public class commentPage extends JFrame implements ActionListener{
+	//DECLARE COMPONENTS
 	private JPanel contentPane;
 	int xx,xy;
 	private int searchCount;
 	private TableDisplay searchcatalog;
 	private JTextArea gameDesc;
-	User mainUser;
+	User user;
 	Entry entry;
 	CommentSQL commentSQL;
 	CommentSection comments;
@@ -53,6 +54,8 @@ public class commentPage extends JFrame implements ActionListener{
 	private JButton profile;
 	private JButton favorites;
 	private JButton submit;
+	private JButton request;
+	private JButton admin;
 	private JButton addFavorite;
 	private JTextArea commentArea;
 	private JTextField commentTitle;
@@ -63,7 +66,7 @@ public class commentPage extends JFrame implements ActionListener{
 	 */
 	public commentPage(User user, Entry entry) {
 		this.entry = entry;
-		mainUser = user;
+		this.user = user;
 		setUndecorated(true);
 		setVisible(true);
 		setBackground(Color.WHITE);
@@ -134,20 +137,67 @@ public class commentPage extends JFrame implements ActionListener{
 		//Create empty border for stylized buttons
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 
-		//Add profile button to navbar
-		home = new JButton("Home");
-		home.setForeground(Color.WHITE);
-		home.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
-		home.setFocusPainted(false);
-		home.setBackground(new Color(25, 24, 26));
-		home.setBounds(171, 0, 164, 63);
-		home.addActionListener(this);
-		navpanel.add(home);
-		home.setFocusPainted(false);
-		home.setForeground(Color.WHITE);
-		home.setBorder(emptyBorder);
-		home.setBounds(80, 0, 164, 63);
-		home.setBackground(new Color(25,24,26));
+		//Add favorites button to navbar
+				home = new JButton("Home");
+				home.setBounds(70, 0, 164, 58);
+				home.setForeground(Color.WHITE);
+				home.setBorder(emptyBorder);
+				home.setFocusPainted(false);
+				home.addActionListener(this);
+				home.setBackground(new Color(25,24,26));
+				home.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+				
+				//Add profile button to navbar
+				profile = new JButton("Profile");
+				profile.setForeground(Color.WHITE);
+				profile.setBorder(emptyBorder);
+				profile.setFocusPainted(false);
+				profile.setBounds(262, 0, 164, 58);
+				profile.setBackground(new Color(25,24,26));
+				profile.addActionListener(this);
+				profile.addActionListener(this);
+				profile.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+				
+				//Add favorites button to navbar
+				favorites = new JButton("Favorites");
+				favorites.setBounds(900, 0, 164, 58);
+				favorites.setForeground(Color.WHITE);
+				favorites.setBorder(emptyBorder);
+				favorites.addActionListener(this);
+				favorites.setFocusPainted(false);
+				favorites.setBackground(new Color(25,24,26));
+				favorites.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+				
+				//Add request button to navbar
+				request = new JButton("Request Game");
+				request.setBounds(454, 0, 164, 58);
+				request.setForeground(Color.WHITE);
+				request.addActionListener(this);
+				request.setBorder(emptyBorder);
+				request.setFocusPainted(false);
+				request.setBackground(new Color(25,24,26));
+				request.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+				
+				//Add admin page button to navbar
+				admin = new JButton("Admin Page");
+				admin.setBounds(676, 0, 164, 58);
+				admin.addActionListener(this);
+				admin.setForeground(Color.WHITE);
+				admin.setFocusPainted(false);
+				admin.setBorder(emptyBorder);
+				admin.setBackground(new Color(25,24,26));
+				admin.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+				
+				
+				if (user.getPrivileges() != -1) {
+					navpanel.add(profile);
+					navpanel.add(favorites);
+					navpanel.add(request);
+					navpanel.add(home);
+				}
+				if(user.getPrivileges()==2) {
+					navpanel.add(admin);
+				}
 
 		//add library logo to top left 
 		JLabel smallIcon = new JLabel("");
@@ -168,7 +218,7 @@ public class commentPage extends JFrame implements ActionListener{
 		//If there are no comments, add label to say there are no comments
 		if(commentSQL.getCommentSection() == null) {
 			JLabel noComment = new JLabel("There are no comments. Be the first one to comment on this game!");
-			noComment.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			noComment.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 22));
 			noComment.setForeground(Color.LIGHT_GRAY);
 			noComment.setBounds(40, 13, 1000, 27);
 			tablepanel.add(noComment);
@@ -195,7 +245,7 @@ public class commentPage extends JFrame implements ActionListener{
 							}
 						}
 						dispose();
-						new commentPage(mainUser, entry);
+						new commentPage(user, entry);
 					}
 				});
 			}
@@ -245,7 +295,7 @@ public class commentPage extends JFrame implements ActionListener{
 		//Otherwise, inform them they need to log in
 		} else {
 			JLabel guestComment = new JLabel("You must be logged into to comment.");
-			guestComment.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			guestComment.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
 			guestComment.setBounds(40, 524, 400, 27);
 			guestComment.setForeground(Color.LIGHT_GRAY);
 			tablepanel.add(guestComment);
@@ -253,6 +303,7 @@ public class commentPage extends JFrame implements ActionListener{
 
 		//add text area for game description-line
 		gameDesc = new JTextArea();
+		gameDesc.setLineWrap(true);
 		gameDesc.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
 		gameDesc.setBounds(36, 212, 1302, 91);
 		gameDesc.setEditable(false);
@@ -267,7 +318,7 @@ public class commentPage extends JFrame implements ActionListener{
 		addFavorite.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 15));
 		addFavorite.setFocusPainted(false);
 		addFavorite.setBackground(new Color(25, 24, 26));
-		addFavorite.setBounds(1351, 212, 196, 91);
+		addFavorite.setBounds(1349, 212, 196, 91);
 		addFavorite.addActionListener(this);
 		contentPane.add(addFavorite);
 		}
@@ -281,12 +332,12 @@ public class commentPage extends JFrame implements ActionListener{
 		//Event handler for home button
 		if (e.getSource() == home) {
 			dispose();
-			new MainPage(mainUser);
+			new MainPage(user);
 		}
 		//Event handler for adding the game to favorites
-		else if (e.getSource() == addFavorite) {
+		if (e.getSource() == addFavorite) {
 			//NOT WORKING //OLDCODE
-			FavoriteListSQL list = new FavoriteListSQL(entry, mainUser);
+			FavoriteListSQL list = new FavoriteListSQL(entry, user);
 			Boolean bool;
 			try {
 				bool = list.addFavorite();
@@ -297,7 +348,7 @@ public class commentPage extends JFrame implements ActionListener{
 			}
 		}
 		//Event handler for submitting a comment
-		else if (e.getSource() == submit) {
+		if (e.getSource() == submit) {
 			if (commentTitle.getText().length()==0 || commentArea.getText().length()==0) {
 				return;
 			}
@@ -310,7 +361,24 @@ public class commentPage extends JFrame implements ActionListener{
 				e1.printStackTrace();
 			}
 			dispose();
-			new commentPage(mainUser, entry);
+			new commentPage(user, entry);
+		}
+		//event handlers for navbar
+		if(e.getSource() == profile) {
+			this.dispose();
+			new newProfilePage(user);
+		}
+		if(e.getSource() == admin) {
+			this.dispose();
+			new newAdminPage(user);
+		}
+		if(e.getSource() == request) {
+			this.dispose();
+			new newRequestPage(user);
+		}
+		if(e.getSource() == favorites) {
+			this.dispose();
+			new FavoritesPageGUI(user);
 		}
 
 	}

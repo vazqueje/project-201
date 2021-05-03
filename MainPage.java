@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -37,7 +38,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.*;
-public class MainPage extends JFrame implements ActionListener, MouseListener {
+/**
+ * MainPage.java
+ * Date created: 4/4/21
+ * @author Jessica Vazquez vazqueje@miamioh.edu
+ */
+
+public class MainPage extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	int xx,xy;
 	private JTextField searchfield;
@@ -47,12 +54,12 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	private JButton request;
 	private JButton favorites;
 	private JButton admin;
+	private JButton home;
 	private JLabel lbl_help;
-
 	User user;
 
 	/**
-	 * Creates a new main page frame where the user can view all games in the library 
+	 * Class constructor: creates a new main page frame where the user can view all games in the library 
 	 * @param user the type of user viewing the page
 	 */
 	public MainPage(User user) {
@@ -84,7 +91,15 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		lbl_help.setBounds(1490, 16, 37, 27);
 		lbl_help.setForeground(new Color(58, 162, 140));
 		lbl_help.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lbl_help.addMouseListener(this);
+	
+		lbl_help.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+					dispose();
+					new HelpPage(user);
+				
+			}
+		});
 		navpanel.add(lbl_help);
 		
 		
@@ -106,44 +121,54 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		//Create empty border for stylized buttons
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 		
-		//Add profile button to navbar
-			profile = new JButton("Profile");
-			profile.setFocusPainted(false);
-			profile.setForeground(Color.WHITE);
-			profile.setBorder(emptyBorder);
-			profile.setBounds(262, 0, 164, 63);
-			profile.setBackground(new Color(25,24,26));
-			profile.addActionListener(this);
-			profile.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
-		
 		//Add favorites button to navbar
-		favorites = new JButton("Favorites");
-		favorites.setBounds(70, 0, 164, 63);
-		favorites.setForeground(Color.WHITE);
-		favorites.setFocusPainted(false);
-		favorites.setBorder(emptyBorder);
-		favorites.setBackground(new Color(25,24,26));
-		favorites.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
-		
-		//Add request button to navbar
-		request = new JButton("Request Game");
-		request.setBounds(454, 0, 164, 63);
-		request.setForeground(Color.WHITE);
-		request.setFocusPainted(false);
-		request.setBorder(emptyBorder);
-		request.setBackground(new Color(25,24,26));
-		request.addActionListener(this);
-		request.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
-		
-		//Add admin page button to navbar
-		admin = new JButton("Admin Page");
-		admin.setBounds(676, 0, 164, 63);
-		admin.setForeground(Color.WHITE);
-		admin.setFocusPainted(false);
-		admin.setBorder(emptyBorder);
-		admin.setBackground(new Color(25,24,26));
-		admin.addActionListener(this);
-		admin.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+				home = new JButton("Home");
+				home.setBounds(70, 0, 164, 63);
+				home.setForeground(Color.WHITE);
+				home.setBorder(emptyBorder);
+				home.setFocusPainted(false);
+				home.setBackground(new Color(25,24,26));
+				home.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+				
+				//Add profile button to navbar
+				profile = new JButton("Profile");
+				profile.setForeground(Color.WHITE);
+				profile.setBorder(emptyBorder);
+				profile.setFocusPainted(false);
+				profile.setBounds(262, 0, 164, 63);
+				profile.setBackground(new Color(25,24,26));
+				profile.addActionListener(this);
+				profile.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+				
+				//Add favorites button to navbar
+				favorites = new JButton("Favorites");
+				favorites.setBounds(900, 0, 164, 63);
+				favorites.setForeground(Color.WHITE);
+				favorites.setBorder(emptyBorder);
+				favorites.setBackground(new Color(25,24,26));
+				favorites.addActionListener(this);
+				favorites.setFocusPainted(false);
+				favorites.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+				
+				//Add request button to navbar
+				request = new JButton("Request Game");
+				request.setBounds(454, 0, 164, 63);
+				request.setFocusPainted(false);
+				request.setForeground(Color.WHITE);
+				request.setBorder(emptyBorder);
+				request.setBackground(new Color(25,24,26));
+				request.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+				request.addActionListener(this);
+				
+				//Add admin page button to navbar
+				admin = new JButton("Admin Page");
+				admin.setBounds(676, 0, 164, 63);
+				admin.setForeground(Color.WHITE);
+				admin.setFocusPainted(false);
+				admin.setBorder(emptyBorder);
+				admin.setBackground(new Color(25,24,26));
+				admin.addActionListener(this);
+				admin.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
 		
 		//add search box with 
 		searchfield = new JTextField();
@@ -163,6 +188,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			navpanel.add(profile);
 			navpanel.add(favorites);
 			navpanel.add(request);
+			navpanel.add(home);
 		}
 		if(user.getPrivileges()==2) {
 			navpanel.add(admin);
@@ -185,8 +211,9 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		contentPane.add(presearch);
 		
 		JLabel lblGamingLibrary = new JLabel("The Gaming Library");
-		lblGamingLibrary.setFont(new Font("Microsoft JhengHei", Font.BOLD, 56));
-		lblGamingLibrary.setBounds(488, 125, 696, 95);
+		lblGamingLibrary.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGamingLibrary.setFont(new Font("ROG Fonts", Font.BOLD, 56));
+		lblGamingLibrary.setBounds(360, 108, 853, 95);
 		lblGamingLibrary.setForeground(Color.white);
 	
 		contentPane.add(lblGamingLibrary);
@@ -291,6 +318,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		
 	}
 	
+	/**
+	 * Event listener for navbar buttons
+	 */
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == profile) {
 			this.dispose();
@@ -304,39 +335,14 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			this.dispose();
 			new newRequestPage(user);
 		}
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource() == lbl_help) {
+		if(e.getSource() == favorites) {
 			this.dispose();
-			new HelpPage(this.user);
+			new FavoritesPageGUI(user);
 		}
-		
-	}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
+	
+	
 
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }

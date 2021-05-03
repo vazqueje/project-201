@@ -1,114 +1,276 @@
-import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.awt.EventQueue;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Button;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
+
+import javax.swing.JTextField;
+import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.sql.*;
+public class FavoritesPageGUI extends JFrame implements ActionListener {
+	private JPanel contentPane;
+	int xx,xy;
+	private JButton home;
+	private JButton profile;
+	private JButton request;
+	private JButton favorites;
+	private JButton admin;
+	private TableDisplay favTable;
+	User user;
 
-public class FavoritesPageGUI implements ActionListener {
-	User mainUser;
-	JFrame frame = new JFrame();
-	JPanel mainPanel = new JPanel();
-	JPanel topPanel = new JPanel();
-	JPanel bottomPanel = new JPanel();
-	JButton returnButton = new JButton("Return to Main Page");
-
-	ArrayList<JButton> list = new ArrayList<JButton>();
-	JButton button;
-
+	/**
+	 * Creates a new main page frame where the user can view all games in the library 
+	 * @param user the type of user viewing the page
+	 */
 	public FavoritesPageGUI(User user) {
-		mainUser=user;
-		frame.add(mainPanel);
-		frame.setSize(500, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("TEST CATALOG Favorites Page");
-		mainPanel.setLayout(new GridLayout(2,1));
-		mainPanel.add(topPanel);
-		mainPanel.add(bottomPanel);
-		topPanel.setLayout(new FlowLayout());
-		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.PAGE_AXIS));
-		returnButton.addActionListener(this);
-		topPanel.add(returnButton);
+		this.user = user;
+		setUndecorated(true);
+		setVisible(true);
+		setBackground(Color.WHITE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1578, 1046);
+		setLocationRelativeTo(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iconlogo.png")));
 		
-		FavoriteListSQL f2 = new FavoriteListSQL(mainUser);
-		FavoritesPage favPage = f2.displayFavorites();
+		//set main panel
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		ArrayList<Entry> entries = favPage.getGameList();
-		if (entries != null) {
-			for (int i = 0; i < entries.size(); i++) {
-				JPanel panel = createEntryPanel(entries.get(i));
-				bottomPanel.add(panel);
+		//Set up navigation bar
+		JPanel navpanel = new JPanel();
+		navpanel.setBackground(new Color(25,24,26));
+		navpanel.setBounds(0, 0, 1578, 63);
+		navpanel.setLayout(null);
+		contentPane.add(navpanel);
+		
+		//add close window button
+		JLabel lbl_close = new JLabel("X");
+		lbl_close.setBounds(1529, 16, 37, 27);
+		navpanel.add(lbl_close);
+		lbl_close.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				System.exit(0);
 			}
+		});
+		lbl_close.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_close.setForeground(new Color(58, 162, 140));
+		lbl_close.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		//Create empty border for stylized buttons
+		Border emptyBorder = BorderFactory.createEmptyBorder();
+		
+		//Add favorites button to navbar
+		home = new JButton("Home");
+		home.setBounds(70, 0, 164, 63);
+		home.setForeground(Color.WHITE);
+		home.setBorder(emptyBorder);
+		home.addActionListener(this);
+		home.setBackground(new Color(25,24,26));
+		home.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+		
+		//Add profile button to navbar
+		profile = new JButton("Profile");
+		profile.setForeground(Color.WHITE);
+		profile.setBorder(emptyBorder);
+		profile.addActionListener(this);
+		profile.setBounds(262, 0, 164, 63);
+		profile.setBackground(new Color(25,24,26));
+		profile.addActionListener(this);
+		profile.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+		
+		//Add favorites button to navbar
+		favorites = new JButton("Favorites");
+		favorites.setBounds(900, 0, 164, 63);
+		favorites.setForeground(Color.WHITE);
+		favorites.addActionListener(this);
+		favorites.setBorder(emptyBorder);
+		favorites.setBackground(new Color(25,24,26));
+		favorites.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+		
+		//Add request button to navbar
+		request = new JButton("Request Game");
+		request.setBounds(454, 0, 164, 63);
+		request.setForeground(Color.WHITE);
+		request.setBorder(emptyBorder);
+		request.setBackground(new Color(25,24,26));
+		request.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+		
+		//Add admin page button to navbar
+		admin = new JButton("Admin Page");
+		admin.setBounds(676, 0, 164, 63);
+		admin.setForeground(Color.WHITE);
+		admin.addActionListener(this);
+		admin.setBorder(emptyBorder);
+		admin.setBackground(new Color(25,24,26));
+		admin.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
+		
+		
+		if (user.getPrivileges() != -1) {
+			navpanel.add(profile);
+			navpanel.add(favorites);
+			navpanel.add(request);
+			navpanel.add(home);
 		}
-		else {
-			JOptionPane.showMessageDialog(null, "No Games in Favorites", "No Favorites", JOptionPane.WARNING_MESSAGE);
+		if(user.getPrivileges()==2) {
+			navpanel.add(admin);
 		}
-		frame.setVisible(true);
+		
+		
+		
+		
+		
+		JLabel lblGamingLibrary = new JLabel("The Gaming Library");
+		lblGamingLibrary.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGamingLibrary.setFont(new Font("ROG Fonts", Font.BOLD, 56));
+		lblGamingLibrary.setBounds(360, 108, 853, 95);
+		lblGamingLibrary.setForeground(Color.white);
+	
+		contentPane.add(lblGamingLibrary);
+		
+		
+		//add library logo to top left 
+		JLabel smallIcon = new JLabel("");
+		smallIcon.setBounds(12, 10, 56, 43);
+		smallIcon.setIcon(new ImageIcon(loginPage.class.getResource("/images/iconlogo.png")));
+
+		navpanel.add(smallIcon);
+		
+		//background image
+				JLabel cover = new JLabel("");
+				cover.setBounds(0, 59, 1578, 356);
+				contentPane.add(cover);
+				cover.setIcon(new ImageIcon(loginPage.class.getResource("/images/cyberpunk.jpg")));
+		
+		//create panel to display catalog entries
+		JPanel tablepanel = new JPanel();
+		
+		
+		
+		
+		tablepanel.setBackground(Color.WHITE);
+		tablepanel.setLayout(null);
+		tablepanel.setBounds(0, 325, 1566, 730);
+		contentPane.add(tablepanel);
+		
+		JLabel noGamesHeading = new JLabel("You currently have no favorites.");
+		noGamesHeading.setVisible(false);
+		noGamesHeading.setForeground(new Color(51, 204, 153));
+		noGamesHeading.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 54));
+		noGamesHeading.setBounds(57, 133, 1290, 83);
+		tablepanel.add(noGamesHeading);
+		
+		JLabel noGamesSub = new JLabel("Add games to your favorites to see them here!");
+		noGamesSub.setVisible(false);
+		noGamesSub.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 30));
+		noGamesSub.setBounds(57, 211, 1290, 83);
+		tablepanel.add(noGamesSub);
+		
+
+	    FavoriteListSQL favsql = new FavoriteListSQL(user);
+	    if(favsql.displayFavorites() != null) {
+	    	FavoritesPage fp = favsql.displayFavorites();
+	    	ArrayList<Entry> favlist = fp.getGameList();
+			favTable = new TableDisplay(favlist);
+			favTable.setBorder(new LineBorder(new Color(255, 255, 255), 10));
+			favTable.setBounds(12,85,1557,666);
+			favTable.setVisible(true);
+			favTable.getTable().addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent evt) {
+	                JTable source = (JTable)evt.getSource();
+	                int row = source.rowAtPoint( evt.getPoint());
+	                String selected = source.getModel().getValueAt(row, 1).toString();
+	                try {
+	                	
+						Search newSearch = new Search(selected,user);
+						ArrayList<Entry> entries = newSearch.fetchSearch(selected);
+						Entry e = entries.get(0);
+						
+						Boolean bool;
+						try {
+							FavoriteListSQL list = new FavoriteListSQL(e, user);
+							bool = list.removeFavorite();
+							if (!bool) JOptionPane.showMessageDialog(null, "Game not found", "Error", JOptionPane.WARNING_MESSAGE);
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						dispose();
+						new FavoritesPageGUI(user);
+	                }catch (Exception e) {
+	                	e.printStackTrace();
+	                }
+	            }
+			});
+			tablepanel.add(favTable);
+	    }else {
+	    	noGamesHeading.setVisible(true);
+	    	noGamesSub.setVisible(true);
+	    }
+	    
+		
+		
+		
+		
+		
+		
 	}
 	
-	public JPanel createEntryPanel(Entry entry) {
-		JPanel retPanel = new JPanel();
-		retPanel.setSize(100, 50);
-		retPanel.setLayout(new BoxLayout(retPanel, BoxLayout.PAGE_AXIS));
-		
-		JLabel nameLabel = new JLabel("Title: " + entry.getName());
-		retPanel.add(nameLabel);
-		
-		JLabel genreLabel = new JLabel("Genre: " + entry.getGenre());
-		retPanel.add(genreLabel);
-		
-		JLabel developerLabel = new JLabel("Developer: " + entry.getDeveloper());
-		retPanel.add(developerLabel);
-		
-		JLabel publishDate = new JLabel("Publish Date: " + entry.getPublishDate().toString());
-		retPanel.add(publishDate);
-
-		JLabel descriptionLabel = new JLabel("Description: " + entry.getDescription());
-		retPanel.add(descriptionLabel);
-		
-		button = new JButton(entry.getName());
-		button.addActionListener(this);
-		retPanel.add(button);
-		list.add(button);
-		
-		JLabel space = new JLabel("----------");
-		retPanel.add(space);
-		
-		return retPanel;
-	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == returnButton) {
-		frame.dispose();
-		new MainPage(mainUser);
+		if(e.getSource() == profile) {
+			this.dispose();
+			new newProfilePage(user);
 		}
-		else {
-			for (int i = 0; i < list.size(); i++) {
-				if (e.getSource() == list.get(i)) {
-					String game = list.get(i).getText();
-					Search newSearch = new Search(game, mainUser);
-					ArrayList<Entry> entries = newSearch.fetchSearch(game);
-					FavoriteListSQL list = new FavoriteListSQL(entries.get(0), mainUser);
-					list.removeFavorite();
-					frame.dispose();
-					new FavoritesPageGUI(mainUser);
-				}
-			}
+		if(e.getSource() == admin) {
+			this.dispose();
+			new newAdminPage(user);
 		}
+		if(e.getSource() == request) {
+			this.dispose();
+			new newRequestPage(user);
+		}
+		if(e.getSource() == favorites) {
+			this.dispose();
+			new FavoritesPageGUI(user);
+		}
+		if(e.getSource() == home) {
+			this.dispose();
+			new MainPage(user);
+		}
+
 	}
-	
 }

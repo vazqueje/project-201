@@ -3,6 +3,7 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -33,7 +34,8 @@ public class reguestFormPage implements ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("TEST CATALOG RequestPage");
 		frame.add(mainPanel);
-		
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/iconlogo.png")));
+
 		mainPanel.setLayout(new GridLayout(3,2));
 		
 		JLabel name = new JLabel("Title:");

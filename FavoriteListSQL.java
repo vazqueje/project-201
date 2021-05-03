@@ -29,7 +29,7 @@ public class FavoriteListSQL {
 	 * @param user the user that you want to retrieve their favorites list from.
 	 */
 	public FavoriteListSQL(User user) {
-		this.entry = null;
+		//this.entry = null;
 		this.user = user;
 	}
 	
@@ -48,7 +48,7 @@ public class FavoriteListSQL {
 		//if the table doesn't exist it will create a table and then add into it
 		if(!generatedKeys.next()) {
 			//creates the table
-			PreparedStatement createTable = conn.prepareStatement("Create Table "+ userFormatted+"(name varchar(255) NOT NULL, description text, genre varchar(255), developer varchar(255), publishDate date, esrbRating varchar(255), image LONGBLOB,  Primary Key(name))", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement createTable = conn.prepareStatement("Create Table "+ userFormatted+"(name varchar(255) NOT NULL, description text, genre varchar(255), developer varchar(255), publishDate date, esrbRating varchar(255), cover LONGBLOB,  Primary Key(name))", Statement.RETURN_GENERATED_KEYS);
 			createTable.execute();
 			
 			//adds into it
@@ -83,7 +83,7 @@ public class FavoriteListSQL {
 		}
 		PreparedStatement add;
 		try {
-			add = conn.prepareStatement("Insert INTO "+ userFormatted+"(name,description,genre,developer,publishDate,esrbRating,image) VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			add = conn.prepareStatement("Insert INTO "+ userFormatted+"(name,description,genre,developer,publishDate,esrbRating,cover) VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			add.setString(1, entry.getName());
 			add.setString(2, entry.getDescription());
 			add.setString(3, entry.getGenre());
@@ -124,19 +124,20 @@ public class FavoriteListSQL {
 	public FavoritesPage displayFavorites() {
 		String userFormatted = user.getUsername()+"_favorite";
 		BufferedImage img = null;
-
+		ResultSet rs = null;
+		PreparedStatement query;
+		ArrayList<Entry> results = new ArrayList<Entry>();
 		try {
-			ArrayList<Entry> results = new ArrayList<Entry>();
-			PreparedStatement query = conn.prepareStatement("Select * from "+userFormatted, Statement.RETURN_GENERATED_KEYS);
+			query = conn.prepareStatement("Select * from "+userFormatted, Statement.RETURN_GENERATED_KEYS);
 			query.execute();
-			ResultSet rs = query.getResultSet();
+			rs = query.getResultSet();
 			 //if there is no next row, tell the user there were no matches
 			 if (rs.next() == false) {
 			        return null;
 			      } else {
 			 //else, add rows in result set to an ArrayList of type Entry
 			        do {
-			        	img = ImageIO.read(rs.getBinaryStream("image"));
+			          img = ImageIO.read(rs.getBinaryStream(7));
 			          results.add(new Entry(rs.getString("name"), rs.getString("description"), rs.getString("genre"), rs.getString("developer"), rs.getDate("publishDate"), rs.getString("esrbRating"), null,img));
 			        } while (rs.next());
 			      }

@@ -104,13 +104,15 @@ public class ForgotPasswordPage extends JFrame implements ActionListener {
 		
 		//Where the user will enter their username in order to retrieve password
 		username = new JTextField("Enter Username", 100);
+		username.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 15));
 		username.setBounds(170, 145, 255, 63);
 		profilePanel.add(username);
 		
 		//Hit the button to execute the SQL Query
 		btnRetrievePassword = new JButton("Retrieve Password");
+		btnRetrievePassword.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 13));
 		btnRetrievePassword.addActionListener(this);
-		btnRetrievePassword.setForeground(Color.DARK_GRAY);
+		btnRetrievePassword.setForeground(new Color(255, 255, 255));
 		btnRetrievePassword.setFocusPainted(false);
 		btnRetrievePassword.setBackground(new Color(25, 24, 26));
 		btnRetrievePassword.setBounds(473, 145, 164, 63);
@@ -118,7 +120,7 @@ public class ForgotPasswordPage extends JFrame implements ActionListener {
 		
 		//Just a label to tell users where to put in their username
 		JLabel lblNewLabel = new JLabel("Username:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 24));
 		lblNewLabel.setBounds(10, 139, 181, 63);
 		profilePanel.add(lblNewLabel);
 		
