@@ -88,6 +88,7 @@ public class HelpPage extends JFrame implements ActionListener{
 		returnMainPage.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
 		returnMainPage.setBounds(70, 0, 164, 63);
 		returnMainPage.setForeground(Color.WHITE);
+		returnMainPage.setFocusPainted(false);
 		returnMainPage.setBorder(emptyBorder);
 		returnMainPage.setBackground(new Color(25,24,26));
 		returnMainPage.addActionListener(this);
