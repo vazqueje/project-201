@@ -193,8 +193,9 @@ public class newProfilePage extends JFrame implements ActionListener{
 			if (!ret) JOptionPane.showMessageDialog(null, "Invalid Password", "Invalid Password", JOptionPane.WARNING_MESSAGE);
 			else {
 				JOptionPane.showMessageDialog(null, "Password Changed", "Password Changed", JOptionPane.WARNING_MESSAGE);
+				User updatedUser = new User(mainUser.getUsername(),newPass.getText(),mainUser.getEmail(),mainUser.getDob(),mainUser.getPrivileges());
 				this.dispose();
-				new newProfilePage(mainUser);
+				new newProfilePage(updatedUser);
 			}
 			}
 		}
@@ -207,8 +208,9 @@ public class newProfilePage extends JFrame implements ActionListener{
 				if (!ret) JOptionPane.showMessageDialog(null, "Invalid Email", "Invalid Email", JOptionPane.WARNING_MESSAGE);
 				else {
 					JOptionPane.showMessageDialog(null, "Email Changed", "Email Changed", JOptionPane.WARNING_MESSAGE);
+					User updatedUser = new User(mainUser.getUsername(),mainUser.getPassword(),newEmail.getText(),mainUser.getDob(),mainUser.getPrivileges());
 					this.dispose();
-					new newProfilePage(mainUser);
+					new newProfilePage(updatedUser);
 				}
 			}
 		}
