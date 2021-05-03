@@ -146,59 +146,7 @@ public class commentPage extends JFrame implements ActionListener{
 				home.addActionListener(this);
 				home.setBackground(new Color(25,24,26));
 				home.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
-				
-				//Add profile button to navbar
-				profile = new JButton("Profile");
-				profile.setForeground(Color.WHITE);
-				profile.setBorder(emptyBorder);
-				profile.setFocusPainted(false);
-				profile.setBounds(262, 0, 164, 58);
-				profile.setBackground(new Color(25,24,26));
-				profile.addActionListener(this);
-				profile.addActionListener(this);
-				profile.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
-				
-				//Add favorites button to navbar
-				favorites = new JButton("Favorites");
-				favorites.setBounds(900, 0, 164, 58);
-				favorites.setForeground(Color.WHITE);
-				favorites.setBorder(emptyBorder);
-				favorites.addActionListener(this);
-				favorites.setFocusPainted(false);
-				favorites.setBackground(new Color(25,24,26));
-				favorites.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
-				
-				//Add request button to navbar
-				request = new JButton("Request Game");
-				request.setBounds(454, 0, 164, 58);
-				request.setForeground(Color.WHITE);
-				request.addActionListener(this);
-				request.setBorder(emptyBorder);
-				request.setFocusPainted(false);
-				request.setBackground(new Color(25,24,26));
-				request.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
-				
-				//Add admin page button to navbar
-				admin = new JButton("Admin Page");
-				admin.setBounds(676, 0, 164, 58);
-				admin.addActionListener(this);
-				admin.setForeground(Color.WHITE);
-				admin.setFocusPainted(false);
-				admin.setBorder(emptyBorder);
-				admin.setBackground(new Color(25,24,26));
-				admin.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 20));
-				
-				
-				if (user.getPrivileges() != -1) {
-					navpanel.add(profile);
-					navpanel.add(favorites);
-					navpanel.add(request);
-					navpanel.add(home);
-				}
-				if(user.getPrivileges()==2) {
-					navpanel.add(admin);
-				}
-
+				navpanel.add(home);
 		//add library logo to top left 
 		JLabel smallIcon = new JLabel("");
 		smallIcon.setBounds(12, 10, 56, 43);
@@ -363,23 +311,5 @@ public class commentPage extends JFrame implements ActionListener{
 			dispose();
 			new commentPage(user, entry);
 		}
-		//event handlers for navbar
-		if(e.getSource() == profile) {
-			this.dispose();
-			new newProfilePage(user);
-		}
-		if(e.getSource() == admin) {
-			this.dispose();
-			new newAdminPage(user);
-		}
-		if(e.getSource() == request) {
-			this.dispose();
-			new newRequestPage(user);
-		}
-		if(e.getSource() == favorites) {
-			this.dispose();
-			new FavoritesPageGUI(user);
-		}
-
 	}
 }
