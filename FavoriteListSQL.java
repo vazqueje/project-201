@@ -1,5 +1,10 @@
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 /**
  * @author Raymond Lin
  *
@@ -43,7 +48,7 @@ public class FavoriteListSQL {
 		//if the table doesn't exist it will create a table and then add into it
 		if(!generatedKeys.next()) {
 			//creates the table
-			PreparedStatement createTable = conn.prepareStatement("Create Table "+ userFormatted+"(name varchar(255) NOT NULL, description text, genre varchar(255), developer varchar(255), publishDate date, esrbRating varchar(255), Primary Key(name))", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement createTable = conn.prepareStatement("Create Table "+ userFormatted+"(name varchar(255) NOT NULL, description text, genre varchar(255), developer varchar(255), publishDate date, esrbRating varchar(255), image LONGBLOB,  Primary Key(name))", Statement.RETURN_GENERATED_KEYS);
 			createTable.execute();
 			
 			//adds into it
@@ -56,18 +61,41 @@ public class FavoriteListSQL {
 	
 	//the general add method
 	private boolean add(String userFormatted) {
+		PreparedStatement findImage;
+		Blob img = null;
+		try {
+			findImage = conn.prepareStatement("Select cover from game_catalog where name=?", Statement.RETURN_GENERATED_KEYS);
+			findImage.setString(1, entry.getName());
+			findImage.execute();
+			ResultSet rs = findImage.getResultSet();
+			if (!rs.next()) {
+				return false;
+			}
+			rs.beforeFirst();
+			
+			rs.first();
+			img = rs.getBlob("cover");
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 		PreparedStatement add;
 		try {
-			add = conn.prepareStatement("Insert INTO "+ userFormatted+"(name,description,genre,developer,publishDate,esrbRating) VALUES (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			add = conn.prepareStatement("Insert INTO "+ userFormatted+"(name,description,genre,developer,publishDate,esrbRating,image) VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			add.setString(1, entry.getName());
 			add.setString(2, entry.getDescription());
 			add.setString(3, entry.getGenre());
 			add.setString(4, entry.getDeveloper());
 			add.setDate(5, entry.getPublishDate());
 			add.setString(6, entry.getEsrbRating());
+			add.setBlob(7, img);
+			
 			add.execute();
 			return true;
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -95,6 +123,7 @@ public class FavoriteListSQL {
 	 */
 	public FavoritesPage displayFavorites() {
 		String userFormatted = user.getUsername()+"_favorite";
+		BufferedImage img = null;
 
 		try {
 			ArrayList<Entry> results = new ArrayList<Entry>();
@@ -107,11 +136,12 @@ public class FavoriteListSQL {
 			      } else {
 			 //else, add rows in result set to an ArrayList of type Entry
 			        do {
-			          results.add(new Entry(rs.getString("name"), rs.getString("description"), rs.getString("genre"), rs.getString("developer"), rs.getDate("publishDate"), rs.getString("esrbRating"), null,null));
+			        	img = ImageIO.read(rs.getBinaryStream("image"));
+			          results.add(new Entry(rs.getString("name"), rs.getString("description"), rs.getString("genre"), rs.getString("developer"), rs.getDate("publishDate"), rs.getString("esrbRating"), null,img));
 			        } while (rs.next());
 			      }
 			 return new FavoritesPage(results,new ArrayList<Entry>());
-		} catch (SQLException e) {
+		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
 			return null;
 		}
