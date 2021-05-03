@@ -89,7 +89,7 @@ public class newProfilePage extends JFrame implements ActionListener{
 		
 
 		//Create button to return to main page
-		returnMainPage = new JButton("Main Page");
+		returnMainPage = new JButton("Home");
 		returnMainPage.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
 		returnMainPage.setBounds(70, 0, 164, 63);
 		returnMainPage.setForeground(Color.WHITE);
