@@ -30,13 +30,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.*;
-public class MainPage extends JFrame implements ActionListener {
+public class MainPage extends JFrame implements ActionListener, MouseListener {
 	private JPanel contentPane;
 	int xx,xy;
 	private JTextField searchfield;
@@ -46,6 +47,7 @@ public class MainPage extends JFrame implements ActionListener {
 	private JButton request;
 	private JButton favorites;
 	private JButton admin;
+	private JLabel lbl_help;
 
 	User user;
 
@@ -76,6 +78,15 @@ public class MainPage extends JFrame implements ActionListener {
 		navpanel.setBounds(0, 0, 1578, 63);
 		navpanel.setLayout(null);
 		contentPane.add(navpanel);
+		
+		//add a help page button
+		lbl_help = new JLabel("?");
+		lbl_help.setBounds(1490, 16, 37, 27);
+		lbl_help.setForeground(new Color(58, 162, 140));
+		lbl_help.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lbl_help.addMouseListener(this);
+		navpanel.add(lbl_help);
+		
 		
 		//add close window button
 		JLabel lbl_close = new JLabel("X");
@@ -293,5 +304,39 @@ public class MainPage extends JFrame implements ActionListener {
 			this.dispose();
 			new newRequestPage(user);
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == lbl_help) {
+			this.dispose();
+			new HelpPage(this.user);
+		}
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
